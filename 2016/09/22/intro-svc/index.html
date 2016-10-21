@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta lang="zh-CN"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="Huang Xiao, Ph.D"><meta name="description" content="支撑向量机（SVM）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以G"><meta name="keywords" content="machine learning"><title>Introduction to Support Vector Clustering · Huang3's Noteble Online Book</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://feuerchop.github.io/2016/09/22/intro-svc/"><link rel="alternate" href="/atom.xml" title="Huang3's Noteble Online Book"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"><script type="text/javascript"><!-- hexo-inject:begin --><!-- hexo-inject:end -->var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?Your baidu Analytics ID";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Your Google Analytics ID', 'auto');
+ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="main"><header><a href="/." class="logo">Huang3's Noteble Online Book</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/categories/" target="_self">Categories</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">Introduction to Support Vector Clustering</h1><span class="post-time">Sep 22, 2016</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述和目标定义"><span class="toc-text">问题描述和目标定义</span></a></li></ol></div><div class="post-content"><p>支撑向量机（SVM）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以Graphical model和SVM为代表的贝叶斯和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们会发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的问题。本文要介绍的就是SVM的一种变种算法：<em>支撑向量聚类（support vector clustering，SVC)</em>，如果你以为SVM只能用作监督学习的分类或者回归，那你就奥特了，SVM换一个形式也可以用作非监督的聚类，那么接下来我就为你揭开支撑向量聚类的神秘面纱。鉴于接下来将有一大波公式和图片袭来，请在家自行做好防护工作！</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><h3 id="问题描述和目标定义"><a href="#问题描述和目标定义" class="headerlink" title="问题描述和目标定义"></a>问题描述和目标定义</h3><p>问题是这样的，你不知道从哪里搞来了N条数据，每条数据有D个特征值，我们定义为</p>
+<p>$$ \mathcal{X}=\left\lbrace x_1,\ldots, x_N\right\rbrace,\,\, x_i \in R^D, \forall i \in \left\lbrace 1,\ldots, N \right\rbrace $$<br>很可惜你只有数据却没有标签，那么监督学习算法基本你就放弃了。为了从数据当中学到点什么，我们可以采用聚类算法来探索数据在D维空间当中是怎么分布的，尽管没有标签用于监督学习，聚类算法仍然能够给你提供很多信息，例如哪些数据更相似，哪些数据属于异常。常用的聚类算法例如KNN，Kmean等都要求你确定具体的K值，即一开始你就假定数据大概可能分成K个簇，很显然，大部分的情况下你猜的都是错的，支撑向量聚类却没有这个问题，SVC的基本原理是这样描述的：</p>
+<blockquote>
+<p>散布在D维空间中的N个数据点，SVC聚类边界将该空间切割成两个部分，高密度部分包含了大部分的数据点，低密度部分只包含了少量异常数据点。</p>
+</blockquote>
+<p>在二维空间的实例中，我们可以从下图中看出SVC算法所做的事。</p>
+<p><img src="http://img2.tbcdn.cn/L1/461/1/f1065371d7edf405ba45a104d47ec5db23a188f1.png" alt="screenshot"></p>
+<p>上图中可以看到，聚类的边界最终将大部分的数据包括在内，而少量的明显异常的数据或噪音点责备排除在外，处于边界上的点我们称之为支撑向量，正是由于它们的存在才能够支撑其整个聚类边界。那么SVC是怎么做到的呢？</p>
+</div></article><div class="tags"><a href="/tags/machine-learning/">machine learning</a></div><div class="paginator"><a href="/2016/09/23/inverview-qa-ml/" class="prev"><i class="iconfont icon-left"></i><span> Prev</span></a></div><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://feuerchop.github.io/2016/09/22/intro-svc/';
+    this.page.identifier = '2016/09/22/intro-svc/';
+    this.page.title = 'Introduction to Support Vector Clustering';
+};
+(function() {
+var d = document, s = d.createElement('script');
+
+s.src = '//huang3.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();</script></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2016<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">Huang Xiao, Ph.D</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body></html>
