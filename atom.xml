@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://feuerchop.github.io/"/>
-  <updated>2016-10-21T12:14:57.000Z</updated>
+  <updated>2016-10-21T13:35:46.000Z</updated>
   <id>http://feuerchop.github.io/</id>
   
   <author>
@@ -17,15 +17,14 @@
   
   <entry>
     <title>Interview QA for Machine Learning Position</title>
-    <link href="http://feuerchop.github.io/2016/09/23/inverview-qa-ml/"/>
-    <id>http://feuerchop.github.io/2016/09/23/inverview-qa-ml/</id>
-    <published>2016-09-22T22:29:15.000Z</published>
-    <updated>2016-10-21T12:14:57.000Z</updated>
+    <link href="http://feuerchop.github.io/2016/10/21/inverview-qa-ml/"/>
+    <id>http://feuerchop.github.io/2016/10/21/inverview-qa-ml/</id>
+    <published>2016-10-21T13:07:43.000Z</published>
+    <updated>2016-10-21T13:35:46.000Z</updated>
     
     <content type="html"><![CDATA[<p>Here I list a set of Machine Learning questions &amp; answers for interview who wants to get a data scientist job or similar position.</p>
 <p>Question List:</p>
-<h4 id="Introduce-one-of-your-favorite-machine-learning-algorithms-in-detail"><a href="#Introduce-one-of-your-favorite-machine-learning-algorithms-in-detail" class="headerlink" title="Introduce one of your favorite machine learning algorithms in detail."></a>Introduce one of your favorite machine learning algorithms in detail.</h4><h4 id="How-would-you-evaluate-the-performance-of-your-classifier-Name-two-ways-at-least"><a href="#How-would-you-evaluate-the-performance-of-your-classifier-Name-two-ways-at-least" class="headerlink" title="How would you evaluate the performance of your classifier? Name two ways at least."></a>How would you evaluate the performance of your classifier? Name two ways at least.</h4><h4 id="How-would-you-understand-overfitting-and-what-you-can-do-about-it"><a href="#How-would-you-understand-overfitting-and-what-you-can-do-about-it" class="headerlink" title="How would you understand overfitting and what you can do about it?"></a>How would you understand overfitting and what you can do about it?</h4><h4 id="Tell-me-how-to-use-cross-validation-for-model-selection"><a href="#Tell-me-how-to-use-cross-validation-for-model-selection" class="headerlink" title="Tell me how to use cross validation for model selection."></a>Tell me how to use cross validation for model selection.</h4><h4 id="What’s-the-difference-of-ROC-and-PRC"><a href="#What’s-the-difference-of-ROC-and-PRC" class="headerlink" title="What’s the difference of ROC and PRC?"></a>What’s the difference of ROC and PRC?</h4><h4 id="What-is-cross-entropy-and-how-to-derive-it"><a href="#What-is-cross-entropy-and-how-to-derive-it" class="headerlink" title="What is cross entropy and how to derive it?"></a>What is cross entropy and how to derive it?</h4><p>Now we have a multiple-class classifier, and the training results look as follows,<br>| Computed Proba. ||| Targets    | Correct? |<br>| :————- ||| :————- | :————- |<br>| 0.1 | 0.1 | 0.3       | Item Two       |</p>
-]]></content>
+<h4 id="Introduce-one-of-your-favorite-machine-learning-algorithms-in-detail"><a href="#Introduce-one-of-your-favorite-machine-learning-algorithms-in-detail" class="headerlink" title="Introduce one of your favorite machine learning algorithms in detail."></a>Introduce one of your favorite machine learning algorithms in detail.</h4><h4 id="How-would-you-evaluate-the-performance-of-your-classifier-Name-two-ways-at-least"><a href="#How-would-you-evaluate-the-performance-of-your-classifier-Name-two-ways-at-least" class="headerlink" title="How would you evaluate the performance of your classifier? Name two ways at least."></a>How would you evaluate the performance of your classifier? Name two ways at least.</h4><h4 id="How-would-you-understand-overfitting-and-what-you-can-do-about-it"><a href="#How-would-you-understand-overfitting-and-what-you-can-do-about-it" class="headerlink" title="How would you understand overfitting and what you can do about it?"></a>How would you understand overfitting and what you can do about it?</h4><h4 id="Tell-me-how-to-use-cross-validation-for-model-selection"><a href="#Tell-me-how-to-use-cross-validation-for-model-selection" class="headerlink" title="Tell me how to use cross validation for model selection."></a>Tell me how to use cross validation for model selection.</h4><h4 id="What’s-the-difference-of-ROC-and-PRC"><a href="#What’s-the-difference-of-ROC-and-PRC" class="headerlink" title="What’s the difference of ROC and PRC?"></a>What’s the difference of ROC and PRC?</h4><h4 id="What-is-cross-entropy-and-how-to-derive-it"><a href="#What-is-cross-entropy-and-how-to-derive-it" class="headerlink" title="What is cross entropy and how to derive it?"></a>What is cross entropy and how to derive it?</h4>]]></content>
     
     <summary type="html">
     
@@ -43,7 +42,7 @@
     <link href="http://feuerchop.github.io/2016/09/22/intro-svc/"/>
     <id>http://feuerchop.github.io/2016/09/22/intro-svc/</id>
     <published>2016-09-22T14:15:44.000Z</published>
-    <updated>2016-10-21T12:15:12.000Z</updated>
+    <updated>2016-10-21T13:07:43.000Z</updated>
     
     <content type="html"><![CDATA[<p>支撑向量机（SVM）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以Graphical model和SVM为代表的贝叶斯和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们会发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的问题。本文要介绍的就是SVM的一种变种算法：<em>支撑向量聚类（support vector clustering，SVC)</em>，如果你以为SVM只能用作监督学习的分类或者回归，那你就奥特了，SVM换一个形式也可以用作非监督的聚类，那么接下来我就为你揭开支撑向量聚类的神秘面纱。鉴于接下来将有一大波公式和图片袭来，请在家自行做好防护工作！</p>
 <h3 id="问题描述和目标定义"><a href="#问题描述和目标定义" class="headerlink" title="问题描述和目标定义"></a>问题描述和目标定义</h3><p>问题是这样的，你不知道从哪里搞来了N条数据，每条数据有D个特征值，我们定义为</p>
