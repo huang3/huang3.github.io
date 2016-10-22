@@ -42,7 +42,7 @@ ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end -
 <p>并且KKT条件必须成立：</p>
 <p>$$<br>\xi_j\mu_j=0, \,<br>\left(R^2+\xi_j-|\Phi(x_j)-\mathbf{a}|^2\right)\alpha_j=0<br>$$</p>
 <p>将以上极值条件代回到$ L $当中，我们可以得到对偶空间的等价优化问题：<br>$$<br>\mathcal{W}=\sum_{i,j}\alpha_i\alpha_j k(x_i,x_j) - \sum_jk(x_j,x_j)\alpha_j, \qquad<br>\text{s.t.}\quad 0\leq\alpha_j\leq C, \; j=1,\ldots,N. \<br>$$</p>
-<p>此处 <span>$k(x_i, x_j) = &lt;\Phi(x_i) \cdot \Phi(x_j)&gt;$</span><!-- Has MathJax --> , 和SVM问题如此的相似，原来的优化问题转化成了对偶空间里的带限制条件的 <strong>单变量二次型优化问题</strong>。接下来我们所要做的就是解这个优化问题。<br>在求解之前，我们不妨先来观察一下之前的极值条件。   </p>
+<p>此处 <span>$k(x_i, x_j) = \&lt;\Phi(x_i) \cdot \Phi(x_j)\&gt;$</span><!-- Has MathJax --> , 和SVM问题如此的相似，原来的优化问题转化成了对偶空间里的带限制条件的 <strong>单变量二次型优化问题</strong>。接下来我们所要做的就是解这个优化问题。<br>在求解之前，我们不妨先来观察一下之前的极值条件。   </p>
 <ol>
 <li>首先，所有的 $ \alpha_i $ 加起来必须等于1.</li>
 <li>其次，我们观察到最终的超球体球心即是所有映射后的数据点和 $ \mathbf{\alpha}$ 的线性加权组合，这点符合我们之前关于核函数空间的解释。</li>
