@@ -56,7 +56,7 @@ ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end -
 </li>
 </ol>
 <p>为了得到超球体的最优半径，我们从结果当中任意选取一个支撑向量 $ x_s $ ，它到球心的距离即是我们要找的最优半径。</p>
-<p>$$<br>R^2 = |\Phi(x_s) - \mathbf{a}|^2 = k(x_s,x_s)-2\sum_j\alpha_j k(x_s,x<em>j) + \sum</em>{i,j}\alpha_i\alpha_j k(x_i,x_j)<br>$$</p>
+<span>$R^2 = \|\Phi(x_s) - \mathbf{a}\|^2 = k(x_s,x_s)-2\sum_j\alpha_j k(x_s,x_j) + \sum_{i,j}\alpha_i\alpha_j k(x_i,x_j)$</span><!-- Has MathJax -->
 <p>并且任意一个点到球心的距离都可以通过该公式计算。此外，通过调节参数 $ C $ 的大小来惩罚松弛变量的值，我们可以控制异常数据在整个数据中所占的比例。<br>以上是SVC算法最重要的结论，当我们能够通过优化目标函数得到 $ \mathbf{\alpha} $ 时，我们就能够通过观察它们的值来确定究竟哪些点在球体内，球体上，和球体外，而那些落在超球体之外的点就是异常点，这个特性可以用在异常检测问题上。为了演示，在二维空间上的聚类效果如下图：</p>
 <p><img src="http://img2.tbcdn.cn/L1/461/1/8912d3cc6d7f0d666d77b1f70a9ace393bc62b7d.png" alt="screenshot"></p>
 <p>除了左边所示能够判断一个数据落在什么位置之外，还能够对空间中任意一个点计算其到球心的距离来判断该点在空间中的概率密度如何（如右图）</p>
