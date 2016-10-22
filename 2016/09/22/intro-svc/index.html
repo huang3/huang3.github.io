@@ -59,10 +59,23 @@ ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end -
 <p>为了得到超球体的最优半径，我们从结果当中任意选取一个支撑向量 $ x_s $ ，它到球心的距离即是我们要找的最优半径。</p>
 <span>$R^2 = \|\Phi(x_s) - \mathbf{a}\|^2 = k(x_s,x_s)-2\sum_j\alpha_j k(x_s,x_j) + \sum_{i,j}\alpha_i\alpha_j k(x_i,x_j)$</span><!-- Has MathJax -->
 <p>并且任意一个点到球心的距离都可以通过该公式计算。此外，通过调节参数 $ C $ 的大小来惩罚松弛变量的值，我们可以控制异常数据在整个数据中所占的比例。<br>以上是SVC算法最重要的结论，当我们能够通过优化目标函数得到 $ \mathbf{\alpha} $ 时，我们就能够通过观察它们的值来确定究竟哪些点在球体内，球体上，和球体外，而那些落在超球体之外的点就是异常点，这个特性可以用在异常检测问题上。为了演示，在二维空间上的聚类效果如下图：</p>
-<p><img src="http://img2.tbcdn.cn/L1/461/1/8912d3cc6d7f0d666d77b1f70a9ace393bc62b7d.png" alt="screenshot"></p>
+<img src="http://img2.tbcdn.cn/L1/461/1/8912d3cc6d7f0d666d77b1f70a9ace393bc62b7d.png" width="600" title="Clustering boundary and density plot">
 <p>除了左边所示能够判断一个数据落在什么位置之外，还能够对空间中任意一个点计算其到球心的距离来判断该点在空间中的概率密度如何（如右图）</p>
 <h3 id="u4ECE_u805A_u7C7B_u8FB9_u754C_u5230_u805A_u7C7B_u6807_u7B7E"><a href="#u4ECE_u805A_u7C7B_u8FB9_u754C_u5230_u805A_u7C7B_u6807_u7B7E" class="headerlink" title="从聚类边界到聚类标签"></a>从聚类边界到聚类标签</h3><p>SVC优化后我们得到的是聚类边界，但为了得到具体的聚类标签，我们还需要对结果进行后续处理，通常我们采取的方法是，连接任意两个在超球体内的点，如果该直线片段上存在一个点属于超球体外，那么我们判断这两个点不属于一个簇，因为从一个点到另一个点必然经过了低密度区域，如下图所示。</p>
-<p><img src="http://img2.tbcdn.cn/L1/461/1/a3c97754bbb7941343d22cd0512bf2e078c1c979.png" alt="screenshot"><br><img src="http://img2.tbcdn.cn/L1/461/1/32a0f29b38a670129080fd9465cd069531dfda3c.png" alt="screenshot"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Clustering</th>
+<th style="text-align:left">Line segmenting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><img src="http://img2.tbcdn.cn/L1/461/1/a3c97754bbb7941343d22cd0512bf2e078c1c979.png" alt="screenshot"></td>
+<td style="text-align:left"><img src="http://img2.tbcdn.cn/L1/461/1/32a0f29b38a670129080fd9465cd069531dfda3c.png" alt="screenshot"></td>
+</tr>
+</tbody>
+</table>
 <p>通过对最终结果两两之间连线进行采样并计算是否存在点在超球体外的方法可以帮助我们确定每个点所属的聚类标签。</p>
 <h3 id="u5982_u4F55_u89E3_u4F18_u5316_u95EE_u9898"><a href="#u5982_u4F55_u89E3_u4F18_u5316_u95EE_u9898" class="headerlink" title="如何解优化问题"></a>如何解优化问题</h3><p>那么如何解上述的二次型优化问题，现在有很多开源的解二次型优化问题的包，但是针对SVM这一类的特定算法，这些包的效率通常都很低，目前最常用的一套算法SMO算法采取的类似坐标下降法可以很高效的解决这一类的优化问题，在后续文章里我们将重点介绍SMO算法。</p>
 <h3 id="u7ED3_u675F_u8BED"><a href="#u7ED3_u675F_u8BED" class="headerlink" title="结束语"></a>结束语</h3><p>无论是异常检测还是聚类，SVC [1]都是一套非常实用的算法，其原理和One-class SVM [3] 非常的类似, 了解单类SVM算法的读者会发现换一种问题的形式化方式往往可以从另一个角度去解释一个学习问题。以上简单扼要的介绍了整个算法的理论基础，针对算法实现，尤其是优化部分会有后续文章跟进，如果你对该算法感兴趣欢迎联系交流！</p>
