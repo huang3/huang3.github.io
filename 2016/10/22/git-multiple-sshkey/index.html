@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta lang="zh-CN"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="Huang Xiao, Ph.D"><meta name="description" content="Theproblemwefacedusuallywhenyoudealwithversioncontrol,isthat,youprobablyhavemultiplegithubaccountsandwanttomaintainva"><meta name="keywords" content="tech"><title>How to setup multiple ssh keys for your github · Huang3's Noteble Online Book</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://feuerchop.github.io/2016/10/22/git-multiple-sshkey/"><link rel="alternate" href="/atom.xml" title="Huang3's Noteble Online Book"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"><script type="text/javascript"><!-- hexo-inject:begin --><!-- hexo-inject:end -->var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?Your baidu Analytics ID";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Your Google Analytics ID', 'auto');
+ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="main"><header><a href="/." class="logo">Huang3's Noteble Online Book</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/categories/" target="_self">Categories</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">How to setup multiple ssh keys for your github</h1><span class="post-time">Oct 22, 2016</span><div class="post-content"><p>The problem we faced usually when you deal with version control, is that, you probably have multiple github accounts and want to maintain various repositories accordingly. Say you have two github accounts: <strong>git_A</strong> and <strong>git_B</strong>, and you create repositories repo_a and repo_b under these two accounts.</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>Github usually will suggests you to generate your public key and associate them with your account. If you’re not familiar with ssh-keygen for github, please refer to <a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">this post</a>.</p>
+<p>Now you need to generate two different public keys for <strong>git_A</strong> and <strong>git_B</strong>. This is what you expect when follow the ssh-keygen:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh-keygen</div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/Users/YOURNAME/.ssh/id_rsa):</div></pre></td></tr></table></figure>
+<p>This is where you name your public key, e.g., id_rsa_git_A.pub. Soon you will have two public keys in /Users/YOURNAME/.ssh/</p>
+<p>Now let’s associate with your git accounts. Open your ssh config with any editor you like:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ vi ~/.ssh/config</div></pre></td></tr></table></figure></p>
+<p>And add two sections accordingly in the config file:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#github-A</span> accounts (default)</div><div class="line">Host github<span class="selector-class">.com-A</span></div><div class="line">    HostName github<span class="selector-class">.com</span></div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_git_A</div><div class="line"></div><div class="line"><span class="selector-id">#github-B</span> account</div><div class="line">Host github<span class="selector-class">.com-B</span></div><div class="line">    HostName github<span class="selector-class">.com</span></div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_git_B</div></pre></td></tr></table></figure></p>
+<p>The name after <strong>Host</strong> can be any thing you like to identify your git account, obviously they are associated with different private keys here. Now you can test it with ssh, e.g.:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh -T git@github.com-A</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh -T git@github.com-B</div></pre></td></tr></table></figure>
+<p>They should be automatically using corresponding public key now, and you will get successful message response.</p>
+<p>To init and config a repository locally, you probably will do:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ git init</div><div class="line">YOURNAME$ git config user.name git_A</div><div class="line">YOURNAME$ git config user.email <span class="string">"git_A@your_mail_domain.com"</span></div><div class="line">YOURNAME$ git remote <span class="built_in">set</span>-url origin git@github.com-A:git_A/repo_a</div><div class="line">YOURNAME$ git pull origin</div></pre></td></tr></table></figure><br>That’s it! now you can do any git commands you want accordingly with different ssh keys. </p>
+</div></article><div class="tags"><a href="/tags/tech/">tech</a></div><div class="paginator"><a href="/2016/10/21/inverview-qa-ml/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://feuerchop.github.io/2016/10/22/git-multiple-sshkey/';
+    this.page.identifier = '2016/10/22/git-multiple-sshkey/';
+    this.page.title = 'How to setup multiple ssh keys for your github';
+};
+(function() {
+var d = document, s = d.createElement('script');
+
+s.src = '//huang3.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();</script></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2016<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">Huang Xiao, Ph.D</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body></html>
