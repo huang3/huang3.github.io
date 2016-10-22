@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * Even theme for Hexo by Ahonn
  * Version 1.0.0
@@ -377,11 +378,11 @@ body {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
+  line-height: 1.4;
   color: #34495e;
   background: #fefefe;
   scroll-behavior: smooth;
-  border-top: 4px solid #c05b4d; }
+  border-top: 4px solid #0047AB; }
 
 img {
   max-width: 100%;
@@ -432,11 +433,11 @@ header {
       padding: 20px 10px; }
       header .nav .nav-link a {
         font-size: 18px;
-        line-height: 1.5; }
+        line-height: 1.4; }
       header .nav .nav-link :hover, header .nav .nav-link .active {
         transition: 0.1s ease-out;
         border-radius: 2px;
-        border-bottom: 2px solid #c05b4d; }
+        border-bottom: 2px solid #0047AB; }
 
 footer {
   padding-top: 2em; }
@@ -448,7 +449,7 @@ footer {
       margin-right: 10px;
       font-size: 30px; }
       footer .social .iconfont:hover {
-        color: #c05b4d; }
+        color: #0047AB; }
   footer .copyright {
     margin-top: 15px;
     margin-bottom: 10px;
@@ -462,7 +463,7 @@ footer {
     footer .copyright .power {
       margin: 0; }
       footer .copyright .power a {
-        color: #c05b4d; }
+        color: #0047AB; }
     footer .copyright .since {
       margin: 0; }
   footer #back2top {
@@ -486,7 +487,7 @@ footer {
     font-size: 26px;
     font-family: Athelas, Times New Roman, SimSun, Microsoft Yahei, serif; }
     .post .post-title .post-link:hover {
-      border-bottom: 2px solid #c05b4d;
+      border-bottom: 2px solid #0047AB;
       transition: 0.1s; }
   .post .post-time {
     margin-top: 5px;
@@ -513,20 +514,21 @@ footer {
   .post .post-content .headerlink:hover {
     border-bottom: 0; }
   .post .post-content .headerlink::before {
-    content: "|";
+    content: "§";
     margin-right: 5px;
     font-size: 1.1em; }
   .post .post-content a {
-    color: #c05b4d; }
+    color: #0047AB; }
     .post .post-content a:hover {
-      border-bottom: 1px solid #c05b4d; }
+      border-bottom: 1px solid #0047AB; }
   .post .post-content blockquote {
-    margin: 1em 1em;
+    margin: 1em 0em;
     padding: 10px 20px;
     position: relative;
-    color: rgba(52, 73, 94, 0.8);
-    background-color: rgba(192, 91, 77, 0);
-    border-left: 3px solid rgba(192, 91, 77, 0.3); }
+    color: rgba(52, 73, 94, 0.9);
+    background-color: rgba(0, 71, 171, 0);
+    border-left: 3px solid rgba(0, 71, 171, 0.3);
+    box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1); }
     .post .post-content blockquote p {
       margin: 0; }
   .post .post-content img {
@@ -542,12 +544,11 @@ footer {
   .post .post-content > table {
     margin-bottom: 20px;
     border-spacing: 0;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.125);
-    border: 3px double #e8c3be; }
+    border: 0px double #4592ff; }
     .post .post-content > table th, .post .post-content > table td {
       padding: 5px 15px;
       background-color: white;
-      border: 1px double #e8c3be; }
+      border: 0px double #4592ff; }
 
 .post .post-sidebar {
   width: 200px;
@@ -556,7 +557,7 @@ footer {
   margin-left: 760px;
   font-size: 15px;
   font-family: Athelas, Times New Roman, SimSun, Microsoft Yahei, serif;
-  background: rgba(248, 245, 236, 0); }
+  background: rgba(240, 242, 245, 0); }
   .post .post-sidebar .heading {
     margin: 5px 10px;
     font-size: 18px;
@@ -565,7 +566,7 @@ footer {
   .post .post-sidebar ol {
     list-style: disc; }
     .post .post-sidebar ol a.active {
-      color: #c05b4d; }
+      color: #0047AB; }
   .post .post-sidebar .toc {
     margin: 7px 0;
     padding-left: 25px; }
@@ -576,7 +577,7 @@ code, pre {
   padding: 7px;
   font-size: 14px;
   font-family: Consolas, Monaco, Menlo, Consolas, monospace;
-  background: #f8f5ec; }
+  background: #f0f2f5; }
 
 code {
   padding: 3px 5px;
@@ -598,7 +599,7 @@ code {
     font-size: 12px;
     font-weight: bold;
     color: #cacaca;
-    background: #f4efe1;
+    background: #e7eaef;
     content: 'CODE'; }
   .highlight.html::after {
     content: "HTML"; }
@@ -701,7 +702,7 @@ code {
       margin: 0 5px; }
     .paginator .prev:hover,
     .paginator .next:hover {
-      color: #c05b4d; }
+      color: #0047AB; }
   .paginator .prev {
     float: left; }
   .paginator .next {
@@ -719,11 +720,11 @@ code {
     .home .post-item .post-title {
       display: block; }
   .home .read-more {
-    color: #c05b4d;
+    color: #0047AB;
     font-size: 1.1em;
     font-family: Athelas, Times New Roman, SimSun, Microsoft Yahei, serif; }
     .home .read-more:hover {
-      border-bottom: 1px solid #c05b4d; }
+      border-bottom: 1px solid #0047AB; }
 
 .archive {
   margin: 3em auto;
@@ -739,7 +740,7 @@ code {
     border-left: 1px solid #cacaca; }
     .archive .post-item:hover {
       padding-left: 13px;
-      border-left: 3px solid #c05b4d;
+      border-left: 3px solid #0047AB;
       transition: 0.2s ease-out; }
   .archive .post-time {
     display: inline-block;
@@ -752,7 +753,7 @@ code {
   .archive .post-link {
     width: 75%;
     display: inline-block;
-    color: #c05b4d;
+    color: #0047AB;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -766,7 +767,7 @@ code {
   border-top: 1px solid #e6e6e6; }
   .tags a {
     margin-right: 5px;
-    color: #c05b4d; }
+    color: #0047AB; }
     .tags a::before {
       content: '#'; }
 
@@ -774,7 +775,7 @@ code {
   margin-top: 3em;
   margin-bottom: 5em;
   text-align: center;
-  color: #c05b4d;
+  color: #0047AB;
   font-family: Athelas, Times New Roman, SimSun, Microsoft Yahei, serif; }
   .tagcloud .total {
     margin-bottom: 10px; }
@@ -782,7 +783,7 @@ code {
       margin: auto;
       font-size: 18px;
       width: 110px;
-      border-bottom: 2px solid #c05b4d; }
+      border-bottom: 2px solid #0047AB; }
   .tagcloud a {
     display: inline-block;
     word-wrap: break-word;
@@ -792,14 +793,14 @@ code {
     transition-property: transform;
     transition-timing-function: ease-out; }
     .tagcloud a:active, .tagcloud a:focus, .tagcloud a:hover {
-      color: #c05b4d;
+      color: #0047AB;
       transform: scale(1.05); }
 
 .categories {
   margin-top: 3em;
   margin-bottom: 5em;
   text-align: center;
-  color: #c05b4d;
+  color: #0047AB;
   font-family: Athelas, Times New Roman, SimSun, Microsoft Yahei, serif; }
   .categories .total {
     margin-bottom: 20px; }
@@ -807,7 +808,7 @@ code {
       margin: auto;
       font-size: 18px;
       width: 110px;
-      border-bottom: 2px solid #c05b4d; }
+      border-bottom: 2px solid #0047AB; }
   .categories .category-link {
     display: inline-block;
     margin: 3px 10px;
@@ -820,10 +821,10 @@ code {
       position: relative;
       top: -8px;
       right: -2px;
-      color: #c05b4d;
+      color: #0047AB;
       font-size: 12px; }
     .categories .category-link:active, .categories .category-link:focus, .categories .category-link:hover {
-      color: #c05b4d;
+      color: #0047AB;
       transform: scale(1.05); }
 
 @media screen and (max-width: 760px) {
