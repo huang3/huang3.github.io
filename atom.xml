@@ -42,11 +42,11 @@
     <link href="http://feuerchop.github.io/2016/09/22/intro-svc/"/>
     <id>http://feuerchop.github.io/2016/09/22/intro-svc/</id>
     <published>2016-09-22T14:15:44.000Z</published>
-    <updated>2016-10-22T08:04:19.000Z</updated>
+    <updated>2016-10-22T08:10:29.000Z</updated>
     
     <content type="html"><![CDATA[<p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
-<h3 id="u95EE_u9898_u63CF_u8FF0_u548C_u76EE_u6807_u5B9A_u4E49"><a href="#u95EE_u9898_u63CF_u8FF0_u548C_u76EE_u6807_u5B9A_u4E49" class="headerlink" title="问题描述和目标定义"></a>问题描述和目标定义</h3><p>我们首先这样定义问题，有 $N$ 条数据样本，每条数据有 $d$ 个特征值，我们定义为</p>
+<h3 id="问题描述和目标定义"><a href="#问题描述和目标定义" class="headerlink" title="问题描述和目标定义"></a>问题描述和目标定义</h3><p>我们首先这样定义问题，有 $N$ 条数据样本，每条数据有 $d$ 个特征值，我们定义为</p>
 <span>$\mathcal{X}=\left\lbrace x_1,\ldots, x_N\right\rbrace,\,\, x_i \in R^d, \forall i \in \left\lbrace 1,\ldots, N \right\rbrace$</span><!-- Has MathJax -->
 <p>很可惜你只有数据却没有标签，那么监督学习算法基本你就放弃了。为了从数据当中学到点什么，我们可以采用聚类算法来探索数据在D维空间当中是怎么分布的，尽管没有标签用于监督学习，聚类算法仍然能够给你提供很多信息，例如哪些数据更相似，哪些数据属于异常。常用的聚类算法例如KNN，Kmean等都要求你确定具体的K值，即一开始你就假定数据大概可能分成K个簇，很显然，大部分的情况下你猜的都是错的，支撑向量聚类却没有这个问题，SVC的基本原理是这样描述的：</p>
 <blockquote>
@@ -55,18 +55,22 @@
 <p>在二维空间的实例中，我们可以从下图中看出SVC算法所做的事。</p>
 <p><img src="http://img2.tbcdn.cn/L1/461/1/f1065371d7edf405ba45a104d47ec5db23a188f1.png" alt="screenshot"></p>
 <p>上图中可以看到，聚类的边界最终将大部分的数据包括在内，而少量的明显异常的数据或噪音点责备排除在外，处于边界上的点我们称之为支撑向量，正是由于它们的存在才能够支撑其整个聚类边界。那么SVC是怎么做到的呢？</p>
-<h3 id="u6700_u5C0F_u8D85_u7403_u4F53"><a href="#u6700_u5C0F_u8D85_u7403_u4F53" class="headerlink" title="最小超球体"></a>最小超球体</h3><p>观察以上二维空间中数据分布，一种简单粗暴的聚类方法就是画一个尽可能小的圆把大部分的点都圈进去，可是和图中所示的聚类边界相比，这种方法明显过于粗放，并且数据的非线性分布不可能使一个圆恰巧把空间分割成高密度和低密度两部分。那么我们需要的是一个非线性的切割边界，借助于核函数（kernel function）我们能够有效的把低维非线性空间转换成高维的线性空间 $ \mathcal{H} $ ，这样一来，在 $ \mathcal{H} $ 空间里我们尝试着找到一个最小的超球体(hypersphere)将大部分的点包括进去，同时允许少量的异常点在球体外，这样映射回原来的低维空间就如我们上图所见的非线性的聚类边界。在大量的SVM文章中都谈及了核函数这个概念，下图简单的揭示了核函数的真正魅力所在，<br><img src="http://img2.tbcdn.cn/L1/461/1/d7d63dc8df47bdf5d72d450a104490b94b74906c.png" alt="screenshot"><br>上图一组一维的数据，如果要进行有效的分类必须用两条线前后进行切割才能将红色和蓝色的点分开，然后如果我们对数据进行如下变换:  $\Phi(x)=(x,x^2)$ ，如右边所示，在映射之后的高维（2维）空间里，我们仅用一条直线就能很好的进行分类，即在低维空间线性不可分的数据在高维空间里变得线性可分了。这就是kernel function做的事，核函数的定义了一种特征变换 $\Phi(x)$ （实际上是空间变换），假设你希望寻找一个最优函数（e.g., 分类，聚类，回归）$ f(x)$, 根据<a href="https://en.wikipedia.org/wiki/Mercer%27s_theorem" target="_blank" rel="external">mercer’s theorem</a>, 你总能从核函数变换过的空间(Hilbert space)中寻找到一个最优函数 <span>$f^*$</span><!-- Has MathJax --> 使得该函数是映射后的点的线性叠加，即： $ f^*(.) = \sum_i c_i\Phi(x_i)$ ,正是这种在 $ \mathcal{H} $ 空间中的线性特征使得核方法能够处理很多低维空间中的非线性问题，那么当你定义一个核函数为 $ k(x_i,x_j) = \left\&lt;\Phi(x_i),\Phi(x_j)\right>$ ，实际上是定义了一个等价的特征空间并且该空间的内积是由 $ k(\cdot,\cdot) $ 来定义的。此处不再做展开，感兴趣的朋友可以跟我联系。<br>那么回到之前的聚类问题，寻找低维空间非线性聚类边界的问题转换成了寻找高维空间中最小超球体的问题，</p>
+<h3 id="最小超球体"><a href="#最小超球体" class="headerlink" title="最小超球体"></a>最小超球体</h3><p>观察以上二维空间中数据分布，一种简单粗暴的聚类方法就是画一个尽可能小的圆把大部分的点都圈进去，可是和图中所示的聚类边界相比，这种方法明显过于粗放，并且数据的非线性分布不可能使一个圆恰巧把空间分割成高密度和低密度两部分。那么我们需要的是一个非线性的切割边界，借助于核函数（kernel function）我们能够有效的把低维非线性空间转换成高维的线性空间 $ \mathcal{H} $ ，这样一来，在 $ \mathcal{H} $ 空间里我们尝试着找到一个最小的超球体(hypersphere)将大部分的点包括进去，同时允许少量的异常点在球体外，这样映射回原来的低维空间就如我们上图所见的非线性的聚类边界。在大量的SVM文章中都谈及了核函数这个概念，下图简单的揭示了核函数的真正魅力所在，<br><img src="http://img2.tbcdn.cn/L1/461/1/d7d63dc8df47bdf5d72d450a104490b94b74906c.png" alt="screenshot"><br>上图一组一维的数据，如果要进行有效的分类必须用两条线前后进行切割才能将红色和蓝色的点分开，然后如果我们对数据进行如下变换:  $\Phi(x)=(x,x^2)$ ，如右边所示，在映射之后的高维（2维）空间里，我们仅用一条直线就能很好的进行分类，即在低维空间线性不可分的数据在高维空间里变得线性可分了。这就是kernel function做的事，核函数的定义了一种特征变换 $\Phi(x)$ （实际上是空间变换），假设你希望寻找一个最优函数（e.g., 分类，聚类，回归）$ f(x)$, 根据<a href="https://en.wikipedia.org/wiki/Mercer%27s_theorem" target="_blank" rel="external">mercer’s theorem</a>, 你总能从核函数变换过的空间(Hilbert space)中寻找到一个最优函数 <span>$f^*$</span><!-- Has MathJax --> 使得该函数是映射后的点的线性叠加，即： $ f^*(.) = \sum_i c_i\Phi(x_i)$, 正是这种在 $ \mathcal{H} $ 空间中的线性特征使得核方法能够处理很多低维空间中的非线性问题，那么当你定义一个核函数为 <span>$k(x_i,x_j) = \left\&lt;\Phi(x_i),\Phi(x_j)\right\&gt;$</span><!-- Has MathJax --> ，实际上是定义了一个等价的特征空间并且该空间的内积是由 <span>$k(\cdot,\cdot)$</span><!-- Has MathJax --> 来定义的。此处不再做展开，感兴趣的朋友可以跟我联系。<br>那么回到之前的聚类问题，寻找低维空间非线性聚类边界的问题转换成了寻找高维空间中最小超球体的问题，</p>
 <blockquote>
 <p>定义球体的半径$ R $和球心 $ \mathbf{a} $ , 还有一组松弛变量 $ \left\lbrace \xi_i \right\rbrace $ ，SVC问题的数学表达形式如下：</p>
 </blockquote>
-<p><img src="http://img3.tbcdn.cn/L1/461/1/3eac06e992f907783da8eac41ce73fdf6a39cfcb.png" alt="screenshot"></p>
+<span>$$\begin{align}
+&amp; \min_{R} R^2+C\sum_i\xi_i \\
+\text{s.t. } &amp; \|\Phi(x_i) - \mathbf{a} \|^2 \leq R^2 + \xi_i \\
+&amp; \xi_i\geq 0, \, \forall i \in \left\lbrace 1,\ldots, N\right\rbrace
+\end{align}$$</span><!-- Has MathJax -->
 <p>上述目标函数描述了两个问题，</p>
 <ol>
 <li>我们希望找到一个最小的超球半径和球心，使得大部分的点都在球内。</li>
 <li>针对每一个数据点引入非负松弛变量 $ \xi_i $ 允许该样本在球体外部，但不至于离球心太远，常数C是惩罚参数防止 $ \sum_i \xi_i $ 过大。</li>
 </ol>
 <p>很显然这是个 <strong>带限制条件的二次型问题</strong>。那么观察目标函数中的限制条件进一步告诉我们，如果一个点在球体内部，那么 $ \xi_i=0 $ ，否则如果它在球体外部（异常点），那么 $ \xi_i&gt;0 $ 。</p>
-<h3 id="u4F18_u5316_u3001_u4F18_u5316_uFF0C_u8FD8_u662F_u4F18_u5316"><a href="#u4F18_u5316_u3001_u4F18_u5316_uFF0C_u8FD8_u662F_u4F18_u5316" class="headerlink" title="优化、优化，还是优化"></a>优化、优化，还是优化</h3><blockquote>
+<h3 id="优化、优化，还是优化"><a href="#优化、优化，还是优化" class="headerlink" title="优化、优化，还是优化"></a>优化、优化，还是优化</h3><blockquote>
 <p>所有的机器学习问题都是个优化问题</p>
 </blockquote>
 <p>一个学习问题如果能够完美定义，它总能够转化成一个形式优美的优化问题，如上面SVC的目标函数就是一个典型的不能再典型的凸优化问题了，二话不说直接上<a href="http://baike.baidu.com/link?url=WeZGD3nvabLVvd5C2igcjda8YbWF55uvH51TnG-YDBTv113jPlC4WrX1N-n6gVEEXmtD2uKkJpyGY4x8lCOS6_" target="_blank" rel="external">拉格朗日乘子法</a>。为每个限制条件引入拉格朗日乘子$\mathbf{\alpha}$ 和 $ \mathbf{\mu} $，得到</p>
@@ -92,12 +96,12 @@
 <p>并且任意一个点到球心的距离都可以通过该公式计算。此外，通过调节参数 $ C $ 的大小来惩罚松弛变量的值，我们可以控制异常数据在整个数据中所占的比例。<br>以上是SVC算法最重要的结论，当我们能够通过优化目标函数得到 $ \mathbf{\alpha} $ 时，我们就能够通过观察它们的值来确定究竟哪些点在球体内，球体上，和球体外，而那些落在超球体之外的点就是异常点，这个特性可以用在异常检测问题上。为了演示，在二维空间上的聚类效果如下图：</p>
 <p><img src="http://img2.tbcdn.cn/L1/461/1/8912d3cc6d7f0d666d77b1f70a9ace393bc62b7d.png" alt="screenshot"></p>
 <p>除了左边所示能够判断一个数据落在什么位置之外，还能够对空间中任意一个点计算其到球心的距离来判断该点在空间中的概率密度如何（如右图）</p>
-<h3 id="u4ECE_u805A_u7C7B_u8FB9_u754C_u5230_u805A_u7C7B_u6807_u7B7E"><a href="#u4ECE_u805A_u7C7B_u8FB9_u754C_u5230_u805A_u7C7B_u6807_u7B7E" class="headerlink" title="从聚类边界到聚类标签"></a>从聚类边界到聚类标签</h3><p>SVC优化后我们得到的是聚类边界，但为了得到具体的聚类标签，我们还需要对结果进行后续处理，通常我们采取的方法是，连接任意两个在超球体内的点，如果该直线片段上存在一个点属于超球体外，那么我们判断这两个点不属于一个簇，因为从一个点到另一个点必然经过了低密度区域，如下图所示。</p>
+<h3 id="从聚类边界到聚类标签"><a href="#从聚类边界到聚类标签" class="headerlink" title="从聚类边界到聚类标签"></a>从聚类边界到聚类标签</h3><p>SVC优化后我们得到的是聚类边界，但为了得到具体的聚类标签，我们还需要对结果进行后续处理，通常我们采取的方法是，连接任意两个在超球体内的点，如果该直线片段上存在一个点属于超球体外，那么我们判断这两个点不属于一个簇，因为从一个点到另一个点必然经过了低密度区域，如下图所示。</p>
 <p><img src="http://img2.tbcdn.cn/L1/461/1/a3c97754bbb7941343d22cd0512bf2e078c1c979.png" alt="screenshot"><br><img src="http://img2.tbcdn.cn/L1/461/1/32a0f29b38a670129080fd9465cd069531dfda3c.png" alt="screenshot"></p>
 <p>通过对最终结果两两之间连线进行采样并计算是否存在点在超球体外的方法可以帮助我们确定每个点所属的聚类标签。</p>
-<h3 id="u5982_u4F55_u89E3_u4F18_u5316_u95EE_u9898"><a href="#u5982_u4F55_u89E3_u4F18_u5316_u95EE_u9898" class="headerlink" title="如何解优化问题"></a>如何解优化问题</h3><p>那么如何解上述的二次型优化问题，现在有很多开源的解二次型优化问题的包，但是针对SVM这一类的特定算法，这些包的效率通常都很低，目前最常用的一套算法SMO算法采取的类似坐标下降法可以很高效的解决这一类的优化问题，在后续文章里我们将重点介绍SMO算法。</p>
-<h3 id="u7ED3_u675F_u8BED"><a href="#u7ED3_u675F_u8BED" class="headerlink" title="结束语"></a>结束语</h3><p>无论是异常检测还是聚类，SVC [1]都是一套非常实用的算法，其原理和One-class SVM [3] 非常的类似, 了解单类SVM算法的读者会发现换一种问题的形式化方式往往可以从另一个角度去解释一个学习问题。以上简单扼要的介绍了整个算法的理论基础，针对算法实现，尤其是优化部分会有后续文章跟进，如果你对该算法感兴趣欢迎联系交流！</p>
-<h3 id="u53C2_u8003_u6587_u732E"><a href="#u53C2_u8003_u6587_u732E" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1] H. Xiao and C. Eckert. Indicative support vector clustering with its application on anomaly detection. In IEEE 12th International Conference on Machine Learning and Applications (ICMLA’13), Miami, Florida, USA, December 2013.</p>
+<h3 id="如何解优化问题"><a href="#如何解优化问题" class="headerlink" title="如何解优化问题"></a>如何解优化问题</h3><p>那么如何解上述的二次型优化问题，现在有很多开源的解二次型优化问题的包，但是针对SVM这一类的特定算法，这些包的效率通常都很低，目前最常用的一套算法SMO算法采取的类似坐标下降法可以很高效的解决这一类的优化问题，在后续文章里我们将重点介绍SMO算法。</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>无论是异常检测还是聚类，SVC [1]都是一套非常实用的算法，其原理和One-class SVM [3] 非常的类似, 了解单类SVM算法的读者会发现换一种问题的形式化方式往往可以从另一个角度去解释一个学习问题。以上简单扼要的介绍了整个算法的理论基础，针对算法实现，尤其是优化部分会有后续文章跟进，如果你对该算法感兴趣欢迎联系交流！</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1] H. Xiao and C. Eckert. Indicative support vector clustering with its application on anomaly detection. In IEEE 12th International Conference on Machine Learning and Applications (ICMLA’13), Miami, Florida, USA, December 2013.</p>
 <p>[2] A. Ben-Hur, D. Horn, H. Siegelmann, and V. Vapnik. A support vector clustering method. In Pattern Recognition, 2000. Proceedings. 15th International Conference on, volume 2, pages 724–727 vol.2, 2000.</p>
 <p>[3] B. Schoekopf, J. C. Platt, J. C. Shawe-Taylor, A. J. Smola, and R. C. Williamson. Estimating the support of a high-dimensional distribution. Neural Comput., 13(7):1443– 1471, July 2001.</p>
 ]]></content>
