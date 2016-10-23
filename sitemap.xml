@@ -2,44 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://feuerchop.github.io/2016/10/23/botnet-detection/</loc>
+    <loc>http://huang3.github.io/about/index.html</loc>
+    
+    <lastmod>2016-10-23T13:22:35.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://huang3.github.io/2016/10/23/icml15-review/</loc>
+    
+    <lastmod>2016-10-23T11:13:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://huang3.github.io/2016/10/23/botnet-detection/</loc>
     
     <lastmod>2016-10-23T08:16:33.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://feuerchop.github.io/2016/10/23/icml15-review/</loc>
-    
-    <lastmod>2016-10-23T08:00:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://feuerchop.github.io/2016/10/22/git-multiple-sshkey/</loc>
+    <loc>http://huang3.github.io/2016/10/22/git-multiple-sshkey/</loc>
     
     <lastmod>2016-10-22T15:24:30.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://feuerchop.github.io/2016/09/22/intro-svc/</loc>
+    <loc>http://huang3.github.io/2016/09/22/intro-svc/</loc>
     
     <lastmod>2016-10-22T15:21:02.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://feuerchop.github.io/2016/10/21/inverview-qa-ml/</loc>
+    <loc>http://huang3.github.io/2016/10/21/inverview-qa-ml/</loc>
     
     <lastmod>2016-10-22T08:16:38.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://feuerchop.github.io/about/index.html</loc>
-    
-    <lastmod>2016-10-21T13:07:43.000Z</lastmod>
     
   </url>
   

@@ -411,8 +411,8 @@ h6 {
   font-size: 16px; }
 
 #main {
-  width: 760px;
-  margin: 0 auto; }
+  width: 1024px;
+  margin-left: 36px; }
 
 #container {
   margin: 32px 20px; }
@@ -554,7 +554,7 @@ footer {
   width: 200px;
   position: absolute;
   padding: 10px 5px;
-  margin-left: 760px;
+  margin-left: 1024px;
   font-size: 15px;
   font-family: Athelas, Times New Roman, SimSun, Microsoft Yahei, serif;
   background: rgba(240, 242, 245, 0); }
@@ -827,7 +827,7 @@ code {
       color: #0047AB;
       transform: scale(1.05); }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 1024px) {
   #main {
     width: 100%; }
   header {
