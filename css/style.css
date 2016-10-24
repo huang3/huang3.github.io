@@ -51,6 +51,17 @@
     margin-top: 10px;
     margin-bottom: 10px; }
 
+.cv-col {
+  padding: 0px 10px;
+  font-family: "helvetica"; }
+  .cv-col .main {
+    font-size: 9pt; }
+  .cv-col p {
+    font-size: 9pt; }
+  .cv-col h5 {
+    color: gray;
+    margin-bottom: 10px; }
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
    * 1. Set default font family to sans-serif.
@@ -461,7 +472,7 @@ h6 {
   float: left; }
 
 .column-left {
-  width: 30%;
+  width: 28%;
   float: left; }
 
 .column-center {
@@ -469,7 +480,11 @@ h6 {
   float: left; }
 
 .column-right {
-  width: 30%;
+  width: 32%;
+  float: left; }
+
+.column-center-right {
+  width: 72%;
   float: left; }
 
 .empty {

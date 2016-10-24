@@ -173,7 +173,7 @@
     <link href="http://huang3.github.io/2016/10/23/icml15-review/"/>
     <id>http://huang3.github.io/2016/10/23/icml15-review/</id>
     <published>2016-10-23T06:05:33.000Z</published>
-    <updated>2016-10-23T11:13:31.000Z</updated>
+    <updated>2016-10-24T18:52:25.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="overall-comments">Overall comments</h3>
 <p>Well organised in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors, ~1600</p>
@@ -188,8 +188,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;overall-comments&quot;&gt;Overall comments&lt;/h3&gt;
-&lt;p&gt;Well organised in terms of main events, incl. presentations, posters, tutorials and works
+      ICML conference is well organized in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors,  ~1600
     
     </summary>
     
@@ -236,7 +235,7 @@
     <link href="http://huang3.github.io/2016/10/21/inverview-qa-ml/"/>
     <id>http://huang3.github.io/2016/10/21/inverview-qa-ml/</id>
     <published>2016-10-21T13:07:43.000Z</published>
-    <updated>2016-10-24T13:09:10.000Z</updated>
+    <updated>2016-10-24T17:45:58.000Z</updated>
     
     <content type="html"><![CDATA[<p>Here I list a set of Machine Learning questions for interview who wants to get a data scientist job or similar position. Answers can be inquired by contact. <img src="http://home.in.tum.de/~xiaohu/uploaded_images/ml-qa-flagcover.png"></p>
 <p><strong>Question List (expanding)</strong></p>
@@ -252,7 +251,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;Here I list a set of Machine Learning questions for interview who wants to get a data scientist job or similar position. Answers can be i
+      Here I list a set of Machine Learning questions for interview who wants to get a data scientist job or similar position. Answers can be inquired by contact.
     
     </summary>
     
@@ -266,7 +265,7 @@
     <link href="http://huang3.github.io/2016/09/22/intro-svc/"/>
     <id>http://huang3.github.io/2016/09/22/intro-svc/</id>
     <published>2016-09-22T14:15:44.000Z</published>
-    <updated>2016-10-23T16:26:53.000Z</updated>
+    <updated>2016-10-24T19:00:12.000Z</updated>
     
     <content type="html"><![CDATA[<p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
@@ -351,7 +350,7 @@ L=R^2-\sum_j\left(R^2+\xi_j-\|\Phi(x_j)-\mathbf{a}\|^2\right)\alpha_j-\sum_j\xi_
     
     <summary type="html">
     
-      &lt;p&gt;支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向
+      Support vector clustering is a kernel-based unsupervised learning algorithm used mainly for anomaly deteciton. Here I give a detailed tutorial on understanding this type of algorithm.
     
     </summary>
     
