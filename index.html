@@ -11,137 +11,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'Your Google Analytics ID', 'auto');
-ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="main"><header><a href="/." class="logo">HUNAG XIAO, Ph.D</a><ul class="nav"><li class="nav-link"><a href="/" class="active">Home</a></li><li class="nav-link"><a href="/tags/machine-learning" target="_self">Machine Learning</a></li><li class="nav-link"><a href="/tags/tech" target="_self">Tech.⧉技</a></li><li class="nav-link"><a href="/tags/misc" target="_self">杂谈</a></li><li class="nav-link"><a href="/archives/" target="_self">Blogs</a></li><li class="nav-link"><a href="/about/" target="_self">Vita</a></li></ul></header><section id="container"><ul class="home"><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/10/23/botnet-detection/" class="post-link">Paper review - Botnet Detection</a></h2><span class="post-time">Oct 23, 2016</span><div class="post-content"><p>This blog is a summary of study for the paper as follows, figures and facts are derived from this paper and should not be abused for other purpose.</p>
-<!-- hexo-inject:begin --><!-- hexo-inject:end --><blockquote>
-<p>Guofei Gu, Roberto Perdisci, Junjie Zhang, and Wenke Lee. 2008. <strong>BotMiner: clustering analysis of network traffic for protocol- and structure-independent botnet detection.</strong> In Proceedings of the 17th conference on Security symposium (SS’08). USENIX Association, Berkeley, CA, USA, 139-154.</p>
-</blockquote>
-<p>While machine learning has been proved effective enough in many different fields, notably such as NLP, OCR, recommendation system and so on, but its applications on Security is relatively barely satisfactory. Given that the security related data volume is booming up at a scale of GB-level per day in many organization, this is absolutely urgent to get our hands on the so called Data-Driven-Security. Amongst all, during my study over this subfield of applied machine learning, Botnets detection is actually a pretty good example or subject of research.</p>
-<h3 id="a-few-words-about-botnets">A few words about Botnets</h3>
-<p>A Botnet can be understood as a group of machines, infected or intended, communicated and controlled by a botmaster to carry on malicious activities through over the network. Obviously a botnet can perform serious harm on a legitimate network or system, known such as DDoS attacks, spams, phishing, identity theft and information exfiltration. Typical structure of Botnet can be centralized or distributed (P2P), and typical protocol of C&amp;C can be IRC, HTTP. Since HTTP is normally allowed by most of networks, HTTP-based P2P Botnet is getting more and more popular.</p>
-<img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img1.png" width="600">
-<p><strong>Fig.1 Possible Botnet structures. (a) centralized (b) P2P</strong></p>
-<p>Previous work has developed many techniques to detect Botnets, however, either focus on particular C&amp;C protocol, structure, infection model of botnets, or be incapable of dealing changing C&amp;C server addresses (e.g., fast-flux service network). In this paper, however, authors proposed a general data-drive framework based on intrinsic characteristics of botnets, namely,</p>
-<ul>
-<li>who is talking to whom? (C-plane)</li>
-<li>who is doing what? (A-plane)</li>
-</ul>
-<p>The assumptions behind it is that we believe that an identifiable botnet is always driven by a certain number of C&amp;C servers, and is intended to perform malicious activities to some assets. Therefore, the characteristics of an identifiable botnet can be summarized as being C&amp;C patterns and the malicious activities patterns, as shown in Fig.1. By doing so, the detection framework is more independent of structure, protocols, infection models and so on, since we are inspecting the botnets by looking at its behavior.</p>
-<h3 id="c-plane">C-plane</h3>
-<p>The BotMiner framework is thus divided into two parts, that is, C-plane and A-plane. C stands for C&amp;C which examines network flow between botmaster and bots, because it is believed the network flow between them follows some certain patterns. It helps logging the network flow in a format suitable for efficient storage and further analysis.</p>
-<h3 id="a-plane">A-plane</h3>
-<p>On the other handside, A-plane focus on outbound traffic of activities performed by the bots. Suspicious activities such as scanning, spamming, binary downloading and exploit attempts could very possibly follow some certain patterns. To detect those malicious activities, they deployed a variety of IDS engines to identify the traffic patterns.</p>
-<p>Importantly we note that either C-plane or A-plane is not enough to detect botnets, which can usually produce high false positive. BotMiner combines two planes and cross-correlate the outputs from both planes to produce the final results. The architecture of BotMiner is depicted in Fig.2.</p>
-<div class="figure">
-<img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img2.png" alt="yy">
-<p class="caption">yy</p>
-</div>
-<p><strong>Fig.2. BotMiner architecture</strong></p>
-<h3 id="learning-traffic">Learning traffic</h3>
-<p>As seen in Fig.2, outbound traffic in A-plane and network flows data in C-plane will be filtered and preprocessed to prepare vector-like features, just as commonly required by machine learning algorithms. For C-plane, similar network flow patterns are aggregated according to source IP and destination IP, also port number and protocol types, which define the <code>who is talking to whom</code>. Features are then built for example, number of flows per hour, number of packets per flow, avg. number of bytes per packets and avg. number of bytes per second. This characterizes the communication pattern when clients are talking to servers. Then a 2-step clustering is applied on the dataset, where X-means is used. For A-plane, it also follows 2-layer clustering, that is, Snort output are clustered firstly according to different types of activities, and further clustered within a similar activity. For instances, scanning on same ports will be classified as the same cluster. Overlapping of SMTP destinations will also be classified as the same cluster. This defines <code>who is doing what</code>. clustering results will be cross correlated to compute the final cluster result, which identifies the detected botnets. To confirm the cross-plane correlation, a score has to be assigned on host, where we expect higher score when the host belongs to multiple malicious activities. In the meanwhile, if the host also belongs to at least one C-cluster sharing a common network flow patterns, then we believe this host belongs to certain botnet.</p>
-<h3 id="results">Results</h3>
-<p>The results look pretty good, BotMiner is able to detect almost all the botnets, detailed in Table.1.</p>
-<table style="width:67%;">
-<colgroup>
-<col width="8%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Botnet</th>
-<th align="center">Number of Bots</th>
-<th align="center">Detected?</th>
-<th align="center">Clustered Bots</th>
-<th align="center">Detection Rate</th>
-<th align="center">False Positive Clusters/Hosts</th>
-<th align="center">FP Rate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">IRC-rbot</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">4</td>
-<td align="center">100%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
-</tr>
-<tr class="even">
-<td align="left">IRC-sdbot</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">4</td>
-<td align="center">100%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
-</tr>
-<tr class="odd">
-<td align="left">IRC-spybot</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">3</td>
-<td align="center">75%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
-</tr>
-<tr class="even">
-<td align="left">IRC-N</td>
-<td align="center">259</td>
-<td align="center">YES</td>
-<td align="center">258</td>
-<td align="center">9.6%</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="odd">
-<td align="left">HTTP-1</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">4</td>
-<td align="center">100%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
-</tr>
-<tr class="even">
-<td align="left">HTTP-2</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">4</td>
-<td align="center">100%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
-</tr>
-<tr class="odd">
-<td align="left">P2P-Storm</td>
-<td align="center">13</td>
-<td align="center">YES</td>
-<td align="center">13</td>
-<td align="center">100%</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr class="even">
-<td align="left">P2P-Nugache</td>
-<td align="center">82</td>
-<td align="center">YES</td>
-<td align="center">82</td>
-<td align="center">100%</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Table.1 Botnet detection results using BotMiner</strong></p>
-<p>You can refer more explanation of the observations in the paper.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Finally when we retrospect the work on detecting botnets using learning based techniques, it is believed and proved eventually that the assumptions made about the botnets are actually realistic and approchable. As we have seen, the whole frame work is grounded on two facts: <code>who is talking to whom</code> and <code>who is doing what</code>. Since we believe this characterizes the fundamental behavior of malware instances, which will be told apart from normal instances. Although a lot of effort on feature engineering is still indispensable for efficiency and precision, the intrinsic properties of botnets have shown those infected machines that have similar communication patterns, meanwhile perform the same set of multiple suspicious activities.</p>
-</div></article></li><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/10/23/icml15-review/" class="post-link">ICMl'15 Review</a></h2><span class="post-time">Oct 23, 2016</span><div class="post-content"><h3 id="overall-comments">Overall comments</h3>
-<p>Well organised in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors, ~1600</p>
+ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="main"><header><a href="/." class="logo">HUNAG XIAO, Ph.D</a><ul class="nav"><li class="nav-link"><a href="/about/" target="_self">About</a></li><li class="nav-link"><a href="/archives/" target="_self">Blogs</a></li><li class="nav-link"><a href="/tags/machine-learning" target="_self">Machine Learning</a></li><li class="nav-link"><a href="/tags/tech" target="_self">Tech.</a></li><li class="nav-link"><a href="/tags/misc" target="_self">杂谈</a></li><li class="nav-link"><a href="/about/" target="_self">Vita</a></li></ul></header><section id="container"><ul class="home"><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/10/23/botnet-detection/" class="post-link">Paper review - Botnet Detection</a></h2><span class="post-time">Oct 23, 2016</span><div class="post-content">We'll review a paper regarding botnets detection. An application on botnets detection will give us an idea of what and how we can do about security problems leveraging machine learning algorithms.</div><a href="/2016/10/23/botnet-detection/" class="read-more">Read more..</a></article></li><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/10/23/icml15-review/" class="post-link">ICMl'15 Review</a></h2><span class="post-time">Oct 23, 2016</span><div class="post-content"><h3 id="overall-comments">Overall comments</h3>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>Well organised in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors, ~1600</p>
 <img src="http://home.in.tum.de/~xiaohu/uploaded_images/ICML15-poster.jpg" width="760">
 <h3 id="research-topics">Research topics</h3>
 <p>Covers almost a full spectrum of ML. topics, incl. DL., Opt., SL, USL, bandit, clustering, kernel methods, causality, time series, bayesian (nonparametric), privacy, large scale learning, distributed optimisation, RL, matrix factorisation, sparsity, transfer learning, ranking learning, networks and graphs, online learning, DL and vision, structured prediction,manifold learning, probe. models, variational inference, hashing, MC methods, FS., GP, approximate inference, NLP, sub modality, topic model, learning theory.</p>
@@ -149,19 +20,16 @@ ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end -
 <p>Almost all the relevant companies are coming for recruiting people from ML. Alibaba has focus now on fraud detection, cloud computing, deep learning, and large scale learning. Google is hot as always. Microsoft is recruiting heavily all over the locations, amazon has its CEO from Germany coming to organize a premium lunch. Also e..g, twitter, disney research, nvidia, Baidu are all looking for top researchers of ML.</p>
 <h3 id="people">People</h3>
 <p>Many top researchers are there, I met Schökopf, Bengio, Job Kleinberg, Leon Button, Emily fox, and also other amazing researchers. Our paper got good feedbacks, some people showed their obvious interests on what we are doing. Adversarial learning is here an interesting topic, many people don’t know. Prof. Joachim in ETHZ is doing kinda of similar work as us, evaluating robustness of ML. algorithms using MI, his student would like to connect for future collaboration. Also students from EPFL, Standfords, JHU, are also interested at our work, definitely gonna stay in touch. Some people from Germany e.g., TUB, Humboldt, Max-plank institute (Bernhardt’s group), face detection company from Dresden. Cognitive system GmbH. Also many excellent researchers from China!</p>
-</div></article></li><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/10/22/git-multiple-sshkey/" class="post-link">How to setup multiple ssh keys for your github</a></h2><span class="post-time">Oct 22, 2016</span><div class="post-content"><p>The problem we faced usually when you deal with version control, is that, you probably have multiple github accounts and want to maintain various repositories accordingly. Say you have two github accounts: <strong>git_A</strong> and <strong>git_B</strong>, and you create repositories repo_a and repo_b under these two accounts.</p>
-<p>Github usually will suggests you to generate your public key and associate them with your account. If you’re not familiar with ssh-keygen for github, please refer to <a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">this post</a>.</p>
-<p>Now you need to generate two different public keys for <strong>git_A</strong> and <strong>git_B</strong>. This is what you expect when follow the ssh-keygen:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh-keygen</div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/Users/YOURNAME/.ssh/id_rsa):</div></pre></td></tr></table></figure>
-<p>This is where you name your public key, e.g., id_rsa_git_A.pub. Soon you will have two public keys in /Users/YOURNAME/.ssh/</p>
-<p>Now let’s associate with your git accounts. Open your ssh config with any editor you like: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ vi ~/.ssh/config</div></pre></td></tr></table></figure></p>
-<p>And add two sections accordingly in the config file: <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#github-A</span> accounts (default)</div><div class="line">Host github<span class="selector-class">.com-A</span></div><div class="line">    HostName github<span class="selector-class">.com</span></div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_git_A</div><div class="line"></div><div class="line"><span class="selector-id">#github-B</span> account</div><div class="line">Host github<span class="selector-class">.com-B</span></div><div class="line">    HostName github<span class="selector-class">.com</span></div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_git_B</div></pre></td></tr></table></figure></p>
-<p>The name after <strong>Host</strong> can be any thing you like to identify your git account, obviously they are associated with different private keys here. Now you can test it with ssh, e.g.: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh -T git@github.com-A</div></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh -T git@github.com-B</div></pre></td></tr></table></figure>
-<p>They should be automatically using corresponding public key now, and you will get successful message response.</p>
-<p>To init and config a repository locally, you probably will do: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ git init</div><div class="line">YOURNAME$ git config user.name git_A</div><div class="line">YOURNAME$ git config user.email <span class="string">"git_A@your_mail_domain.com"</span></div><div class="line">YOURNAME$ git remote <span class="built_in">set</span>-url origin git@github.com-A:git_A/repo_a</div><div class="line">YOURNAME$ git pull origin</div></pre></td></tr></table></figure> That’s it! now you can do any git commands you want accordingly with different ssh keys.</p>
-</div></article></li><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/10/21/inverview-qa-ml/" class="post-link">Interview QA for Machine Learning Position</a></h2><span class="post-time">Oct 21, 2016</span><div class="post-content"><p>Here I list a set of Machine Learning questions &amp; answers for interview who wants to get a data scientist job or similar position.</p>
-<p>Question List: * Introduce one of your favorite machine learning algorithms in detail. * How would you evaluate the performance of your classifier? Name two ways at least. * How would you understand overfitting and what you can do about it? * Tell me how to use cross validation for model selection. * What’s the difference of ROC and PRC? * What is cross entropy and how to derive it?</p>
+</div></article></li><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/10/22/git-multiple-sshkey/" class="post-link">How to setup multiple ssh keys for your github</a></h2><span class="post-time">Oct 22, 2016</span><div class="post-content">This tutorial aims at those who have multiple github accounts and wanna maintain them on local machines. We walk you through how you can setup multiple ssh keys for different github.com accounts.</div><a href="/2016/10/22/git-multiple-sshkey/" class="read-more">Read more..</a></article></li><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/10/21/inverview-qa-ml/" class="post-link">Interview QA for Machine Learning Position</a></h2><span class="post-time">Oct 21, 2016</span><div class="post-content"><p>Here I list a set of Machine Learning questions for interview who wants to get a data scientist job or similar position. Answers can be inquired by contact. <img src="http://home.in.tum.de/~xiaohu/uploaded_images/ml-qa-flagcover.png"></p>
+<p><strong>Question List (expanding)</strong></p>
+<ul>
+<li>Introduce one of your favorite machine learning algorithms in detail.</li>
+<li>How would you evaluate the performance of your classifier? Name two ways at least.</li>
+<li>How would you understand overfitting and what you can do about it?</li>
+<li>Tell me how to use cross validation for model selection.</li>
+<li>What’s the difference of ROC and PRC?</li>
+<li>What is cross entropy and how to derive it?</li>
+</ul>
 </div></article></li><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/09/22/intro-svc/" class="post-link">Introduction to Support Vector Clustering</a></h2><span class="post-time">Sep 22, 2016</span><div class="post-content"><p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
 <h3 id="问题描述和目标定义">问题描述和目标定义</h3>

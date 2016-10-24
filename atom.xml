@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huang3.github.io/"/>
-  <updated>2016-10-23T08:16:33.000Z</updated>
+  <updated>2016-10-24T15:51:01.000Z</updated>
   <id>http://huang3.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huang3.github.io/2016/10/23/botnet-detection/"/>
     <id>http://huang3.github.io/2016/10/23/botnet-detection/</id>
     <published>2016-10-23T08:01:41.000Z</published>
-    <updated>2016-10-23T08:16:33.000Z</updated>
+    <updated>2016-10-24T15:51:01.000Z</updated>
     
     <content type="html"><![CDATA[<p>This blog is a summary of study for the paper as follows, figures and facts are derived from this paper and should not be abused for other purpose.</p>
 <blockquote>
@@ -29,8 +29,10 @@
 <p>While machine learning has been proved effective enough in many different fields, notably such as NLP, OCR, recommendation system and so on, but its applications on Security is relatively barely satisfactory. Given that the security related data volume is booming up at a scale of GB-level per day in many organization, this is absolutely urgent to get our hands on the so called Data-Driven-Security. Amongst all, during my study over this subfield of applied machine learning, Botnets detection is actually a pretty good example or subject of research.</p>
 <h3 id="a-few-words-about-botnets">A few words about Botnets</h3>
 <p>A Botnet can be understood as a group of machines, infected or intended, communicated and controlled by a botmaster to carry on malicious activities through over the network. Obviously a botnet can perform serious harm on a legitimate network or system, known such as DDoS attacks, spams, phishing, identity theft and information exfiltration. Typical structure of Botnet can be centralized or distributed (P2P), and typical protocol of C&amp;C can be IRC, HTTP. Since HTTP is normally allowed by most of networks, HTTP-based P2P Botnet is getting more and more popular.</p>
-<img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img1.png" width="600">
-<p><strong>Fig.1 Possible Botnet structures. (a) centralized (b) P2P</strong></p>
+<div class="figure">
+<img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img1.png" alt="Fig.1 Possible Botnet structures. a centralized b">
+<p class="caption"><strong>Fig.1 Possible Botnet structures. a centralized b</strong></p>
+</div>
 <p>Previous work has developed many techniques to detect Botnets, however, either focus on particular C&amp;C protocol, structure, infection model of botnets, or be incapable of dealing changing C&amp;C server addresses (e.g., fast-flux service network). In this paper, however, authors proposed a general data-drive framework based on intrinsic characteristics of botnets, namely,</p>
 <ul>
 <li>who is talking to whom? (C-plane)</li>
@@ -155,7 +157,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;This blog is a summary of study for the paper as follows, figures and facts are derived from this paper and should not be abused for othe
+      We&#39;ll review a paper regarding botnets detection. An application on botnets detection will give us an idea of what and how we can do about security problems leveraging machine learning algorithms.
     
     </summary>
     
@@ -203,7 +205,7 @@
     <link href="http://huang3.github.io/2016/10/22/git-multiple-sshkey/"/>
     <id>http://huang3.github.io/2016/10/22/git-multiple-sshkey/</id>
     <published>2016-10-22T08:39:11.000Z</published>
-    <updated>2016-10-22T15:24:30.000Z</updated>
+    <updated>2016-10-24T15:49:27.000Z</updated>
     
     <content type="html"><![CDATA[<p>The problem we faced usually when you deal with version control, is that, you probably have multiple github accounts and want to maintain various repositories accordingly. Say you have two github accounts: <strong>git_A</strong> and <strong>git_B</strong>, and you create repositories repo_a and repo_b under these two accounts.</p>
 <p>Github usually will suggests you to generate your public key and associate them with your account. If you’re not familiar with ssh-keygen for github, please refer to <a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">this post</a>.</p>
@@ -220,7 +222,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;The problem we faced usually when you deal with version control, is that, you probably have multiple github accounts and want to maintain
+      This tutorial aims at those who have multiple github accounts and wanna maintain them on local machines. We walk you through how you can setup multiple ssh keys for different github.com accounts.
     
     </summary>
     
@@ -234,15 +236,23 @@
     <link href="http://huang3.github.io/2016/10/21/inverview-qa-ml/"/>
     <id>http://huang3.github.io/2016/10/21/inverview-qa-ml/</id>
     <published>2016-10-21T13:07:43.000Z</published>
-    <updated>2016-10-22T08:16:38.000Z</updated>
+    <updated>2016-10-24T13:09:10.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Here I list a set of Machine Learning questions &amp; answers for interview who wants to get a data scientist job or similar position.</p>
-<p>Question List: * Introduce one of your favorite machine learning algorithms in detail. * How would you evaluate the performance of your classifier? Name two ways at least. * How would you understand overfitting and what you can do about it? * Tell me how to use cross validation for model selection. * What’s the difference of ROC and PRC? * What is cross entropy and how to derive it?</p>
+    <content type="html"><![CDATA[<p>Here I list a set of Machine Learning questions for interview who wants to get a data scientist job or similar position. Answers can be inquired by contact. <img src="http://home.in.tum.de/~xiaohu/uploaded_images/ml-qa-flagcover.png"></p>
+<p><strong>Question List (expanding)</strong></p>
+<ul>
+<li>Introduce one of your favorite machine learning algorithms in detail.</li>
+<li>How would you evaluate the performance of your classifier? Name two ways at least.</li>
+<li>How would you understand overfitting and what you can do about it?</li>
+<li>Tell me how to use cross validation for model selection.</li>
+<li>What’s the difference of ROC and PRC?</li>
+<li>What is cross entropy and how to derive it?</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Here I list a set of Machine Learning questions &amp;amp; answers for interview who wants to get a data scientist job or similar position.&lt;/p
+      &lt;p&gt;Here I list a set of Machine Learning questions for interview who wants to get a data scientist job or similar position. Answers can be i
     
     </summary>
     
@@ -256,7 +266,7 @@
     <link href="http://huang3.github.io/2016/09/22/intro-svc/"/>
     <id>http://huang3.github.io/2016/09/22/intro-svc/</id>
     <published>2016-09-22T14:15:44.000Z</published>
-    <updated>2016-10-22T15:21:02.000Z</updated>
+    <updated>2016-10-23T16:26:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
