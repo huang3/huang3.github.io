@@ -483,6 +483,9 @@ h6 {
 .column-left {
   width: 28%;
   float: left; }
+  .column-left div.social a {
+    font-size: 32px;
+    padding-right: 0px 5px; }
 
 .column-center {
   width: 40%;
