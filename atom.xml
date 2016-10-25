@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huang3.github.io/"/>
-  <updated>2016-10-24T15:51:01.000Z</updated>
+  <updated>2016-10-25T06:05:41.000Z</updated>
   <id>http://huang3.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huang3.github.io/2016/10/23/botnet-detection/"/>
     <id>http://huang3.github.io/2016/10/23/botnet-detection/</id>
     <published>2016-10-23T08:01:41.000Z</published>
-    <updated>2016-10-24T15:51:01.000Z</updated>
+    <updated>2016-10-25T06:05:41.000Z</updated>
     
     <content type="html"><![CDATA[<p>This blog is a summary of study for the paper as follows, figures and facts are derived from this paper and should not be abused for other purpose.</p>
 <blockquote>
@@ -157,7 +157,7 @@
     
     <summary type="html">
     
-      We&#39;ll review a paper regarding botnets detection. An application on botnets detection will give us an idea of what and how we can do about security problems leveraging machine learning algorithms.
+      We&#39;ll review a paper regarding &lt;a href=https://en.wikipedia.org/wiki/Botnet&gt;&lt;b&gt;botnets&lt;/b&gt;&lt;/a&gt; detection. An application on botnets detection will give us an idea of what and how we can do about security problems leveraging machine learning algorithms.
     
     </summary>
     
@@ -173,7 +173,7 @@
     <link href="http://huang3.github.io/2016/10/23/icml15-review/"/>
     <id>http://huang3.github.io/2016/10/23/icml15-review/</id>
     <published>2016-10-23T06:05:33.000Z</published>
-    <updated>2016-10-24T18:52:25.000Z</updated>
+    <updated>2016-10-25T06:06:33.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="overall-comments">Overall comments</h3>
 <p>Well organised in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors, ~1600</p>
@@ -188,7 +188,7 @@
     
     <summary type="html">
     
-      ICML conference is well organized in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors,  ~1600
+      &lt;a href=http://icml.cc/2015/&gt;&lt;b&gt;ICML conference&lt;/b&gt;&lt;/a&gt; is well organized in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors,  ~1600
     
     </summary>
     
@@ -204,7 +204,7 @@
     <link href="http://huang3.github.io/2016/10/22/git-multiple-sshkey/"/>
     <id>http://huang3.github.io/2016/10/22/git-multiple-sshkey/</id>
     <published>2016-10-22T08:39:11.000Z</published>
-    <updated>2016-10-24T15:49:27.000Z</updated>
+    <updated>2016-10-25T06:04:47.000Z</updated>
     
     <content type="html"><![CDATA[<p>The problem we faced usually when you deal with version control, is that, you probably have multiple github accounts and want to maintain various repositories accordingly. Say you have two github accounts: <strong>git_A</strong> and <strong>git_B</strong>, and you create repositories repo_a and repo_b under these two accounts.</p>
 <p>Github usually will suggests you to generate your public key and associate them with your account. If you’re not familiar with ssh-keygen for github, please refer to <a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">this post</a>.</p>
@@ -221,7 +221,7 @@
     
     <summary type="html">
     
-      This tutorial aims at those who have multiple github accounts and wanna maintain them on local machines. We walk you through how you can setup multiple ssh keys for different github.com accounts.
+      This tutorial aims at those who have multiple &lt;a href=&#39;github.com&#39;&gt;&lt;strong&gt;github&lt;/strong&gt;&lt;/a&gt; accounts and wanna maintain them on local machines. We walk you through how you can setup multiple ssh keys for different github.com accounts.
     
     </summary>
     
@@ -265,7 +265,7 @@
     <link href="http://huang3.github.io/2016/09/22/intro-svc/"/>
     <id>http://huang3.github.io/2016/09/22/intro-svc/</id>
     <published>2016-09-22T14:15:44.000Z</published>
-    <updated>2016-10-24T19:00:12.000Z</updated>
+    <updated>2016-10-25T06:07:39.000Z</updated>
     
     <content type="html"><![CDATA[<p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
@@ -350,7 +350,7 @@ L=R^2-\sum_j\left(R^2+\xi_j-\|\Phi(x_j)-\mathbf{a}\|^2\right)\alpha_j-\sum_j\xi_
     
     <summary type="html">
     
-      Support vector clustering is a kernel-based unsupervised learning algorithm used mainly for anomaly deteciton. Here I give a detailed tutorial on understanding this type of algorithm.
+      &lt;a href=&quot;http://www.scholarpedia.org/article/Support_vector_clustering&quot;&gt;&lt;b&gt;Support vector clustering&lt;/b&gt;&lt;/a&gt; is a kernel-based unsupervised learning algorithm used mainly for anomaly deteciton. Here I give a detailed tutorial on understanding this type of algorithm.
     
     </summary>
     
