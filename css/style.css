@@ -61,6 +61,15 @@
   .cv-col h5 {
     color: gray;
     margin-bottom: 10px; }
+  .cv-col a {
+    color: #0047AB; }
+  .cv-col a:hover {
+    color: gray;
+    text-decoration: underline; }
+  .cv-col h6 {
+    font-size: 10pt;
+    color: gray;
+    margin-bottom: 10px; }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
