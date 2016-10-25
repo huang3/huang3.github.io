@@ -162,9 +162,9 @@
     </summary>
     
     
-      <category term="research" scheme="http://huang3.github.io/tags/research/"/>
-    
       <category term="security" scheme="http://huang3.github.io/tags/security/"/>
+    
+      <category term="research" scheme="http://huang3.github.io/tags/research/"/>
     
   </entry>
   
@@ -193,9 +193,9 @@
     </summary>
     
     
-      <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
-    
       <category term="research" scheme="http://huang3.github.io/tags/research/"/>
+    
+      <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
     
   </entry>
   
