@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta lang="zh-CN"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="Huang Xiao, Ph.D"><meta name="description" content="Welcome to this site, feel free to contact and critisize"><title>Archives · HUNAG XIAO, Ph.D</title><link rel="icon" href="/favicon_h3.png"><link rel="canonical" href="http://huang3.github.io/archives/2016/09/"><link rel="alternate" href="/atom.xml" title="HUNAG XIAO, Ph.D"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"><script type="text/javascript"><!-- hexo-inject:begin --><!-- hexo-inject:end -->var _hmt = _hmt || [];
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta lang="zh-CN"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="Huang Xiao, Ph.D"><meta name="description" content="Welcome to this site, feel free to contact and critisize"><title>Archives · HUNAG XIAO, Ph.D</title><link rel="icon" href="/favicon_h3.png"><link rel="canonical" href="http://huang3.github.io/archives/2016/09/"><link rel="alternate" href="/atom.xml" title="HUNAG XIAO, Ph.D"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"><script type="text/javascript">var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "//hm.baidu.com/hm.js?Your baidu Analytics ID";
@@ -11,26 +11,4 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'Your Google Analytics ID', 'auto');
-ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="main"><header><a href="/." class="logo">HUNAG XIAO, Ph.D</a><ul class="nav"><li class="nav-link"><a href="/about/" target="_self">About</a></li><li class="nav-link"><a href="/archives/" target="_self">Blogs</a></li><li class="nav-link"><a href="/tags/machine-learning" target="_self">Machine Learning</a></li><li class="nav-link"><a href="/tags/tech" target="_self">Tech.</a></li><li class="nav-link"><a href="/vita/" target="_self">Vita</a></li></ul></header><section id="container"><ul class="home"><li class="post-item"><article class="post"><h2 class="post-title"><a href="/2016/09/22/intro-svc/" class="post-link">Introduction to Support Vector Clustering</a></h2><span class="post-time">Sep 22, 2016</span><!--if excerpt--><!--  div.post-content--><!--    != excerpt--><!--  a.read-more(href=url_for(item.path))--><!--    != __('more')--><!--else--><!--  div.post-content--><!--    != item.content--><div class="post-content"><p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
-<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
-<h3 id="问题描述和目标定义">问题描述和目标定义</h3>
-<p>我们首先这样定义问题，有 <span class="math inline">\(N\)</span> 条数据样本，每条数据有 <span class="math inline">\(d\)</span> 个特征值，我们定义为</p>
-<span>$\mathcal{X}=\left\lbrace x_1,\ldots, x_N\right\rbrace,\,\, x_i \in R^d, \forall i \in \left\lbrace 1,\ldots, N \right\rbrace$</span><!-- Has MathJax -->
-<p>很可惜你只有数据却没有标签，那么监督学习算法基本你就放弃了。为了从数据当中学到点什么，我们可以采用聚类算法来探索数据在D维空间当中是怎么分布的，尽管没有标签用于监督学习，聚类算法仍然能够给你提供很多信息，例如哪些数据更相似，哪些数据属于异常。常用的聚类算法例如KNN，Kmean等都要求你确定具体的K值，即一开始你就假定数据大概可能分成K个簇，很显然，大部分的情况下你...<a href="/2016/09/22/intro-svc/" class="read-more">Read more..</a></div></article></li></ul><div class="paginator"></div></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2016<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">Huang Xiao, Ph.D</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end --></body></html>
+ga('send', 'pageview');</script></head><body><div id="main"><header><a href="/." class="logo">HUNAG XIAO, Ph.D</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Blogs</a></li><li class="nav-link"><a href="/tags/machine-learning" target="_self">Machine Learning</a></li><li class="nav-link"><a href="/projects/" target="_self">Projects</a></li><li class="nav-link"><a href="/vita/" target="_self">Vita</a></li></ul></header><section id="container"><div class="archive"><h2 class="year">2016</h2><div class="post-item"><div class="post-time">Sep 22</div><a href="/2016/09/22/intro-svc/" class="post-link">Introduction to Support Vector Clustering</a></div></div><div class="paginator"></div></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2016<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">Huang Xiao, Ph.D</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script></body></html>
