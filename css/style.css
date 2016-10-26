@@ -530,7 +530,7 @@ header {
     font-family: Athelas, Times New Roman, SimSun, Microsoft Yahei, serif; }
     header .nav .nav-link {
       display: inline-block;
-      padding: 20px 10px; }
+      padding: 0px 10px; }
       header .nav .nav-link a {
         font-size: 18px;
         line-height: 1.4; }
