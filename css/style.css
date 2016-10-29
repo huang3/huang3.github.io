@@ -649,6 +649,10 @@ footer {
       padding: 5px 15px;
       background-color: white;
       border: 0px double #4592ff; }
+  .post .post-content kbd {
+    background-color: #FCF8E3;
+    color: #8D7140;
+    padding: 2px 3px; }
 
 .post .post-sidebar {
   width: 200px;

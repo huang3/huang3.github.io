@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huang3.github.io/"/>
-  <updated>2016-10-25T06:05:41.000Z</updated>
+  <updated>2016-10-27T10:40:46.000Z</updated>
   <id>http://huang3.github.io/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Manually install a package in MikTeX</title>
+    <link href="http://huang3.github.io/2016/10/26/how-to-manual-pkg-miktex/"/>
+    <id>http://huang3.github.io/2016/10/26/how-to-manual-pkg-miktex/</id>
+    <published>2016-10-26T19:49:14.000Z</published>
+    <updated>2016-10-27T10:40:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Firstly, check README files, available documentation of the package, perhaps the beginning of the .dtx file to get installation information.</p>
+<p><strong>Installing a package available as dtx/ins bundle:</strong></p>
+<ul>
+<li><p>Download the content of the package directory. <kbd>dtx</kbd> is the extension of a documented source file, <kdb>ins is the extension of an installation file.</kdb></p></li>
+<li><p>Run LaTeX (or TeX) on the <kbd>.ins</kbd> file. This may be done using your editor or at the command prompt (latex packagename.ins). This would usually produce one or more files ending with <kbd>.sty</kbd>, perhaps some additional files. As you now have <em>cls</em> or <em>sty</em> files or the like, the remaining steps are the same like in the next alternative way:</p></li>
+</ul>
+<p><strong>Installing sty or cls files:</strong></p>
+<p>Create a new directory with the package name in your tex directory structure. With MiKTeX that directory might be <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:<span class="symbol">\P</span>rogram Files<span class="symbol">\M</span>iKTeX 2.8<span class="symbol">\t</span>exmf<span class="symbol">\t</span>ex<span class="symbol">\l</span>atex<span class="symbol">\p</span>ackagename<span class="symbol">\.</span></div></pre></td></tr></table></figure></p>
+<p>Copy the package files (<em>.sty, </em>.cls etc.) into this directory. Make the new package known to MiKTeX: refresh the MiKTeX filename database. To do this, click Start/ Programs/ MiKTeX 2.8/ Maintenance/ Settings (or similar) to get to the MiKTeX options, click the button “Refresh FNDB”. The installation is complete.</p>
+<p>If you did not download the documentation already, you could get it by running pdfLaTeX or LaTeX on the .dtx file. Compile twice to get correct references.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      For writting &lt;b&gt;LaTeX&lt;/b&gt;, it&#39;s normal that you will have to install a third party library to enhace your work. This post shows you how to install a third package in your MikTeX distribution.
+    
+    </summary>
+    
+    
+      <category term="tech" scheme="http://huang3.github.io/tags/tech/"/>
+    
+  </entry>
   
   <entry>
     <title>Paper review - Botnet Detection</title>
