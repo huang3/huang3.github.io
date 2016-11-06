@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://huang3.github.io/2016/09/22/intro-svc/</loc>
+    
+    <lastmod>2016-11-06T22:04:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://huang3.github.io/2016/10/26/how-to-manual-pkg-miktex/</loc>
     
     <lastmod>2016-10-27T10:40:46.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://huang3.github.io/2016/10/23/icml15-review/</loc>
     
     <lastmod>2016-10-26T13:50:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://huang3.github.io/2016/09/22/intro-svc/</loc>
-    
-    <lastmod>2016-10-26T12:33:37.000Z</lastmod>
     
   </url>
   
