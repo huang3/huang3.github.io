@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://huang3.github.io/about/index.html</loc>
+    
+    <lastmod>2016-11-06T22:28:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://huang3.github.io/2016/09/22/intro-svc/</loc>
     
     <lastmod>2016-11-06T22:04:05.000Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>http://huang3.github.io/2016/10/22/git-multiple-sshkey/</loc>
     
     <lastmod>2016-10-25T06:04:47.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://huang3.github.io/about/index.html</loc>
-    
-    <lastmod>2016-10-24T19:04:58.000Z</lastmod>
     
   </url>
   
