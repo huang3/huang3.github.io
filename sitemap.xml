@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://huang3.github.io/about/index.html</loc>
-    
-    <lastmod>2016-11-20T17:30:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://huang3.github.io/2016/09/22/visualize-data/</loc>
-    
-    <lastmod>2016-11-20T12:57:12.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://huang3.github.io/2016/09/22/intro-svc/</loc>
     
-    <lastmod>2016-11-06T22:04:05.000Z</lastmod>
+    <lastmod>2016-11-20T18:54:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://huang3.github.io/2016/11/20/visualize-data/</loc>
+    
+    <lastmod>2016-11-20T18:53:37.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://huang3.github.io/about/index.html</loc>
+    
+    <lastmod>2016-11-20T18:31:22.000Z</lastmod>
     
   </url>
   

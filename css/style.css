@@ -902,11 +902,12 @@ code {
   padding-top: 20px;
   font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif;
   border-top: 1px solid #e6e6e6; }
+  .tags .badge {
+    margin-left: 5px; }
   .tags a {
-    margin-right: 5px;
-    color: #0047AB; }
-    .tags a::before {
-      content: '#'; }
+    padding: 5px 5px;
+    color: white;
+    font-family: "Helvetica Neue", SimSun, Arial, sans-serif; }
 
 .tagcloud {
   margin-top: 3em;
