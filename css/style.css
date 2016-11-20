@@ -454,9 +454,9 @@ body {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.8;
+  line-height: 1.4;
   color: #2e2e2e;
-  background: whitesmoke;
+  background: white;
   scroll-behavior: smooth;
   border-top: 4px solid #0047AB; }
 
@@ -529,22 +529,24 @@ header {
   padding: 20px 10px; }
   header .logo {
     float: left;
-    font-size: 20px;
-    font-family: "Arial Black", Gadget, sans-serif; }
+    font-size: 28px;
+    font-family: "Brush Script MT", "Arial Black", Gadget, sans-serif; }
   header .nav {
     float: right;
     margin-top: 0;
-    font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+    font-family: "Helvetica", "Arial", cursive, LiSu, sans-serif; }
     header .nav .nav-link {
       display: inline-block;
-      padding: 0px 10px; }
+      padding: 0px 5px; }
       header .nav .nav-link a {
-        font-size: 18px;
-        line-height: 1.8; }
+        font-size: 14px;
+        line-height: 1.4;
+        padding: 2px 10px; }
       header .nav .nav-link :hover, header .nav .nav-link .active {
         transition: 0.1s ease-out;
-        border-radius: 2px;
-        border-bottom: 2px solid #0047AB; }
+        border-radius: 15px;
+        background-color: #0047AB;
+        color: white; }
     header .nav .navicon {
       display: none; }
       header .nav .navicon a {
@@ -604,79 +606,81 @@ footer {
     margin-top: 5px;
     display: inline-block;
     color: #8a8a8a; }
-  .post .post-content h1 {
-    font-weight: 400;
-    font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
-  .post .post-content h2 {
-    font-weight: 400;
-    font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
-  .post .post-content h3 {
-    font-weight: 400;
-    font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
-  .post .post-content h4 {
-    font-weight: 400;
-    font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
-  .post .post-content h5 {
-    font-weight: 400;
-    font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
-  .post .post-content h6 {
-    font-weight: 400;
-    font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
-  .post .post-content .headerlink:hover {
-    border-bottom: 0; }
-  .post .post-content .headerlink::before {
-    content: "§";
-    margin-right: 5px;
-    font-size: 1.1em; }
-  .post .post-content a {
-    color: #0047AB; }
-    .post .post-content a:hover {
-      border-bottom: 1px solid #0047AB; }
-  .post .post-content blockquote {
-    margin: 1em 0em;
-    padding: 10px 20px;
-    position: relative;
-    color: rgba(52, 73, 94, 0.9);
-    background-color: rgba(0, 71, 171, 0);
-    border-left: 3px solid rgba(0, 71, 171, 0.3);
-    box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1); }
-    .post .post-content blockquote p {
-      margin: 0; }
-  .post .post-content .figure img {
-    display: block;
-    margin: auto; }
-  .post .post-content .figure p.caption {
-    max-width: 640px;
-    padding-top: 20px;
-    margin: auto;
-    text-align: left; }
-  .post .post-content img {
-    display: block;
-    max-width: 100%;
-    margin: 10px 0px; }
-  .post .post-content > ul {
-    padding: 0;
-    list-style: inside; }
-  .post .post-content > ol {
-    padding: 0;
-    list-style: inside decimal; }
-  .post .post-content > table {
-    margin-bottom: 20px;
-    border-spacing: 0;
-    border: 0px double #4592ff; }
-    .post .post-content > table th, .post .post-content > table td {
-      padding: 5px 15px;
-      background-color: whitesmoke;
-      border: 0px double #4592ff; }
-    .post .post-content > table > caption {
+  .post .post-content {
+    line-height: 1.8; }
+    .post .post-content h1 {
+      font-weight: 400;
+      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+    .post .post-content h2 {
+      font-weight: 400;
+      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+    .post .post-content h3 {
+      font-weight: 400;
+      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+    .post .post-content h4 {
+      font-weight: 400;
+      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+    .post .post-content h5 {
+      font-weight: 400;
+      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+    .post .post-content h6 {
+      font-weight: 400;
+      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+    .post .post-content .headerlink:hover {
+      border-bottom: 0; }
+    .post .post-content .headerlink::before {
+      content: "§";
+      margin-right: 5px;
+      font-size: 1.1em; }
+    .post .post-content a {
+      color: #0047AB; }
+      .post .post-content a:hover {
+        border-bottom: 1px solid #0047AB; }
+    .post .post-content blockquote {
+      margin: 1em 0em;
+      padding: 10px 20px;
+      position: relative;
+      color: rgba(52, 73, 94, 0.9);
+      background-color: rgba(0, 71, 171, 0);
+      border-left: 3px solid rgba(0, 71, 171, 0.3);
+      box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1); }
+      .post .post-content blockquote p {
+        margin: 0; }
+    .post .post-content .figure img {
+      display: block;
+      margin: auto; }
+    .post .post-content .figure p.caption {
       max-width: 640px;
+      padding-top: 20px;
       margin: auto;
-      text-align: left;
-      padding-bottom: 20px; }
-  .post .post-content kbd {
-    background-color: #FCF8E3;
-    color: #8D7140;
-    padding: 2px 3px; }
+      text-align: left; }
+    .post .post-content img {
+      display: block;
+      max-width: 100%;
+      margin: 10px 0px; }
+    .post .post-content > ul {
+      padding: 0;
+      list-style: inside; }
+    .post .post-content > ol {
+      padding: 0;
+      list-style: inside decimal; }
+    .post .post-content > table {
+      margin-bottom: 20px;
+      border-spacing: 0;
+      border: 0px double #4592ff; }
+      .post .post-content > table th, .post .post-content > table td {
+        padding: 5px 15px;
+        background-color: white;
+        border: 0px double #4592ff; }
+      .post .post-content > table > caption {
+        max-width: 640px;
+        margin: auto;
+        text-align: left;
+        padding-bottom: 20px; }
+    .post .post-content kbd {
+      background-color: #FCF8E3;
+      color: #8D7140;
+      padding: 2px 3px; }
 
 .post .post-sidebar {
   width: 200px;
