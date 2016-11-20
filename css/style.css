@@ -11,6 +11,9 @@
   font-weight: lighter;
   font-style: normal; }
 
+article {
+  text-align: justify; }
+
 .bio-col {
   padding-right: 5px;
   padding-top: 14px;
@@ -534,12 +537,12 @@ header {
   header .nav {
     float: right;
     margin-top: 0;
-    font-family: "Helvetica", "Arial", cursive, LiSu, sans-serif; }
+    font-family: "Tahoma", cursive, LiSu, sans-serif; }
     header .nav .nav-link {
       display: inline-block;
       padding: 0px 5px; }
       header .nav .nav-link a {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.4;
         padding: 2px 10px; }
       header .nav .nav-link :hover, header .nav .nav-link .active {
@@ -607,7 +610,8 @@ footer {
     display: inline-block;
     color: #8a8a8a; }
   .post .post-content {
-    line-height: 1.8; }
+    line-height: 1.8;
+    text-align: justify; }
     .post .post-content h1 {
       font-weight: 400;
       font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
