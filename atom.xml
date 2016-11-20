@@ -374,7 +374,7 @@
     <link href="http://huang3.github.io/2016/09/22/intro-svc/"/>
     <id>http://huang3.github.io/2016/09/22/intro-svc/</id>
     <published>2016-09-22T14:15:44.000Z</published>
-    <updated>2016-11-20T18:54:55.000Z</updated>
+    <updated>2016-11-20T19:14:23.000Z</updated>
     
     <content type="html"><![CDATA[<p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
@@ -384,27 +384,30 @@
 <p>很可惜你只有数据却没有标签，那么监督学习算法基本你就放弃了。为了从数据当中学到点什么，我们可以采用聚类算法来探索数据在D维空间当中是怎么分布的，尽管没有标签用于监督学习，聚类算法仍然能够给你提供很多信息，例如哪些数据更相似，哪些数据属于异常。常用的聚类算法例如KNN，Kmean等都要求你确定具体的K值，即一开始你就假定数据大概可能分成K个簇，很显然，大部分的情况下你猜的都是错的，支撑向量聚类却没有这个问题，SVC的基本原理是这样描述的： &gt; 散布在D维空间中的N个数据点，SVC聚类边界将该空间切割成两个部分，高密度部分包含了大部分的数据点，低密度部分只包含了少量异常数据点。</p>
 <p>在二维空间的实例中，我们可以从下图中看出SVC算法所做的事。</p>
 <div class="figure">
-<img src="http://img2.tbcdn.cn/L1/461/1/f1065371d7edf405ba45a104d47ec5db23a188f1.png" alt="screenshot">
-<p class="caption">screenshot</p>
+<img src="http://img2.tbcdn.cn/L1/461/1/f1065371d7edf405ba45a104d47ec5db23a188f1.png" alt="Figure.1 A simple example of what SVC can do">
+<p class="caption"><strong>Figure.1 A simple example of what SVC can do</strong></p>
 </div>
 <p>上图中可以看到，聚类的边界最终将大部分的数据包括在内，而少量的明显异常的数据或噪音点责备排除在外，处于边界上的点我们称之为支撑向量，正是由于它们的存在才能够支撑其整个聚类边界。那么SVC是怎么做到的呢？</p>
 <h3 id="最小超球体">最小超球体</h3>
 <p>观察以上二维空间中数据分布，一种简单粗暴的聚类方法就是画一个尽可能小的圆把大部分的点都圈进去，可是和图中所示的聚类边界相比，这种方法明显过于粗放，并且数据的非线性分布不可能使一个圆恰巧把空间分割成高密度和低密度两部分。那么我们需要的是一个非线性的切割边界，借助于核函数（kernel function）我们能够有效的把低维非线性空间转换成高维的线性空间 $  $ ，这样一来，在 $  $ 空间里我们尝试着找到一个最小的超球体(hypersphere)将大部分的点包括进去，同时允许少量的异常点在球体外，这样映射回原来的低维空间就如我们上图所见的非线性的聚类边界。在大量的SVM文章中都谈及了核函数这个概念，下图简单的揭示了核函数的真正魅力所在，</p>
-<img src="http://img2.tbcdn.cn/L1/461/1/d7d63dc8df47bdf5d72d450a104490b94b74906c.png" width="450" height="100" title="feature mapping from 1-d to 2-d">
+<div class="figure">
+<img src="http://img2.tbcdn.cn/L1/461/1/d7d63dc8df47bdf5d72d450a104490b94b74906c.png" alt="Figure.2 feature mapping from 1-d to 2-d" width="450">
+<p class="caption"><strong>Figure.2 feature mapping from 1-d to 2-d</strong></p>
+</div>
 <p>上图一组一维的数据，如果要进行有效的分类必须用两条线前后进行切割才能将红色和蓝色的点分开，然后如果我们对数据进行如下变换: <span class="math inline">\(\Phi(x)=(x,x^2)\)</span> ，如右边所示，在映射之后的高维（2维）空间里，我们仅用一条直线就能很好的进行分类，即在低维空间线性不可分的数据在高维空间里变得线性可分了。这就是kernel function做的事，核函数的定义了一种特征变换 <span class="math inline">\(\Phi(x)\)</span> （实际上是空间变换），假设你希望寻找一个最优函数（e.g., 分类，聚类，回归）$ f(x)$, 根据<a href="https://en.wikipedia.org/wiki/Mercer%27s_theorem" target="_blank" rel="external">mercer’s theorem</a>, 你总能从核函数变换过的空间(Hilbert space)中寻找到一个最优函数 <span>$f^*$</span><!-- Has MathJax --> 使得该函数是映射后的点的线性叠加，即： $ f^*(.) = \sum_i c_i\Phi(x_i)$, 正是这种在 $  $ 空间中的线性特征使得核方法能够处理很多低维空间中的非线性问题，那么当你定义一个核函数为 <span>$k(x_i,x_j) = \left&lt;\Phi(x_i),\Phi(x_j)\right&gt;$</span><!-- Has MathJax --> ，实际上是定义了一个等价的特征空间并且该空间的内积是由 <span>$k(\cdot,\cdot)$</span><!-- Has MathJax --> 来定义的。此处不再做展开，感兴趣的朋友可以跟我联系。 那么回到之前的聚类问题，寻找低维空间非线性聚类边界的问题转换成了寻找高维空间中最小超球体的问题，</p>
-<p>定义球体的半径$ R $和球心 $  $ , 还有一组松弛变量 $ _i $ ，SVC问题如下：</p>
+<p>定义球体的半径<span>$R$</span><!-- Has MathJax -->和球心 <span>$\mathbf{a}$</span><!-- Has MathJax --> , 还有一组松弛变量 <span>$\left\lbrace \xi_i \right\rbrace$</span><!-- Has MathJax --> ，SVC问题如下：</p>
 <span>$$\begin{align}
 &amp; \min_{R} R^2+C\sum_i\xi_i \nonumber\\
 \text{s.t. } &amp; \|\Phi(x_i) - \mathbf{a} \|^2 \leq R^2 + \xi_i \nonumber\\
 &amp; \xi_i\geq 0, \, \forall i \in \left\lbrace 1,\ldots, N\right\rbrace \nonumber
 \end{align}$$</span><!-- Has MathJax -->
 <p>上述目标函数描述了两个问题， 1. 我们希望找到一个最小的超球半径和球心，使得大部分的点都在球内。 2. 针对每一个数据点引入非负松弛变量 $ _i $ 允许该样本在球体外部，但不至于离球心太远，常数 <span class="math inline">\(C\)</span> 是惩罚参数防止 $ _i _i $ 过大。</p>
-<p>很显然这是个 <strong>带限制条件的二次型问题</strong>。那么观察目标函数中的限制条件进一步告诉我们，如果一个点在球体内部，那么 $ _i=0 $ ，否则如果它在球体外部（异常点），那么 $ _i&gt;0 $ 。</p>
+<p>很显然这是个 <strong>带限制条件的二次型问题</strong>。那么观察目标函数中的限制条件进一步告诉我们，如果一个点在球体内部，那么 <span>$\xi_i=0$</span><!-- Has MathJax -->，否则如果它在球体外部（异常点），那么 <span>$\xi_i&gt;0$</span><!-- Has MathJax -->。</p>
 <h3 id="优化优化还是优化">优化、优化，还是优化</h3>
 <blockquote>
 <p>所有的机器学习问题都是个优化问题</p>
 </blockquote>
-<p>一个学习问题如果能够完美定义，它总能够转化成一个形式优美的优化问题，如上面SVC的目标函数就是一个典型的不能再典型的凸优化问题了，二话不说直接上<a href="http://baike.baidu.com/link?url=WeZGD3nvabLVvd5C2igcjda8YbWF55uvH51TnG-YDBTv113jPlC4WrX1N-n6gVEEXmtD2uKkJpyGY4x8lCOS6_" target="_blank" rel="external">拉格朗日乘子法</a>。为每个限制条件引入拉格朗日乘子<span class="math inline">\(\mathbf{\alpha}\)</span> 和 $  $，得到</p>
+<p>一个学习问题如果能够完美定义，它总能够转化成一个形式优美的优化问题，如上面SVC的目标函数就是一个典型的不能再典型的凸优化问题了，二话不说直接上<a href="http://baike.baidu.com/link?url=WeZGD3nvabLVvd5C2igcjda8YbWF55uvH51TnG-YDBTv113jPlC4WrX1N-n6gVEEXmtD2uKkJpyGY4x8lCOS6_" target="_blank" rel="external">拉格朗日乘子法</a>。为每个限制条件引入拉格朗日乘子<span class="math inline">\(\mathbf{\alpha}\)</span> 和 <span>$\mathbf{\mu}$</span><!-- Has MathJax -->，得到</p>
 <p><span class="math display">\[
 L=R^2-\sum_j\left(R^2+\xi_j-\|\Phi(x_j)-\mathbf{a}\|^2\right)\alpha_j-\sum_j\xi_j\mu_j+\sum_j C\xi_j,
 \]</span></p>
@@ -428,7 +431,10 @@ L=R^2-\sum_j\left(R^2+\xi_j-\|\Phi(x_j)-\mathbf{a}\|^2\right)\alpha_j-\sum_j\xi_
 <p>为了得到超球体的最优半径，我们从结果当中任意选取一个支撑向量 $ x_s $ ，它到球心的距离即是我们要找的最优半径。</p>
 <span>$R^2 = \|\Phi(x_s) - \mathbf{a}\|^2 = k(x_s,x_s)-2\sum_j\alpha_j k(x_s,x_j) + \sum_{i,j}\alpha_i\alpha_j k(x_i,x_j)$</span><!-- Has MathJax -->
 <p>并且任意一个点到球心的距离都可以通过该公式计算。此外，通过调节参数 $ C $ 的大小来惩罚松弛变量的值，我们可以控制异常数据在整个数据中所占的比例。 以上是SVC算法最重要的结论，当我们能够通过优化目标函数得到 $  $ 时，我们就能够通过观察它们的值来确定究竟哪些点在球体内，球体上，和球体外，而那些落在超球体之外的点就是异常点，这个特性可以用在异常检测问题上。为了演示，在二维空间上的聚类效果如下图：</p>
-<img src="http://img2.tbcdn.cn/L1/461/1/8912d3cc6d7f0d666d77b1f70a9ace393bc62b7d.png" width="550" title="Clustering boundary and density plot">
+<div class="figure">
+<img src="http://img2.tbcdn.cn/L1/461/1/8912d3cc6d7f0d666d77b1f70a9ace393bc62b7d.png" alt="Figure.3 Clustering boundary and density plot" width="550">
+<p class="caption"><strong>Figure.3 Clustering boundary and density plot</strong></p>
+</div>
 <p>除了左边所示能够判断一个数据落在什么位置之外，还能够对空间中任意一个点计算其到球心的距离来判断该点在空间中的概率密度如何（如右图）</p>
 <h3 id="从聚类边界到聚类标签">从聚类边界到聚类标签</h3>
 <p>SVC优化后我们得到的是聚类边界，但为了得到具体的聚类标签，我们还需要对结果进行后续处理，通常我们采取的方法是，连接任意两个在超球体内的点，如果该直线片段上存在一个点属于超球体外，那么我们判断这两个点不属于一个簇，因为从一个点到另一个点必然经过了低密度区域，如下图所示。</p>
