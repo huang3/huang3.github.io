@@ -14,9 +14,12 @@ ga('create', 'Your Google Analytics ID', 'auto');
 ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="main"><header><a href="/." class="logo">Xiao, Huang</a><ul id="myTopnav" class="nav"><li class="navicon"><a href="javascript:void(0);" style="font-size:24px;" onclick="toggleNav()">&#9776;</a></li><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Blogs</a></li><li class="nav-link"><a href="/projects/" target="_self">Projects</a></li><li class="nav-link"><a href="/vita/" target="_self">Vita</a></li></ul></header><div class="row"><div class="col-9"><article class="post"><h1 class="post-title">Introduction to Support Vector Clustering</h1><span class="post-time">Sep 22, 2016</span><div class="post-content"><p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <!-- hexo-inject:begin --><!-- hexo-inject:end --><p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
 <h3 id="问题描述和目标定义">问题描述和目标定义</h3>
-<p>我们首先这样定义问题，有 <span class="math inline">\(N\)</span> 条数据样本，每条数据有 <span class="math inline">\(d\)</span> 个特征值，我们定义为</p>
+<p>我们首先这样定义问题，有 <span>$N$</span><!-- Has MathJax -->条数据样本，每条数据有 <span class="math inline">\(d\)</span> 个特征值，我们定义为</p>
 <span>$\mathcal{X}=\left\lbrace x_1,\ldots, x_N\right\rbrace,\,\, x_i \in R^d, \forall i \in \left\lbrace 1,\ldots, N \right\rbrace$</span><!-- Has MathJax -->
-<p>很可惜你只有数据却没有标签，那么监督学习算法基本你就放弃了。为了从数据当中学到点什么，我们可以采用聚类算法来探索数据在D维空间当中是怎么分布的，尽管没有标签用于监督学习，聚类算法仍然能够给你提供很多信息，例如哪些数据更相似，哪些数据属于异常。常用的聚类算法例如KNN，Kmean等都要求你确定具体的K值，即一开始你就假定数据大概可能分成K个簇，很显然，大部分的情况下你猜的都是错的，支撑向量聚类却没有这个问题，SVC的基本原理是这样描述的： &gt; 散布在D维空间中的N个数据点，SVC聚类边界将该空间切割成两个部分，高密度部分包含了大部分的数据点，低密度部分只包含了少量异常数据点。</p>
+<p>很可惜你只有数据却没有标签，那么监督学习算法基本你就放弃了。为了从数据当中学到点什么，我们可以采用聚类算法来探索数据在D维空间当中是怎么分布的，尽管没有标签用于监督学习，聚类算法仍然能够给你提供很多信息，例如哪些数据更相似，哪些数据属于异常。常用的聚类算法例如KNN，Kmean等都要求你确定具体的K值，即一开始你就假定数据大概可能分成K个簇，很显然，大部分的情况下你猜的都是错的，支撑向量聚类却没有这个问题，SVC的基本原理是这样描述的：</p>
+<blockquote>
+<p>散布在D维空间中的N个数据点，SVC聚类边界将该空间切割成两个部分，高密度部分包含了大部分的数据点，低密度部分只包含了少量异常数据点。</p>
+</blockquote>
 <p>在二维空间的实例中，我们可以从下图中看出SVC算法所做的事。</p>
 <div class="figure">
 <img src="http://img2.tbcdn.cn/L1/461/1/f1065371d7edf405ba45a104d47ec5db23a188f1.png" alt="Figure.1 A simple example of what SVC can do">
@@ -24,7 +27,7 @@ ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end -
 </div>
 <p>上图中可以看到，聚类的边界最终将大部分的数据包括在内，而少量的明显异常的数据或噪音点责备排除在外，处于边界上的点我们称之为支撑向量，正是由于它们的存在才能够支撑其整个聚类边界。那么SVC是怎么做到的呢？</p>
 <h3 id="最小超球体">最小超球体</h3>
-<p>观察以上二维空间中数据分布，一种简单粗暴的聚类方法就是画一个尽可能小的圆把大部分的点都圈进去，可是和图中所示的聚类边界相比，这种方法明显过于粗放，并且数据的非线性分布不可能使一个圆恰巧把空间分割成高密度和低密度两部分。那么我们需要的是一个非线性的切割边界，借助于核函数（kernel function）我们能够有效的把低维非线性空间转换成高维的线性空间 $  $ ，这样一来，在 $  $ 空间里我们尝试着找到一个最小的超球体(hypersphere)将大部分的点包括进去，同时允许少量的异常点在球体外，这样映射回原来的低维空间就如我们上图所见的非线性的聚类边界。在大量的SVM文章中都谈及了核函数这个概念，下图简单的揭示了核函数的真正魅力所在，</p>
+<p>观察以上二维空间中数据分布，一种简单粗暴的聚类方法就是画一个尽可能小的圆把大部分的点都圈进去，可是和图中所示的聚类边界相比，这种方法明显过于粗放，并且数据的非线性分布不可能使一个圆恰巧把空间分割成高密度和低密度两部分。那么我们需要的是一个非线性的切割边界，借助于核函数（kernel function）我们能够有效的把低维非线性空间转换成高维的线性空间 <span>$\mathcal{H}$</span><!-- Has MathJax -->，这样一来，在 $  $ 空间里我们尝试着找到一个最小的超球体(hypersphere)将大部分的点包括进去，同时允许少量的异常点在球体外，这样映射回原来的低维空间就如我们上图所见的非线性的聚类边界。在大量的SVM文章中都谈及了核函数这个概念，下图简单的揭示了核函数的真正魅力所在，</p>
 <div class="figure">
 <img src="http://img2.tbcdn.cn/L1/461/1/d7d63dc8df47bdf5d72d450a104490b94b74906c.png" alt="Figure.2 feature mapping from 1-d to 2-d" width="450">
 <p class="caption"><strong>Figure.2 feature mapping from 1-d to 2-d</strong></p>
