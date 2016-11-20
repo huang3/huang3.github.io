@@ -25,14 +25,12 @@
     <content type="html"><![CDATA[<p>Firstly, check README files, available documentation of the package, perhaps the beginning of the .dtx file to get installation information.</p>
 <p><strong>Installing a package available as dtx/ins bundle:</strong></p>
 <ul>
-<li><p>Download the content of the package directory. <kbd>dtx</kbd> is the extension of a documented source file, <kdb>ins is the extension of an installation file.</kdb></p>
-</li>
-<li><p>Run LaTeX (or TeX) on the <kbd>.ins</kbd> file. This may be done using your editor or at the command prompt (latex packagename.ins). This would usually produce one or more files ending with <kbd>.sty</kbd>, perhaps some additional files. As you now have <em>cls</em> or <em>sty</em> files or the like, the remaining steps are the same like in the next alternative way:</p>
-</li>
+<li><p>Download the content of the package directory. <kbd>dtx</kbd> is the extension of a documented source file, <kdb>ins is the extension of an installation file.</kdb></p></li>
+<li><p>Run LaTeX (or TeX) on the <kbd>.ins</kbd> file. This may be done using your editor or at the command prompt (latex packagename.ins). This would usually produce one or more files ending with <kbd>.sty</kbd>, perhaps some additional files. As you now have <em>cls</em> or <em>sty</em> files or the like, the remaining steps are the same like in the next alternative way:</p></li>
 </ul>
 <p><strong>Installing sty or cls files:</strong></p>
-<p>Create a new directory with the package name in your tex directory structure. With MiKTeX that directory might be<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:<span class="symbol">\P</span>rogram Files<span class="symbol">\M</span>iKTeX 2.8<span class="symbol">\t</span>exmf<span class="symbol">\t</span>ex<span class="symbol">\l</span>atex<span class="symbol">\p</span>ackagename<span class="symbol">\.</span></div></pre></td></tr></table></figure></p>
-<p>Copy the package files (<em>.sty, </em>.cls etc.) into this directory.<br>Make the new package known to MiKTeX: refresh the MiKTeX filename database. To do this, click Start/ Programs/ MiKTeX 2.8/ Maintenance/ Settings (or similar) to get to the MiKTeX options, click the button “Refresh FNDB”. The installation is complete.</p>
+<p>Create a new directory with the package name in your tex directory structure. With MiKTeX that directory might be <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:<span class="symbol">\P</span>rogram Files<span class="symbol">\M</span>iKTeX 2.8<span class="symbol">\t</span>exmf<span class="symbol">\t</span>ex<span class="symbol">\l</span>atex<span class="symbol">\p</span>ackagename<span class="symbol">\.</span></div></pre></td></tr></table></figure></p>
+<p>Copy the package files (<em>.sty, </em>.cls etc.) into this directory. Make the new package known to MiKTeX: refresh the MiKTeX filename database. To do this, click Start/ Programs/ MiKTeX 2.8/ Maintenance/ Settings (or similar) to get to the MiKTeX options, click the button “Refresh FNDB”. The installation is complete.</p>
 <p>If you did not download the documentation already, you could get it by running pdfLaTeX or LaTeX on the .dtx file. Compile twice to get correct references.</p>
 ]]></content>
     
@@ -59,111 +57,132 @@
 <p>Guofei Gu, Roberto Perdisci, Junjie Zhang, and Wenke Lee. 2008. <strong>BotMiner: clustering analysis of network traffic for protocol- and structure-independent botnet detection.</strong> In Proceedings of the 17th conference on Security symposium (SS’08). USENIX Association, Berkeley, CA, USA, 139-154.</p>
 </blockquote>
 <p>While machine learning has been proved effective enough in many different fields, notably such as NLP, OCR, recommendation system and so on, but its applications on Security is relatively barely satisfactory. Given that the security related data volume is booming up at a scale of GB-level per day in many organization, this is absolutely urgent to get our hands on the so called Data-Driven-Security. Amongst all, during my study over this subfield of applied machine learning, Botnets detection is actually a pretty good example or subject of research.</p>
-<h3 id="A_few_words_about_Botnets"><a href="#A_few_words_about_Botnets" class="headerlink" title="A few words about Botnets"></a>A few words about Botnets</h3><p>A Botnet can be understood as a group of machines, infected or intended, communicated and controlled by a botmaster to carry on malicious activities through over the network. Obviously a botnet can perform serious harm on a legitimate network or system, known such as DDoS attacks, spams, phishing, identity theft and information exfiltration. Typical structure of Botnet can be centralized or distributed (P2P), and typical protocol of C&amp;C can be IRC, HTTP. Since HTTP is normally allowed by most of networks, HTTP-based P2P Botnet is getting more and more popular.</p>
-<p><img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img1.png" alt="**Fig.1 Possible Botnet structures. a centralized b**">{}</p>
+<h3 id="a-few-words-about-botnets">A few words about Botnets</h3>
+<p>A Botnet can be understood as a group of machines, infected or intended, communicated and controlled by a botmaster to carry on malicious activities through over the network. Obviously a botnet can perform serious harm on a legitimate network or system, known such as DDoS attacks, spams, phishing, identity theft and information exfiltration. Typical structure of Botnet can be centralized or distributed (P2P), and typical protocol of C&amp;C can be IRC, HTTP. Since HTTP is normally allowed by most of networks, HTTP-based P2P Botnet is getting more and more popular.</p>
+<div class="figure">
+<img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img1.png" alt="Fig.1 Possible Botnet structures. a centralized b">
+<p class="caption"><strong>Fig.1 Possible Botnet structures. a centralized b</strong></p>
+</div>
 <p>Previous work has developed many techniques to detect Botnets, however, either focus on particular C&amp;C protocol, structure, infection model of botnets, or be incapable of dealing changing C&amp;C server addresses (e.g., fast-flux service network). In this paper, however, authors proposed a general data-drive framework based on intrinsic characteristics of botnets, namely,</p>
 <ul>
 <li>who is talking to whom? (C-plane)</li>
 <li>who is doing what? (A-plane)</li>
 </ul>
 <p>The assumptions behind it is that we believe that an identifiable botnet is always driven by a certain number of C&amp;C servers, and is intended to perform malicious activities to some assets. Therefore, the characteristics of an identifiable botnet can be summarized as being C&amp;C patterns and the malicious activities patterns, as shown in Fig.1. By doing so, the detection framework is more independent of structure, protocols, infection models and so on, since we are inspecting the botnets by looking at its behavior.</p>
-<h3 id="C-plane"><a href="#C-plane" class="headerlink" title="C-plane"></a>C-plane</h3><p>The BotMiner framework is thus divided into two parts, that is, C-plane and A-plane. C stands for C&amp;C which examines network flow between botmaster and bots, because it is believed the network flow between them follows some certain patterns. It helps logging the network flow in a format suitable for efficient storage and further analysis.</p>
-<h3 id="A-plane"><a href="#A-plane" class="headerlink" title="A-plane"></a>A-plane</h3><p>On the other handside, A-plane focus on outbound traffic of activities performed by the bots. Suspicious activities such as scanning, spamming, binary downloading and exploit attempts could very possibly follow some certain patterns. To detect those malicious activities, they deployed a variety of IDS engines to identify the traffic patterns.</p>
+<h3 id="c-plane">C-plane</h3>
+<p>The BotMiner framework is thus divided into two parts, that is, C-plane and A-plane. C stands for C&amp;C which examines network flow between botmaster and bots, because it is believed the network flow between them follows some certain patterns. It helps logging the network flow in a format suitable for efficient storage and further analysis.</p>
+<h3 id="a-plane">A-plane</h3>
+<p>On the other handside, A-plane focus on outbound traffic of activities performed by the bots. Suspicious activities such as scanning, spamming, binary downloading and exploit attempts could very possibly follow some certain patterns. To detect those malicious activities, they deployed a variety of IDS engines to identify the traffic patterns.</p>
 <p>Importantly we note that either C-plane or A-plane is not enough to detect botnets, which can usually produce high false positive. BotMiner combines two planes and cross-correlate the outputs from both planes to produce the final results. The architecture of BotMiner is depicted in Fig.2.</p>
-<p><img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img2.png" alt="yy"></p>
+<div class="figure">
+<img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img2.png" alt="yy">
+<p class="caption">yy</p>
+</div>
 <p><strong>Fig.2. BotMiner architecture</strong></p>
-<h3 id="Learning_traffic"><a href="#Learning_traffic" class="headerlink" title="Learning traffic"></a>Learning traffic</h3><p>As seen in Fig.2, outbound traffic in A-plane and network flows data in C-plane will be filtered and preprocessed  to prepare vector-like features, just as commonly required by machine learning algorithms. For C-plane, similar network flow patterns are aggregated according to source IP and destination IP, also port number and protocol types, which define the <code>who is talking to whom</code>. Features are then built for example, number of flows per hour, number of packets per flow, avg. number of bytes per packets and avg. number of bytes per second. This characterizes the communication pattern when clients are talking to servers. Then a 2-step clustering is applied on the dataset, where X-means is used. For A-plane, it also follows 2-layer clustering, that is, Snort output are clustered firstly according to different types of activities, and further clustered within a similar activity. For instances, scanning on same ports will be classified as the same cluster. Overlapping of SMTP destinations will also be classified as the same cluster. This defines <code>who is doing what</code>. clustering results will be cross correlated to compute the final cluster result, which identifies the detected botnets. To confirm the cross-plane correlation, a score has to be assigned on host, where we expect higher score when the host belongs to multiple malicious activities. In the meanwhile, if the host also belongs to at least one C-cluster sharing a common network flow patterns, then we believe this host belongs to certain botnet.</p>
-<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>The results look pretty good, BotMiner is able to detect almost all the botnets, detailed in Table.1.</p>
-<table>
+<h3 id="learning-traffic">Learning traffic</h3>
+<p>As seen in Fig.2, outbound traffic in A-plane and network flows data in C-plane will be filtered and preprocessed to prepare vector-like features, just as commonly required by machine learning algorithms. For C-plane, similar network flow patterns are aggregated according to source IP and destination IP, also port number and protocol types, which define the <code>who is talking to whom</code>. Features are then built for example, number of flows per hour, number of packets per flow, avg. number of bytes per packets and avg. number of bytes per second. This characterizes the communication pattern when clients are talking to servers. Then a 2-step clustering is applied on the dataset, where X-means is used. For A-plane, it also follows 2-layer clustering, that is, Snort output are clustered firstly according to different types of activities, and further clustered within a similar activity. For instances, scanning on same ports will be classified as the same cluster. Overlapping of SMTP destinations will also be classified as the same cluster. This defines <code>who is doing what</code>. clustering results will be cross correlated to compute the final cluster result, which identifies the detected botnets. To confirm the cross-plane correlation, a score has to be assigned on host, where we expect higher score when the host belongs to multiple malicious activities. In the meanwhile, if the host also belongs to at least one C-cluster sharing a common network flow patterns, then we believe this host belongs to certain botnet.</p>
+<h3 id="results">Results</h3>
+<p>The results look pretty good, BotMiner is able to detect almost all the botnets, detailed in Table.1.</p>
+<table style="width:67%;">
+<colgroup>
+<col width="8%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left">Botnet</th>
-<th style="text-align:center">Number of Bots</th>
-<th style="text-align:center">Detected?</th>
-<th style="text-align:center">Clustered Bots</th>
-<th style="text-align:center">Detection Rate</th>
-<th style="text-align:center">False Positive Clusters/Hosts</th>
-<th style="text-align:center">FP Rate</th>
+<tr class="header">
+<th align="left">Botnet</th>
+<th align="center">Number of Bots</th>
+<th align="center">Detected?</th>
+<th align="center">Clustered Bots</th>
+<th align="center">Detection Rate</th>
+<th align="center">False Positive Clusters/Hosts</th>
+<th align="center">FP Rate</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">IRC-rbot</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">YES</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">100%</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">0.003</td>
+<tr class="odd">
+<td align="left">IRC-rbot</td>
+<td align="center">4</td>
+<td align="center">YES</td>
+<td align="center">4</td>
+<td align="center">100%</td>
+<td align="center">1/2</td>
+<td align="center">0.003</td>
 </tr>
-<tr>
-<td style="text-align:left">IRC-sdbot</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">YES</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">100%</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">0.003</td>
+<tr class="even">
+<td align="left">IRC-sdbot</td>
+<td align="center">4</td>
+<td align="center">YES</td>
+<td align="center">4</td>
+<td align="center">100%</td>
+<td align="center">1/2</td>
+<td align="center">0.003</td>
 </tr>
-<tr>
-<td style="text-align:left">IRC-spybot</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">YES</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">75%</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">0.003</td>
+<tr class="odd">
+<td align="left">IRC-spybot</td>
+<td align="center">4</td>
+<td align="center">YES</td>
+<td align="center">3</td>
+<td align="center">75%</td>
+<td align="center">1/2</td>
+<td align="center">0.003</td>
 </tr>
-<tr>
-<td style="text-align:left">IRC-N</td>
-<td style="text-align:center">259</td>
-<td style="text-align:center">YES</td>
-<td style="text-align:center">258</td>
-<td style="text-align:center">9.6%</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<tr class="even">
+<td align="left">IRC-N</td>
+<td align="center">259</td>
+<td align="center">YES</td>
+<td align="center">258</td>
+<td align="center">9.6%</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
-<tr>
-<td style="text-align:left">HTTP-1</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">YES</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">100%</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">0.003</td>
+<tr class="odd">
+<td align="left">HTTP-1</td>
+<td align="center">4</td>
+<td align="center">YES</td>
+<td align="center">4</td>
+<td align="center">100%</td>
+<td align="center">1/2</td>
+<td align="center">0.003</td>
 </tr>
-<tr>
-<td style="text-align:left">HTTP-2</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">YES</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">100%</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">0.003</td>
+<tr class="even">
+<td align="left">HTTP-2</td>
+<td align="center">4</td>
+<td align="center">YES</td>
+<td align="center">4</td>
+<td align="center">100%</td>
+<td align="center">1/2</td>
+<td align="center">0.003</td>
 </tr>
-<tr>
-<td style="text-align:left">P2P-Storm</td>
-<td style="text-align:center">13</td>
-<td style="text-align:center">YES</td>
-<td style="text-align:center">13</td>
-<td style="text-align:center">100%</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<tr class="odd">
+<td align="left">P2P-Storm</td>
+<td align="center">13</td>
+<td align="center">YES</td>
+<td align="center">13</td>
+<td align="center">100%</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
-<tr>
-<td style="text-align:left">P2P-Nugache</td>
-<td style="text-align:center">82</td>
-<td style="text-align:center">YES</td>
-<td style="text-align:center">82</td>
-<td style="text-align:center">100%</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<tr class="even">
+<td align="left">P2P-Nugache</td>
+<td align="center">82</td>
+<td align="center">YES</td>
+<td align="center">82</td>
+<td align="center">100%</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Table.1 Botnet detection results using BotMiner</strong></p>
 <p>You can refer more explanation of the observations in the paper.</p>
-<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Finally when we retrospect the work on detecting botnets using learning based techniques, it is believed and proved eventually that the assumptions made about the botnets are actually realistic and approchable. As we have seen, the whole frame work is grounded on two facts: <code>who is talking to whom</code> and <code>who is doing what</code>. Since we believe this characterizes the fundamental behavior of malware instances, which will be told apart from normal instances. Although a lot of effort on feature engineering is still indispensable for efficiency and precision, the intrinsic properties of botnets have shown those infected machines that have similar communication patterns, meanwhile perform the same set of multiple suspicious activities.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Finally when we retrospect the work on detecting botnets using learning based techniques, it is believed and proved eventually that the assumptions made about the botnets are actually realistic and approchable. As we have seen, the whole frame work is grounded on two facts: <code>who is talking to whom</code> and <code>who is doing what</code>. Since we believe this characterizes the fundamental behavior of malware instances, which will be told apart from normal instances. Although a lot of effort on feature engineering is still indispensable for efficiency and precision, the intrinsic properties of botnets have shown those infected machines that have similar communication patterns, meanwhile perform the same set of multiple suspicious activities.</p>
 ]]></content>
     
     <summary type="html">
@@ -173,9 +192,9 @@
     </summary>
     
     
-      <category term="research" scheme="http://huang3.github.io/tags/research/"/>
-    
       <category term="security" scheme="http://huang3.github.io/tags/security/"/>
+    
+      <category term="research" scheme="http://huang3.github.io/tags/research/"/>
     
   </entry>
   
@@ -186,11 +205,15 @@
     <published>2016-10-23T06:05:33.000Z</published>
     <updated>2016-10-26T13:50:49.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Overall_comments"><a href="#Overall_comments" class="headerlink" title="Overall comments"></a>Overall comments</h3><p>Well organised in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors,  ~1600</p>
+    <content type="html"><![CDATA[<h3 id="overall-comments">Overall comments</h3>
+<p>Well organised in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors, ~1600</p>
 <img src="http://home.in.tum.de/~xiaohu/uploaded_images/ICML15-poster.jpg" width="760">
-<h3 id="Research_topics"><a href="#Research_topics" class="headerlink" title="Research topics"></a>Research topics</h3><p>Covers almost a full spectrum of ML. topics, incl. DL., Opt., SL, USL, bandit, clustering, kernel methods, causality, time series, bayesian (nonparametric), privacy, large scale learning, distributed optimisation, RL, matrix factorisation, sparsity, transfer learning, ranking learning, networks and graphs, online learning, DL and vision, structured prediction,manifold learning, probe. models, variational inference, hashing, MC methods, FS., GP, approximate inference, NLP, sub modality, topic model, learning theory.</p>
-<h3 id="Industry"><a href="#Industry" class="headerlink" title="Industry"></a>Industry</h3><p>Almost all the relevant companies are coming for recruiting people from ML. Alibaba has focus now on fraud detection, cloud computing, deep learning, and large scale learning. Google is hot as always. Microsoft is recruiting heavily all over the locations, amazon has its CEO from Germany coming to organize a premium lunch. Also e..g, twitter, disney research, nvidia, Baidu are all looking for top researchers of ML.</p>
-<h3 id="People"><a href="#People" class="headerlink" title="People"></a>People</h3><p>Many top researchers are there, I met Schökopf, Bengio, Job Kleinberg, Leon Button, Emily fox, and also other amazing researchers.<br>Our paper got good feedbacks, some people showed their obvious interests on what we are doing. Adversarial learning is here an interesting topic, many people don’t know. Prof. Joachim in ETHZ is doing kinda of similar work as us, evaluating robustness of ML. algorithms using MI, his student would like to connect for future collaboration.<br>Also students from EPFL, Standfords, JHU, are also interested at our work, definitely gonna stay in touch.<br>Some people from Germany e.g., TUB, Humboldt, Max-plank institute (Bernhardt’s group), face detection company from Dresden. Cognitive system GmbH. Also many excellent researchers from China!</p>
+<h3 id="research-topics">Research topics</h3>
+<p>Covers almost a full spectrum of ML. topics, incl. DL., Opt., SL, USL, bandit, clustering, kernel methods, causality, time series, bayesian (nonparametric), privacy, large scale learning, distributed optimisation, RL, matrix factorisation, sparsity, transfer learning, ranking learning, networks and graphs, online learning, DL and vision, structured prediction,manifold learning, probe. models, variational inference, hashing, MC methods, FS., GP, approximate inference, NLP, sub modality, topic model, learning theory.</p>
+<h3 id="industry">Industry</h3>
+<p>Almost all the relevant companies are coming for recruiting people from ML. Alibaba has focus now on fraud detection, cloud computing, deep learning, and large scale learning. Google is hot as always. Microsoft is recruiting heavily all over the locations, amazon has its CEO from Germany coming to organize a premium lunch. Also e..g, twitter, disney research, nvidia, Baidu are all looking for top researchers of ML.</p>
+<h3 id="people">People</h3>
+<p>Many top researchers are there, I met Schökopf, Bengio, Job Kleinberg, Leon Button, Emily fox, and also other amazing researchers. Our paper got good feedbacks, some people showed their obvious interests on what we are doing. Adversarial learning is here an interesting topic, many people don’t know. Prof. Joachim in ETHZ is doing kinda of similar work as us, evaluating robustness of ML. algorithms using MI, his student would like to connect for future collaboration. Also students from EPFL, Standfords, JHU, are also interested at our work, definitely gonna stay in touch. Some people from Germany e.g., TUB, Humboldt, Max-plank institute (Bernhardt’s group), face detection company from Dresden. Cognitive system GmbH. Also many excellent researchers from China!</p>
 ]]></content>
     
     <summary type="html">
@@ -200,9 +223,9 @@
     </summary>
     
     
-      <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
-    
       <category term="research" scheme="http://huang3.github.io/tags/research/"/>
+    
+      <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
     
   </entry>
   
@@ -218,12 +241,12 @@
 <p>Now you need to generate two different public keys for <strong>git_A</strong> and <strong>git_B</strong>. This is what you expect when follow the ssh-keygen:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh-keygen</div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/Users/YOURNAME/.ssh/id_rsa):</div></pre></td></tr></table></figure>
 <p>This is where you name your public key, e.g., id_rsa_git_A.pub. Soon you will have two public keys in /Users/YOURNAME/.ssh/</p>
-<p>Now let’s associate with your git accounts. Open your ssh config with any editor you like:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ vi ~/.ssh/config</div></pre></td></tr></table></figure></p>
-<p>And add two sections accordingly in the config file:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#github-A</span> accounts (default)</div><div class="line">Host github<span class="selector-class">.com-A</span></div><div class="line">    HostName github<span class="selector-class">.com</span></div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_git_A</div><div class="line"></div><div class="line"><span class="selector-id">#github-B</span> account</div><div class="line">Host github<span class="selector-class">.com-B</span></div><div class="line">    HostName github<span class="selector-class">.com</span></div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_git_B</div></pre></td></tr></table></figure></p>
-<p>The name after <strong>Host</strong> can be any thing you like to identify your git account, obviously they are associated with different private keys here. Now you can test it with ssh, e.g.:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh -T git@github.com-A</div></pre></td></tr></table></figure></p>
+<p>Now let’s associate with your git accounts. Open your ssh config with any editor you like: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ vi ~/.ssh/config</div></pre></td></tr></table></figure></p>
+<p>And add two sections accordingly in the config file: <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#github-A</span> accounts (default)</div><div class="line">Host github<span class="selector-class">.com-A</span></div><div class="line">    HostName github<span class="selector-class">.com</span></div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_git_A</div><div class="line"></div><div class="line"><span class="selector-id">#github-B</span> account</div><div class="line">Host github<span class="selector-class">.com-B</span></div><div class="line">    HostName github<span class="selector-class">.com</span></div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_git_B</div></pre></td></tr></table></figure></p>
+<p>The name after <strong>Host</strong> can be any thing you like to identify your git account, obviously they are associated with different private keys here. Now you can test it with ssh, e.g.: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh -T git@github.com-A</div></pre></td></tr></table></figure></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ ssh -T git@github.com-B</div></pre></td></tr></table></figure>
 <p>They should be automatically using corresponding public key now, and you will get successful message response.</p>
-<p>To init and config a repository locally, you probably will do:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ git init</div><div class="line">YOURNAME$ git config user.name git_A</div><div class="line">YOURNAME$ git config user.email <span class="string">"git_A@your_mail_domain.com"</span></div><div class="line">YOURNAME$ git remote <span class="built_in">set</span>-url origin git@github.com-A:git_A/repo_a</div><div class="line">YOURNAME$ git pull origin</div></pre></td></tr></table></figure><br>That’s it! now you can do any git commands you want accordingly with different ssh keys.</p>
+<p>To init and config a repository locally, you probably will do: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">YOURNAME$ git init</div><div class="line">YOURNAME$ git config user.name git_A</div><div class="line">YOURNAME$ git config user.email <span class="string">"git_A@your_mail_domain.com"</span></div><div class="line">YOURNAME$ git remote <span class="built_in">set</span>-url origin git@github.com-A:git_A/repo_a</div><div class="line">YOURNAME$ git pull origin</div></pre></td></tr></table></figure> That’s it! now you can do any git commands you want accordingly with different ssh keys.</p>
 ]]></content>
     
     <summary type="html">
@@ -244,7 +267,7 @@
     <published>2016-10-21T13:07:43.000Z</published>
     <updated>2016-10-24T17:45:58.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Here I list a set of Machine Learning questions for interview who wants to get a data scientist job or similar position.<br>Answers can be inquired by contact.<br><img src="http://home.in.tum.de/~xiaohu/uploaded_images/ml-qa-flagcover.png"></p>
+    <content type="html"><![CDATA[<p>Here I list a set of Machine Learning questions for interview who wants to get a data scientist job or similar position. Answers can be inquired by contact. <img src="http://home.in.tum.de/~xiaohu/uploaded_images/ml-qa-flagcover.png"></p>
 <p><strong>Question List (expanding)</strong></p>
 <ul>
 <li>Introduce one of your favorite machine learning algorithms in detail.</li>
@@ -276,75 +299,81 @@
     
     <content type="html"><![CDATA[<p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
-<h3 id="u95EE_u9898_u63CF_u8FF0_u548C_u76EE_u6807_u5B9A_u4E49"><a href="#u95EE_u9898_u63CF_u8FF0_u548C_u76EE_u6807_u5B9A_u4E49" class="headerlink" title="问题描述和目标定义"></a>问题描述和目标定义</h3><p>我们首先这样定义问题，有 $N$ 条数据样本，每条数据有 $d$ 个特征值，我们定义为</p>
+<h3 id="问题描述和目标定义">问题描述和目标定义</h3>
+<p>我们首先这样定义问题，有 <span class="math inline">\(N\)</span> 条数据样本，每条数据有 <span class="math inline">\(d\)</span> 个特征值，我们定义为</p>
 <span>$\mathcal{X}=\left\lbrace x_1,\ldots, x_N\right\rbrace,\,\, x_i \in R^d, \forall i \in \left\lbrace 1,\ldots, N \right\rbrace$</span><!-- Has MathJax -->
-<p>很可惜你只有数据却没有标签，那么监督学习算法基本你就放弃了。为了从数据当中学到点什么，我们可以采用聚类算法来探索数据在D维空间当中是怎么分布的，尽管没有标签用于监督学习，聚类算法仍然能够给你提供很多信息，例如哪些数据更相似，哪些数据属于异常。常用的聚类算法例如KNN，Kmean等都要求你确定具体的K值，即一开始你就假定数据大概可能分成K个簇，很显然，大部分的情况下你猜的都是错的，支撑向量聚类却没有这个问题，SVC的基本原理是这样描述的：</p>
-<blockquote>
-<p>散布在D维空间中的N个数据点，SVC聚类边界将该空间切割成两个部分，高密度部分包含了大部分的数据点，低密度部分只包含了少量异常数据点。</p>
-</blockquote>
+<p>很可惜你只有数据却没有标签，那么监督学习算法基本你就放弃了。为了从数据当中学到点什么，我们可以采用聚类算法来探索数据在D维空间当中是怎么分布的，尽管没有标签用于监督学习，聚类算法仍然能够给你提供很多信息，例如哪些数据更相似，哪些数据属于异常。常用的聚类算法例如KNN，Kmean等都要求你确定具体的K值，即一开始你就假定数据大概可能分成K个簇，很显然，大部分的情况下你猜的都是错的，支撑向量聚类却没有这个问题，SVC的基本原理是这样描述的： &gt; 散布在D维空间中的N个数据点，SVC聚类边界将该空间切割成两个部分，高密度部分包含了大部分的数据点，低密度部分只包含了少量异常数据点。</p>
 <p>在二维空间的实例中，我们可以从下图中看出SVC算法所做的事。</p>
-<p><img src="http://img2.tbcdn.cn/L1/461/1/f1065371d7edf405ba45a104d47ec5db23a188f1.png" alt="screenshot"></p>
+<div class="figure">
+<img src="http://img2.tbcdn.cn/L1/461/1/f1065371d7edf405ba45a104d47ec5db23a188f1.png" alt="screenshot">
+<p class="caption">screenshot</p>
+</div>
 <p>上图中可以看到，聚类的边界最终将大部分的数据包括在内，而少量的明显异常的数据或噪音点责备排除在外，处于边界上的点我们称之为支撑向量，正是由于它们的存在才能够支撑其整个聚类边界。那么SVC是怎么做到的呢？</p>
-<h3 id="u6700_u5C0F_u8D85_u7403_u4F53"><a href="#u6700_u5C0F_u8D85_u7403_u4F53" class="headerlink" title="最小超球体"></a>最小超球体</h3><p>观察以上二维空间中数据分布，一种简单粗暴的聚类方法就是画一个尽可能小的圆把大部分的点都圈进去，可是和图中所示的聚类边界相比，这种方法明显过于粗放，并且数据的非线性分布不可能使一个圆恰巧把空间分割成高密度和低密度两部分。那么我们需要的是一个非线性的切割边界，借助于核函数（kernel function）我们能够有效的把低维非线性空间转换成高维的线性空间 $ \mathcal{H} $ ，这样一来，在 $ \mathcal{H} $ 空间里我们尝试着找到一个最小的超球体(hypersphere)将大部分的点包括进去，同时允许少量的异常点在球体外，这样映射回原来的低维空间就如我们上图所见的非线性的聚类边界。在大量的SVM文章中都谈及了核函数这个概念，下图简单的揭示了核函数的真正魅力所在，</p>
+<h3 id="最小超球体">最小超球体</h3>
+<p>观察以上二维空间中数据分布，一种简单粗暴的聚类方法就是画一个尽可能小的圆把大部分的点都圈进去，可是和图中所示的聚类边界相比，这种方法明显过于粗放，并且数据的非线性分布不可能使一个圆恰巧把空间分割成高密度和低密度两部分。那么我们需要的是一个非线性的切割边界，借助于核函数（kernel function）我们能够有效的把低维非线性空间转换成高维的线性空间 $  $ ，这样一来，在 $  $ 空间里我们尝试着找到一个最小的超球体(hypersphere)将大部分的点包括进去，同时允许少量的异常点在球体外，这样映射回原来的低维空间就如我们上图所见的非线性的聚类边界。在大量的SVM文章中都谈及了核函数这个概念，下图简单的揭示了核函数的真正魅力所在，</p>
 <img src="http://img2.tbcdn.cn/L1/461/1/d7d63dc8df47bdf5d72d450a104490b94b74906c.png" width="450" height="100" title="feature mapping from 1-d to 2-d">
-<p>上图一组一维的数据，如果要进行有效的分类必须用两条线前后进行切割才能将红色和蓝色的点分开，然后如果我们对数据进行如下变换:  $\Phi(x)=(x,x^2)$ ，如右边所示，在映射之后的高维（2维）空间里，我们仅用一条直线就能很好的进行分类，即在低维空间线性不可分的数据在高维空间里变得线性可分了。这就是kernel function做的事，核函数的定义了一种特征变换 $\Phi(x)$ （实际上是空间变换），假设你希望寻找一个最优函数（e.g., 分类，聚类，回归）$ f(x)$, 根据<a href="https://en.wikipedia.org/wiki/Mercer%27s_theorem" target="_blank" rel="external">mercer’s theorem</a>, 你总能从核函数变换过的空间(Hilbert space)中寻找到一个最优函数 <span>$f^*$</span><!-- Has MathJax --> 使得该函数是映射后的点的线性叠加，即： $ f^*(.) = \sum_i c_i\Phi(x_i)$, 正是这种在 $ \mathcal{H} $ 空间中的线性特征使得核方法能够处理很多低维空间中的非线性问题，那么当你定义一个核函数为 <span>$k(x_i,x_j) = \left&lt;\Phi(x_i),\Phi(x_j)\right&gt;$</span><!-- Has MathJax --> ，实际上是定义了一个等价的特征空间并且该空间的内积是由 <span>$k(\cdot,\cdot)$</span><!-- Has MathJax --> 来定义的。此处不再做展开，感兴趣的朋友可以跟我联系。<br>那么回到之前的聚类问题，寻找低维空间非线性聚类边界的问题转换成了寻找高维空间中最小超球体的问题，</p>
-<p>定义球体的半径$ R $和球心 $ \mathbf{a} $ , 还有一组松弛变量 $ \left\lbrace \xi_i \right\rbrace $ ，SVC问题如下：</p>
+<p>上图一组一维的数据，如果要进行有效的分类必须用两条线前后进行切割才能将红色和蓝色的点分开，然后如果我们对数据进行如下变换: <span class="math inline">\(\Phi(x)=(x,x^2)\)</span> ，如右边所示，在映射之后的高维（2维）空间里，我们仅用一条直线就能很好的进行分类，即在低维空间线性不可分的数据在高维空间里变得线性可分了。这就是kernel function做的事，核函数的定义了一种特征变换 <span class="math inline">\(\Phi(x)\)</span> （实际上是空间变换），假设你希望寻找一个最优函数（e.g., 分类，聚类，回归）$ f(x)$, 根据<a href="https://en.wikipedia.org/wiki/Mercer%27s_theorem" target="_blank" rel="external">mercer’s theorem</a>, 你总能从核函数变换过的空间(Hilbert space)中寻找到一个最优函数 <span>$f^*$</span><!-- Has MathJax --> 使得该函数是映射后的点的线性叠加，即： $ f^*(.) = \sum_i c_i\Phi(x_i)$, 正是这种在 $  $ 空间中的线性特征使得核方法能够处理很多低维空间中的非线性问题，那么当你定义一个核函数为 <span>$k(x_i,x_j) = \left&lt;\Phi(x_i),\Phi(x_j)\right&gt;$</span><!-- Has MathJax --> ，实际上是定义了一个等价的特征空间并且该空间的内积是由 <span>$k(\cdot,\cdot)$</span><!-- Has MathJax --> 来定义的。此处不再做展开，感兴趣的朋友可以跟我联系。 那么回到之前的聚类问题，寻找低维空间非线性聚类边界的问题转换成了寻找高维空间中最小超球体的问题，</p>
+<p>定义球体的半径$ R $和球心 $  $ , 还有一组松弛变量 $ _i $ ，SVC问题如下：</p>
 <span>$$\begin{align}
 &amp; \min_{R} R^2+C\sum_i\xi_i \nonumber\\
 \text{s.t. } &amp; \|\Phi(x_i) - \mathbf{a} \|^2 \leq R^2 + \xi_i \nonumber\\
 &amp; \xi_i\geq 0, \, \forall i \in \left\lbrace 1,\ldots, N\right\rbrace \nonumber
 \end{align}$$</span><!-- Has MathJax -->
-<p>上述目标函数描述了两个问题，</p>
-<ol>
-<li>我们希望找到一个最小的超球半径和球心，使得大部分的点都在球内。</li>
-<li>针对每一个数据点引入非负松弛变量 $ \xi_i $ 允许该样本在球体外部，但不至于离球心太远，常数 $C$ 是惩罚参数防止 $ \sum_i \xi_i $ 过大。</li>
-</ol>
-<p>很显然这是个 <strong>带限制条件的二次型问题</strong>。那么观察目标函数中的限制条件进一步告诉我们，如果一个点在球体内部，那么 $ \xi_i=0 $ ，否则如果它在球体外部（异常点），那么 $ \xi_i&gt;0 $ 。</p>
-<h3 id="u4F18_u5316_u3001_u4F18_u5316_uFF0C_u8FD8_u662F_u4F18_u5316"><a href="#u4F18_u5316_u3001_u4F18_u5316_uFF0C_u8FD8_u662F_u4F18_u5316" class="headerlink" title="优化、优化，还是优化"></a>优化、优化，还是优化</h3><blockquote>
+<p>上述目标函数描述了两个问题， 1. 我们希望找到一个最小的超球半径和球心，使得大部分的点都在球内。 2. 针对每一个数据点引入非负松弛变量 $ _i $ 允许该样本在球体外部，但不至于离球心太远，常数 <span class="math inline">\(C\)</span> 是惩罚参数防止 $ _i _i $ 过大。</p>
+<p>很显然这是个 <strong>带限制条件的二次型问题</strong>。那么观察目标函数中的限制条件进一步告诉我们，如果一个点在球体内部，那么 $ _i=0 $ ，否则如果它在球体外部（异常点），那么 $ _i&gt;0 $ 。</p>
+<h3 id="优化优化还是优化">优化、优化，还是优化</h3>
+<blockquote>
 <p>所有的机器学习问题都是个优化问题</p>
 </blockquote>
-<p>一个学习问题如果能够完美定义，它总能够转化成一个形式优美的优化问题，如上面SVC的目标函数就是一个典型的不能再典型的凸优化问题了，二话不说直接上<a href="http://baike.baidu.com/link?url=WeZGD3nvabLVvd5C2igcjda8YbWF55uvH51TnG-YDBTv113jPlC4WrX1N-n6gVEEXmtD2uKkJpyGY4x8lCOS6_" target="_blank" rel="external">拉格朗日乘子法</a>。为每个限制条件引入拉格朗日乘子$\mathbf{\alpha}$ 和 $ \mathbf{\mu} $，得到</p>
-<p>$$<br>L=R^2-\sum_j\left(R^2+\xi_j-|\Phi(x_j)-\mathbf{a}|^2\right)\alpha_j-\sum_j\xi_j\mu_j+\sum_j C\xi_j,<br>$$</p>
+<p>一个学习问题如果能够完美定义，它总能够转化成一个形式优美的优化问题，如上面SVC的目标函数就是一个典型的不能再典型的凸优化问题了，二话不说直接上<a href="http://baike.baidu.com/link?url=WeZGD3nvabLVvd5C2igcjda8YbWF55uvH51TnG-YDBTv113jPlC4WrX1N-n6gVEEXmtD2uKkJpyGY4x8lCOS6_" target="_blank" rel="external">拉格朗日乘子法</a>。为每个限制条件引入拉格朗日乘子<span class="math inline">\(\mathbf{\alpha}\)</span> 和 $  $，得到</p>
+<p><span class="math display">\[
+L=R^2-\sum_j\left(R^2+\xi_j-\|\Phi(x_j)-\mathbf{a}\|^2\right)\alpha_j-\sum_j\xi_j\mu_j+\sum_j C\xi_j,
+\]</span></p>
 <p>如果$ L $有最优解，那么设置primal优化变量的梯度为0，我们得到，</p>
-<p>$$<br>\sum\alpha_j=1, \,<br>\mathbf{a}=\sum\alpha_j\Phi(x_j), \,<br>\alpha_j=C-\mu_j<br>$$</p>
+<p><span class="math display">\[
+\sum\alpha_j=1, \,
+\mathbf{a}=\sum\alpha_j\Phi(x_j), \,
+\alpha_j=C-\mu_j
+\]</span></p>
 <p>并且KKT条件必须成立：</p>
-<p>$$<br>\xi_j\mu_j=0, \,<br>\left(R^2+\xi_j-|\Phi(x_j)-\mathbf{a}|^2\right)\alpha_j=0<br>$$</p>
-<p>将以上极值条件代回到$ L $当中，我们可以得到对偶空间的等价优化问题：<br>$$<br>\mathcal{W}=\sum_{i,j}\alpha_i\alpha_j k(x_i,x_j) - \sum_jk(x_j,x_j)\alpha_j, \qquad<br>\text{s.t.}\quad 0\leq\alpha_j\leq C, \; j=1,\ldots,N. \<br>$$</p>
-<p>此处 <span>$k(x_i, x_j) = \left&lt;\Phi(x_i) \cdot \Phi(x_j)\right&gt;$</span><!-- Has MathJax --> , 和SVM问题如此的相似，原来的优化问题转化成了对偶空间里的带限制条件的 <strong>单变量二次型优化问题</strong>。接下来我们所要做的就是解这个优化问题。<br>在求解之前，我们不妨先来观察一下之前的极值条件。   </p>
-<ol>
-<li>首先，所有的 $ \alpha_i $ 加起来必须等于1.</li>
-<li>其次，我们观察到最终的超球体球心即是所有映射后的数据点和 $ \mathbf{\alpha}$ 的线性加权组合，这点符合我们之前关于核函数空间的解释。</li>
-<li>最终需要优化的拉格朗日乘子 $ \mathbf{\alpha} $ 分成三个集合:<ul>
-<li>当 $ \alpha_i=0 $ 时，我们发现 $ \mu_i=C $ , 那么 $ \xi_i=0 $ ，即 $ x_i $ 必然在球内。</li>
-<li>当 $ \xi_i&gt;0 $ 时，即 $ x_i $在球体外（异常点），那么我们知道 $ \mu_i=0$ 从而$ \alpha_i=C $</li>
-<li>当 $ 0 &lt; \alpha_i &lt; C $ 时，$ \mu_i&gt;0 $ ，于是 $ \xi_i=0 $ ，并且 $ R^2-|\Phi(x_j)-\mathbf{a}|^2=0 $ , 也就是意味着 $ x_i $ 刚好在球体上，即支撑向量。</li>
-</ul>
-</li>
-</ol>
+<p><span class="math display">\[
+\xi_j\mu_j=0, \,
+\left(R^2+\xi_j-\|\Phi(x_j)-\mathbf{a}\|^2\right)\alpha_j=0
+\]</span></p>
+<p>将以上极值条件代回到$ L $当中，我们可以得到对偶空间的等价优化问题： <span class="math display">\[
+\mathcal{W}=\sum_{i,j}\alpha_i\alpha_j k(x_i,x_j) - \sum_jk(x_j,x_j)\alpha_j, \qquad
+\text{s.t.}\quad 0\leq\alpha_j\leq C, \; j=1,\ldots,N. \\
+\]</span></p>
+<p>此处 <span>$k(x_i, x_j) = \left&lt;\Phi(x_i) \cdot \Phi(x_j)\right&gt;$</span><!-- Has MathJax --> , 和SVM问题如此的相似，原来的优化问题转化成了对偶空间里的带限制条件的 <strong>单变量二次型优化问题</strong>。接下来我们所要做的就是解这个优化问题。 在求解之前，我们不妨先来观察一下之前的极值条件。<br>
+1. 首先，所有的 $ _i $ 加起来必须等于1. 2. 其次，我们观察到最终的超球体球心即是所有映射后的数据点和 $ $ 的线性加权组合，这点符合我们之前关于核函数空间的解释。 3. 最终需要优化的拉格朗日乘子 $  $ 分成三个集合: - 当 $ _i=0 $ 时，我们发现 $ _i=C $ , 那么 $ _i=0 $ ，即 $ x_i $ 必然在球内。 - 当 $ _i&gt;0 $ 时，即 $ x_i $在球体外（异常点），那么我们知道 $ _i=0$ 从而$ _i=C $ - 当 $ 0 &lt; _i &lt; C $ 时，$ _i&gt;0 $ ，于是 $ _i=0 $ ，并且 $ R<sup>2-|(x_j)-|</sup>2=0 $ , 也就是意味着 $ x_i $ 刚好在球体上，即支撑向量。</p>
 <p>为了得到超球体的最优半径，我们从结果当中任意选取一个支撑向量 $ x_s $ ，它到球心的距离即是我们要找的最优半径。</p>
 <span>$R^2 = \|\Phi(x_s) - \mathbf{a}\|^2 = k(x_s,x_s)-2\sum_j\alpha_j k(x_s,x_j) + \sum_{i,j}\alpha_i\alpha_j k(x_i,x_j)$</span><!-- Has MathJax -->
-<p>并且任意一个点到球心的距离都可以通过该公式计算。此外，通过调节参数 $ C $ 的大小来惩罚松弛变量的值，我们可以控制异常数据在整个数据中所占的比例。<br>以上是SVC算法最重要的结论，当我们能够通过优化目标函数得到 $ \mathbf{\alpha} $ 时，我们就能够通过观察它们的值来确定究竟哪些点在球体内，球体上，和球体外，而那些落在超球体之外的点就是异常点，这个特性可以用在异常检测问题上。为了演示，在二维空间上的聚类效果如下图：</p>
+<p>并且任意一个点到球心的距离都可以通过该公式计算。此外，通过调节参数 $ C $ 的大小来惩罚松弛变量的值，我们可以控制异常数据在整个数据中所占的比例。 以上是SVC算法最重要的结论，当我们能够通过优化目标函数得到 $  $ 时，我们就能够通过观察它们的值来确定究竟哪些点在球体内，球体上，和球体外，而那些落在超球体之外的点就是异常点，这个特性可以用在异常检测问题上。为了演示，在二维空间上的聚类效果如下图：</p>
 <img src="http://img2.tbcdn.cn/L1/461/1/8912d3cc6d7f0d666d77b1f70a9ace393bc62b7d.png" width="550" title="Clustering boundary and density plot">
 <p>除了左边所示能够判断一个数据落在什么位置之外，还能够对空间中任意一个点计算其到球心的距离来判断该点在空间中的概率密度如何（如右图）</p>
-<h3 id="u4ECE_u805A_u7C7B_u8FB9_u754C_u5230_u805A_u7C7B_u6807_u7B7E"><a href="#u4ECE_u805A_u7C7B_u8FB9_u754C_u5230_u805A_u7C7B_u6807_u7B7E" class="headerlink" title="从聚类边界到聚类标签"></a>从聚类边界到聚类标签</h3><p>SVC优化后我们得到的是聚类边界，但为了得到具体的聚类标签，我们还需要对结果进行后续处理，通常我们采取的方法是，连接任意两个在超球体内的点，如果该直线片段上存在一个点属于超球体外，那么我们判断这两个点不属于一个簇，因为从一个点到另一个点必然经过了低密度区域，如下图所示。</p>
+<h3 id="从聚类边界到聚类标签">从聚类边界到聚类标签</h3>
+<p>SVC优化后我们得到的是聚类边界，但为了得到具体的聚类标签，我们还需要对结果进行后续处理，通常我们采取的方法是，连接任意两个在超球体内的点，如果该直线片段上存在一个点属于超球体外，那么我们判断这两个点不属于一个簇，因为从一个点到另一个点必然经过了低密度区域，如下图所示。</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">Clustering</th>
-<th style="text-align:left">Line segmenting</th>
+<tr class="header">
+<th align="left">Clustering</th>
+<th align="left">Line segmenting</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><img src="http://img2.tbcdn.cn/L1/461/1/a3c97754bbb7941343d22cd0512bf2e078c1c979.png" alt="screenshot"></td>
-<td style="text-align:left"><img src="http://img2.tbcdn.cn/L1/461/1/32a0f29b38a670129080fd9465cd069531dfda3c.png" alt="screenshot"></td>
+<tr class="odd">
+<td align="left"><img src="http://img2.tbcdn.cn/L1/461/1/a3c97754bbb7941343d22cd0512bf2e078c1c979.png" alt="screenshot"></td>
+<td align="left"><img src="http://img2.tbcdn.cn/L1/461/1/32a0f29b38a670129080fd9465cd069531dfda3c.png" alt="screenshot"></td>
 </tr>
 </tbody>
 </table>
 <p>通过对最终结果两两之间连线进行采样并计算是否存在点在超球体外的方法可以帮助我们确定每个点所属的聚类标签。</p>
-<h3 id="u5982_u4F55_u89E3_u4F18_u5316_u95EE_u9898"><a href="#u5982_u4F55_u89E3_u4F18_u5316_u95EE_u9898" class="headerlink" title="如何解优化问题"></a>如何解优化问题</h3><p>那么如何解上述的二次型优化问题，现在有很多开源的解二次型优化问题的包，但是针对SVM这一类的特定算法，这些包的效率通常都很低，目前最常用的一套算法SMO算法采取的类似坐标下降法可以很高效的解决这一类的优化问题，在后续文章里我们将重点介绍SMO算法。</p>
-<h3 id="u7ED3_u675F_u8BED"><a href="#u7ED3_u675F_u8BED" class="headerlink" title="结束语"></a>结束语</h3><p>无论是异常检测还是聚类，SVC [1]都是一套非常实用的算法，其原理和One-class SVM [3] 非常的类似, 了解单类SVM算法的读者会发现换一种问题的形式化方式往往可以从另一个角度去解释一个学习问题。以上简单扼要的介绍了整个算法的理论基础，针对算法实现，尤其是优化部分会有后续文章跟进，如果你对该算法感兴趣欢迎联系交流！</p>
-<h3 id="u53C2_u8003_u6587_u732E"><a href="#u53C2_u8003_u6587_u732E" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1] H. Xiao and C. Eckert. Indicative support vector clustering with its application on anomaly detection. In IEEE 12th International Conference on Machine Learning and Applications (ICMLA’13), Miami, Florida, USA, December 2013.</p>
+<h3 id="如何解优化问题">如何解优化问题</h3>
+<p>那么如何解上述的二次型优化问题，现在有很多开源的解二次型优化问题的包，但是针对SVM这一类的特定算法，这些包的效率通常都很低，目前最常用的一套算法SMO算法采取的类似坐标下降法可以很高效的解决这一类的优化问题，在后续文章里我们将重点介绍SMO算法。</p>
+<h3 id="结束语">结束语</h3>
+<p>无论是异常检测还是聚类，SVC [1]都是一套非常实用的算法，其原理和One-class SVM [3] 非常的类似, 了解单类SVM算法的读者会发现换一种问题的形式化方式往往可以从另一个角度去解释一个学习问题。以上简单扼要的介绍了整个算法的理论基础，针对算法实现，尤其是优化部分会有后续文章跟进，如果你对该算法感兴趣欢迎联系交流！</p>
+<h3 id="参考文献">参考文献</h3>
+<p>[1] H. Xiao and C. Eckert. Indicative support vector clustering with its application on anomaly detection. In IEEE 12th International Conference on Machine Learning and Applications (ICMLA’13), Miami, Florida, USA, December 2013.</p>
 <p>[2] A. Ben-Hur, D. Horn, H. Siegelmann, and V. Vapnik. A support vector clustering method. In Pattern Recognition, 2000. Proceedings. 15th International Conference on, volume 2, pages 724–727 vol.2, 2000.</p>
 <p>[3] B. Schoekopf, J. C. Platt, J. C. Shawe-Taylor, A. J. Smola, and R. C. Williamson. Estimating the support of a high-dimensional distribution. Neural Comput., 13(7):1443– 1471, July 2001.</p>
 ]]></content>
@@ -371,57 +400,58 @@
     <published>2016-09-22T14:15:44.000Z</published>
     <updated>2016-11-20T12:57:12.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="DataViz_for_Easy_Plotting"><a href="#DataViz_for_Easy_Plotting" class="headerlink" title="DataViz for Easy Plotting"></a>DataViz for Easy Plotting</h2><p>Ever since machine learning and big data are getting extremely popular, it makes total sense that we need a better way to look into what’s going on behind the data and model. There exists a number of frameworks you can leverage to produce figures on your demand, most popular ones like <a href="http://matplotlib.org/" target="_blank" rel="external">matplotlib</a>, <a href="http://seaborn.pydata.org/" target="_blank" rel="external">seaborn</a>, <a href="https://plot.ly/python/getting-started/" target="_blank" rel="external">plot.ly</a>, and also <a href="http://bokeh.pydata.org" target="_blank" rel="external">bokeh</a> which we use in this project. Of course, there’re many other choices.</p>
+    <content type="html"><![CDATA[<h2 id="dataviz-for-easy-plotting">DataViz for Easy Plotting</h2>
+<p>Ever since machine learning and big data are getting extremely popular, it makes total sense that we need a better way to look into what’s going on behind the data and model. There exists a number of frameworks you can leverage to produce figures on your demand, most popular ones like <a href="http://matplotlib.org/" target="_blank" rel="external">matplotlib</a>, <a href="http://seaborn.pydata.org/" target="_blank" rel="external">seaborn</a>, <a href="https://plot.ly/python/getting-started/" target="_blank" rel="external">plot.ly</a>, and also <a href="http://bokeh.pydata.org" target="_blank" rel="external">bokeh</a> which we use in this project. Of course, there’re many other choices.</p>
 <p>I’ve been using matplotlib for quite a long time, it’s been regarded as a default plotting packages you need to install if you are using Python as your programing language for machine learning, however, it is now kinda of outdated, mainly because it does not support modern web browser very well, instead, other frameworks like bokeh and plot.ly originally are designed for deployment and share over website, they are deeply built with modern web technologies like javascript.</p>
 <p>Frankly to say, I change to bokeh a while ago, because it does produce amazing figures and also with a number advantages to deploy your figures simply as a set of HTML files. I haven’t yet tired other frameworks, but as to my knowledge, bokeh is one of the most promising ones, plot.ly is also great, however I dislike their concept of plotting by API calls. I won’t bother discuss pro&amp;cons of different plotting frameworks, I chose bokeh since it does support both low level and higher level plotting functions, except that <strong>it does not support contour plot</strong>, for this I felt like really sorry, but you can find alternative solution too.</p>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>So firstly I show a simple demonstration of how it should looks like in the end.<br><img src="http://home.in.tum.de/~xiaohu/uploaded_images/datavis_example.png" alt="demonstration of dataviz"><br>The three examples above are actually plotted for three kinds of purposes in data analytics. The main purpose of having this <kbd>DataViz</kbd> wrappers built beyond bokeh is to better facilitate my daily research. In machine learning, usually we are more interested at a certain number of plots. For instances, you build a model for a task, probably you wanna evaluate the model with varying parameters, then you will plot a validation curve with mean and standard deviation, w.r.t. different parameter settings. You will also be interested at a learning curve of how this model performs with respect the training size.   </p>
+<h2 id="motivation">Motivation</h2>
+<p>So firstly I show a simple demonstration of how it should looks like in the end. <img src="http://home.in.tum.de/~xiaohu/uploaded_images/datavis_example.png" alt="demonstration of dataviz"> The three examples above are actually plotted for three kinds of purposes in data analytics. The main purpose of having this <kbd>DataViz</kbd> wrappers built beyond bokeh is to better facilitate my daily research. In machine learning, usually we are more interested at a certain number of plots. For instances, you build a model for a task, probably you wanna evaluate the model with varying parameters, then you will plot a validation curve with mean and standard deviation, w.r.t. different parameter settings. You will also be interested at a learning curve of how this model performs with respect the training size.</p>
 <p>Even <kbd>scikit-learn</kbd> provides two very convenient functions for you to create these common curves. See examples below,</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> learning_curve</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> validation_curve</div><div class="line"></div><div class="line">...</div><div class="line">cvfolds = ShuffleSplit(n_splits=<span class="number">5</span>, test_size=<span class="number">0.2</span>)</div><div class="line">tr_sizes, tr_scores, tt_scores = \</div><div class="line">         learning_curve(estimator, n_jobs=<span class="number">-1</span>, X=Xtr, y=ytr, cv=cvfolds,</div><div class="line">                        train_sizes=np.linspace(<span class="number">0.1</span>, <span class="number">1</span>, <span class="number">5</span>), scoring=<span class="string">'accuracy'</span>)</div><div class="line">tr_scores, tt_scores = \</div><div class="line">         validation_curve(estimator=clf, param_name=eval_param, param_range=c_range,</div><div class="line">                          X=Xtr, y=ytr, scoring=scoring_str, n_jobs=<span class="number">-1</span>,</div><div class="line">                          cv=cvfolds, verbose=<span class="keyword">True</span>)</div></pre></td></tr></table></figure>
-<p>The usage of these two curves are quite straightforward, I use it quite often in experiments. The <kbd>estimator</kbd> always corresponds to the classifier you build, which must have implemented <em>fit</em> and <em>prediction</em> methods, if you do not pass the <em>scoring</em> argument, you also need to implement an <em>estimator.score()</em> function in your estimator. Anyway, how to use these is out of scope for this post. If we look at the output, there are _tr<em>scores</em> and _tt<em>scores</em> which have dimension <kbd>x_sizes*n_folds</kbd>. _x<em>sizes</em> corresponds to the x-axis, and n_folds corresponds to the number of repetitions in your cross validation folds. At this point, it would be nice to have helper functions to directly generate plots with these arrays.</p>
-<h2 id="Bokeh"><a href="#Bokeh" class="headerlink" title="Bokeh"></a>Bokeh</h2><p>Frankly to say, bokeh still has a lot to be improved, especially it does not provide contour/contourf plots, which I use a lot when I plot classification boundary or density maps. But it does really nice in support modern browsers. It can generate directly HTML files that can be deployed on your own website, or share with friends. And also it integrates seamlessly with Jupyter notebook, which allows you interactively play around it. Besides, another very nice feature is the widget and controls, like you can create Button/Checklist/Input Box very easily in bokeh, and make them response to your plots, with matplotlib to achieve these? a lot of pain in ass, it is afterall not designed as so.</p>
-<h2 id="Concept_of_DataViz"><a href="#Concept_of_DataViz" class="headerlink" title="Concept of DataViz"></a>Concept of DataViz</h2><p>Simply use bokeh’s native API will just be fine to plot your data, however, I want to make it even simpler for my research purpose. That is every time if I wanna inspect a model or data or experimental results, I can present all the plots that I am interested in one simple web page. Using bokeh, I can easily achieve this.</p>
+<p>The usage of these two curves are quite straightforward, I use it quite often in experiments. The <kbd>estimator</kbd> always corresponds to the classifier you build, which must have implemented <em>fit</em> and <em>prediction</em> methods, if you do not pass the <em>scoring</em> argument, you also need to implement an <em>estimator.score()</em> function in your estimator. Anyway, how to use these is out of scope for this post. If we look at the output, there are <em>tr_scores</em> and <em>tt_scores</em> which have dimension <kbd>x_sizes*n_folds</kbd>. <em>x_sizes</em> corresponds to the x-axis, and n_folds corresponds to the number of repetitions in your cross validation folds. At this point, it would be nice to have helper functions to directly generate plots with these arrays.</p>
+<h2 id="bokeh">Bokeh</h2>
+<p>Frankly to say, bokeh still has a lot to be improved, especially it does not provide contour/contourf plots, which I use a lot when I plot classification boundary or density maps. But it does really nice in support modern browsers. It can generate directly HTML files that can be deployed on your own website, or share with friends. And also it integrates seamlessly with Jupyter notebook, which allows you interactively play around it. Besides, another very nice feature is the widget and controls, like you can create Button/Checklist/Input Box very easily in bokeh, and make them response to your plots, with matplotlib to achieve these? a lot of pain in ass, it is afterall not designed as so.</p>
+<h2 id="concept-of-dataviz">Concept of DataViz</h2>
+<p>Simply use bokeh’s native API will just be fine to plot your data, however, I want to make it even simpler for my research purpose. That is every time if I wanna inspect a model or data or experimental results, I can present all the plots that I am interested in one simple web page. Using bokeh, I can easily achieve this.</p>
 <p>Now the DataViz is simply a main class contains several plotting methods,</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataViz</span><span class="params">(object)</span>:</span></div><div class="line">   <span class="string">'''</span></div><div class="line">   A class for multiple common plotting functions for machine learning research</div><div class="line">   '''</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, config)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      init a DataViz obj for plotting dataset</div><div class="line">      :param config: configuration for plotting</div><div class="line">      :return: a figure handler of bokeh</div><div class="line">      '''      </div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">_get_figure_instance</span><span class="params">(self, ...)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      Return a figure with default setting</div><div class="line">      '''</div><div class="line">      fig = figure(...)</div><div class="line">      <span class="keyword">return</span> fig</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">feature_scatter1d</span><span class="params">(self, ...)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      Plot feature values along the x-axis</div><div class="line">      '''</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">project2d</span><span class="params">(self, ...)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      Project high-dimensiona data to 2D for visulaization</div><div class="line">      '''</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">plot_corr</span><span class="params">(self, ...)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      Correlation matrix plot</div><div class="line">      '''</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">fill_between</span><span class="params">(self, ...)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      Plot curves with fill area up and down</div><div class="line">      '''</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">simple_curves</span><span class="params">(self, ...)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      Simple curves</div><div class="line">      '''</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">send_to_server</span><span class="params">(self, server=..., port=.., user=<span class="string">"xxx"</span>, pw=<span class="string">"yyy"</span>)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      send plots to remote hosting server</div><div class="line">      '''</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">email_to</span><span class="params">(self, recipients=[], ... )</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      Email the plots to recipients</div><div class="line">      '''</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">save_as</span><span class="params">(self, format=<span class="string">'html'</span>)</span>:</span></div><div class="line">      <span class="string">'''</span></div><div class="line">      Save the plots as certain format</div><div class="line">      '''</div></pre></td></tr></table></figure>
 <p>The backbone code of the DataViz class is shown above. The basic idea is that one DataViz instance should represent a figure, where each method of DataViz returns a particular plot attaches to the figure. Each plotting method in the DataViz instance will firstly get a default plot configured by default settings. DataViz also provides other utilities, e.g., send the figure to server for hosting or email someone the plots.</p>
 <p><strong>So, why bother to have this?</strong> given that you can basically directly use bokeh to achieve your goals. Well, this is more or less helpers for those who only cares the plots important in machine learning community. There’s of course tradeoff between usability and flexibility of any kind of frameworks. The higher you encapsulate, the more easier for you to use, but of course you lose your flexibility.</p>
-<h2 id="Plot_Types"><a href="#Plot_Types" class="headerlink" title="Plot Types"></a>Plot Types</h2><p>We currently support following plots particularly for machine learning use cases, the list will be updated actively during my research needs. For the moment, I do not intend to publish the code, it’s just helpers anyway. But for those who really wanna give them a shot, just mail me to check if I can send you the code.</p>
+<h2 id="plot-types">Plot Types</h2>
+<p>We currently support following plots particularly for machine learning use cases, the list will be updated actively during my research needs. For the moment, I do not intend to publish the code, it’s just helpers anyway. But for those who really wanna give them a shot, just mail me to check if I can send you the code.</p>
 <p>Currently we support only a few plot types, ofc, the list will be getting longer in the future.</p>
-<h3 id="feature_scatter1d"><a href="#feature_scatter1d" class="headerlink" title="feature_scatter1d"></a>feature_scatter1d</h3><p>This plot shows how the feature values distribute, along the x-axis are the indices of feature columns, and along the y-axis is the values of N data samples. By plotting it, you can get an overview of how is your data distributed, and decide afterwards how you’re gonna preprocess it. An example is shown below in Figure 1 (Left).</p>
+<h3 id="feature_scatter1d">feature_scatter1d</h3>
+<p>This plot shows how the feature values distribute, along the x-axis are the indices of feature columns, and along the y-axis is the values of N data samples. By plotting it, you can get an overview of how is your data distributed, and decide afterwards how you’re gonna preprocess it. An example is shown below in Figure 1 (Left).</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left"></th>
-</tr>
-</thead>
+<caption><strong>Figure 1: (Left) Feature scatter in 1D, x-axis indicates the index of features, y-axis shows the actual feature values. (Right) Data points are projected to lower dimension (2d) by PCA or other dimension reduction techniques.</strong></caption>
 <tbody>
-<tr>
-<td style="text-align:left"><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_featurescatter.png" alt=""></td>
-<td style="text-align:left"><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_project2d.png" alt=""></td>
+<tr class="odd">
+<td align="left"><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_featurescatter.png"></td>
+<td align="left"><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_project2d.png"></td>
 </tr>
 </tbody>
 </table>
-<p>:<strong>Figure 1: (Left) Feature scatter in 1D, x-axis indicates the index of features, y-axis shows the actual feature values. (Right) Data points are projected to lower dimension (2d) by PCA or other dimension reduction techniques.</strong></p>
-<h3 id="project2d"><a href="#project2d" class="headerlink" title="project2d"></a>project2d</h3><p>The name of <em>project2d</em> is self-explanatory. We wanna see how data distributed in lower dimension, For example, If we have two categories of data, And we use different colors to annotate the data, Therefore we can get inside what is going on behind the observations. One example you can see in the table 1 (Right).  This is actually a very common task when you first time get your data. Well normally you’re going to get a very high dimensional data, and the data will be transformed into 2 dimensional data using PCA algorithm or some other dimension reduction methods. Some examples are Multidimension Scaling (MDS), t-Distributed Stochastic Neighbor Embedding (t-SNE) and of course PCA/Kernel PCA. Those are all my favoriate ones. Before you start to learn any model from the data, it is a common practice to run them in order to see if there’s any insight behind it.</p>
-<h3 id="Correlation_map"><a href="#Correlation_map" class="headerlink" title="Correlation map"></a>Correlation map</h3><p>Another common plot you wanna check is the correlation map among features/targets. After computing the correlation on pairwise features and targets, you can see which features are strongly correlated, or you can see which features are obviously more decisive for targets. This is quite crucial at the first step, because you might do a feature selection before feeding a huge number of irrelevant features to your model. And it is usually the case that your observations are very sparse, only a small subset of features are relevant. An example is show in Figure 2.</p>
-<p><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_corr.png" alt="__Figure 2: Correlation map among features and targets, blue means positive correlation, red means negative correlation.__"></p>
-<h3 id="Simple_curves_and_fill_between_curves"><a href="#Simple_curves_and_fill_between_curves" class="headerlink" title="Simple curves and fill_between curves"></a>Simple curves and fill_between curves</h3><p>Simple curves and fill_between curves target on same type of plots, that is for instance, an error curve or learning curve described as before. The only difference is that fill_between provides a upper and lower bound over the actual curve, to present information such as error bars, standard variation over multiple repetitions of runs. See the Figure 3 for an example.</p>
+<h3 id="project2d">project2d</h3>
+<p>The name of <em>project2d</em> is self-explanatory. We wanna see how data distributed in lower dimension, For example, If we have two categories of data, And we use different colors to annotate the data, Therefore we can get inside what is going on behind the observations. One example you can see in the table 1 (Right). This is actually a very common task when you first time get your data. Well normally you’re going to get a very high dimensional data, and the data will be transformed into 2 dimensional data using PCA algorithm or some other dimension reduction methods. Some examples are Multidimension Scaling (MDS), t-Distributed Stochastic Neighbor Embedding (t-SNE) and of course PCA/Kernel PCA. Those are all my favoriate ones. Before you start to learn any model from the data, it is a common practice to run them in order to see if there’s any insight behind it.</p>
+<h3 id="correlation-map">Correlation map</h3>
+<p>Another common plot you wanna check is the correlation map among features/targets. After computing the correlation on pairwise features and targets, you can see which features are strongly correlated, or you can see which features are obviously more decisive for targets. This is quite crucial at the first step, because you might do a feature selection before feeding a huge number of irrelevant features to your model. And it is usually the case that your observations are very sparse, only a small subset of features are relevant. An example is show in Figure 2.</p>
+<div class="figure">
+<img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_corr.png" alt="Figure 2: Correlation map among features and targets, blue means positive correlation, red means negative correlation.">
+<p class="caption"><strong>Figure 2: Correlation map among features and targets, blue means positive correlation, red means negative correlation.</strong></p>
+</div>
+<h3 id="simple-curves-and-fill_between-curves">Simple curves and fill_between curves</h3>
+<p>Simple curves and fill_between curves target on same type of plots, that is for instance, an error curve or learning curve described as before. The only difference is that fill_between provides a upper and lower bound over the actual curve, to present information such as error bars, standard variation over multiple repetitions of runs. See the Figure 3 for an example.</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left"></th>
-</tr>
-</thead>
+<caption><strong>Figure 1: (Left) fill_between curves, the shaded area present standard deviation, and the solid line draws the mean. (Right) Simple curves only draw basic lines over XY-axis without providing more information.</strong></caption>
 <tbody>
-<tr>
-<td style="text-align:left"><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_fillbetween.png" alt=""></td>
-<td style="text-align:left"><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_simplecurve.png" alt=""></td>
+<tr class="odd">
+<td align="left"><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_fillbetween.png"></td>
+<td align="left"><img src="http://home.in.tum.de/~xiaohu/uploaded_images/dataviz_simplecurve.png"></td>
 </tr>
 </tbody>
 </table>
-<p>:<strong>Figure 1: (Left) fill_between curves, the shaded area present standard deviation, and the solid line draws the mean. (Right) Simple curves only draw basic lines over XY-axis without providing more information.</strong></p>
-<h2 id="Future_Works"><a href="#Future_Works" class="headerlink" title="Future Works"></a>Future Works</h2><p>Visualizing your data and model correctly is crucial while you develop your learning systems, I always put a lot more emphasis on demonstrating the model, it is not only for your own insight, but as well as how your customers or supervisors can understand what you have achieved.</p>
+<h2 id="future-works">Future Works</h2>
+<p>Visualizing your data and model correctly is crucial while you develop your learning systems, I always put a lot more emphasis on demonstrating the model, it is not only for your own insight, but as well as how your customers or supervisors can understand what you have achieved.</p>
 <p>For the future, I plan to work out more type of plots which are relevant for machine learning community, for example, the contour/contourf plots, classification boundary, visualization of neural networks and so on. Besides, I also want to add facilities like better deployment of figures, widgets for better interaction for website and so on.</p>
 ]]></content>
     
