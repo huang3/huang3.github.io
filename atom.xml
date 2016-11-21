@@ -67,7 +67,7 @@
     <link href="http://huang3.github.io/2016/11/20/visualize-data/"/>
     <id>http://huang3.github.io/2016/11/20/visualize-data/</id>
     <published>2016-11-20T09:15:44.000Z</published>
-    <updated>2016-11-20T18:53:37.000Z</updated>
+    <updated>2016-11-21T20:46:16.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="dataviz-for-easy-plotting">DataViz for Easy Plotting</h2>
 <p>Ever since machine learning and big data are getting extremely popular, it makes total sense that we need a better way to look into what’s going on behind the data and model. There exists a number of frameworks you can leverage to produce figures on your demand, most popular ones like <a href="http://matplotlib.org/" target="_blank" rel="external">matplotlib</a>, <a href="http://seaborn.pydata.org/" target="_blank" rel="external">seaborn</a>, <a href="https://plot.ly/python/getting-started/" target="_blank" rel="external">plot.ly</a>, and also <a href="http://bokeh.pydata.org" target="_blank" rel="external">bokeh</a> which we use in this project. Of course, there’re many other choices.</p>
@@ -176,7 +176,7 @@
     <link href="http://huang3.github.io/2016/10/23/botnet-detection/"/>
     <id>http://huang3.github.io/2016/10/23/botnet-detection/</id>
     <published>2016-10-23T08:01:41.000Z</published>
-    <updated>2016-11-21T14:12:06.000Z</updated>
+    <updated>2016-11-21T20:46:00.000Z</updated>
     
     <content type="html"><![CDATA[<p>This blog is a summary of study for the paper as follows, figures and facts are derived from this paper and should not be abused for other purpose.</p>
 <blockquote>
@@ -319,37 +319,6 @@
       <category term="security" scheme="http://huang3.github.io/tags/security/"/>
     
       <category term="research" scheme="http://huang3.github.io/tags/research/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ICMl&#39;15 Review</title>
-    <link href="http://huang3.github.io/2016/10/23/icml15-review/"/>
-    <id>http://huang3.github.io/2016/10/23/icml15-review/</id>
-    <published>2016-10-23T06:05:33.000Z</published>
-    <updated>2016-10-26T13:50:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="overall-comments">Overall comments</h3>
-<p>Well organised in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors, ~1600</p>
-<img src="http://home.in.tum.de/~xiaohu/uploaded_images/ICML15-poster.jpg" width="760">
-<h3 id="research-topics">Research topics</h3>
-<p>Covers almost a full spectrum of ML. topics, incl. DL., Opt., SL, USL, bandit, clustering, kernel methods, causality, time series, bayesian (nonparametric), privacy, large scale learning, distributed optimisation, RL, matrix factorisation, sparsity, transfer learning, ranking learning, networks and graphs, online learning, DL and vision, structured prediction,manifold learning, probe. models, variational inference, hashing, MC methods, FS., GP, approximate inference, NLP, sub modality, topic model, learning theory.</p>
-<h3 id="industry">Industry</h3>
-<p>Almost all the relevant companies are coming for recruiting people from ML. Alibaba has focus now on fraud detection, cloud computing, deep learning, and large scale learning. Google is hot as always. Microsoft is recruiting heavily all over the locations, amazon has its CEO from Germany coming to organize a premium lunch. Also e..g, twitter, disney research, nvidia, Baidu are all looking for top researchers of ML.</p>
-<h3 id="people">People</h3>
-<p>Many top researchers are there, I met Schökopf, Bengio, Job Kleinberg, Leon Button, Emily fox, and also other amazing researchers. Our paper got good feedbacks, some people showed their obvious interests on what we are doing. Adversarial learning is here an interesting topic, many people don’t know. Prof. Joachim in ETHZ is doing kinda of similar work as us, evaluating robustness of ML. algorithms using MI, his student would like to connect for future collaboration. Also students from EPFL, Standfords, JHU, are also interested at our work, definitely gonna stay in touch. Some people from Germany e.g., TUB, Humboldt, Max-plank institute (Bernhardt’s group), face detection company from Dresden. Cognitive system GmbH. Also many excellent researchers from China!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;a href=http://icml.cc/2015/&gt;&lt;b&gt;ICML conference&lt;/b&gt;&lt;/a&gt; is well organized in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors,  ~1600
-    
-    </summary>
-    
-    
-      <category term="research" scheme="http://huang3.github.io/tags/research/"/>
-    
-      <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
     
   </entry>
   
@@ -521,6 +490,37 @@ L=R^2-\sum_j\left(R^2+\xi_j-\|\Phi(x_j)-\mathbf{a}\|^2\right)\alpha_j-\sum_j\xi_
     
       <category term="machine learning" scheme="http://huang3.github.io/categories/research/machine-learning/"/>
     
+    
+      <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ICMl&#39;15 Review</title>
+    <link href="http://huang3.github.io/2016/04/01/icml15-review/"/>
+    <id>http://huang3.github.io/2016/04/01/icml15-review/</id>
+    <published>2016-04-01T19:36:33.000Z</published>
+    <updated>2016-11-21T20:46:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="overall-comments">Overall comments</h3>
+<p>Well organised in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors, ~1600</p>
+<img src="http://home.in.tum.de/~xiaohu/uploaded_images/ICML15-poster.jpg" width="760">
+<h3 id="research-topics">Research topics</h3>
+<p>Covers almost a full spectrum of ML. topics, incl. DL., Opt., SL, USL, bandit, clustering, kernel methods, causality, time series, bayesian (nonparametric), privacy, large scale learning, distributed optimisation, RL, matrix factorisation, sparsity, transfer learning, ranking learning, networks and graphs, online learning, DL and vision, structured prediction,manifold learning, probe. models, variational inference, hashing, MC methods, FS., GP, approximate inference, NLP, sub modality, topic model, learning theory.</p>
+<h3 id="industry">Industry</h3>
+<p>Almost all the relevant companies are coming for recruiting people from ML. Alibaba has focus now on fraud detection, cloud computing, deep learning, and large scale learning. Google is hot as always. Microsoft is recruiting heavily all over the locations, amazon has its CEO from Germany coming to organize a premium lunch. Also e..g, twitter, disney research, nvidia, Baidu are all looking for top researchers of ML.</p>
+<h3 id="people">People</h3>
+<p>Many top researchers are there, I met Schökopf, Bengio, Job Kleinberg, Leon Button, Emily fox, and also other amazing researchers. Our paper got good feedbacks, some people showed their obvious interests on what we are doing. Adversarial learning is here an interesting topic, many people don’t know. Prof. Joachim in ETHZ is doing kinda of similar work as us, evaluating robustness of ML. algorithms using MI, his student would like to connect for future collaboration. Also students from EPFL, Standfords, JHU, are also interested at our work, definitely gonna stay in touch. Some people from Germany e.g., TUB, Humboldt, Max-plank institute (Bernhardt’s group), face detection company from Dresden. Cognitive system GmbH. Also many excellent researchers from China!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a href=http://icml.cc/2015/&gt;&lt;b&gt;ICML conference&lt;/b&gt;&lt;/a&gt; is well organized in terms of main events, incl. presentations, posters, tutorials and workshops. However catering and services are kinda of being compromised due to a huge amount of visitors,  ~1600
+    
+    </summary>
+    
+    
+      <category term="research" scheme="http://huang3.github.io/tags/research/"/>
     
       <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
     
