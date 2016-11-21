@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huang3.github.io/"/>
-  <updated>2016-11-20T18:53:37.000Z</updated>
+  <updated>2016-11-21T20:34:41.000Z</updated>
   <id>http://huang3.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GIToolbox</title>
+    <link href="http://huang3.github.io/2016/11/21/gitoolbox/"/>
+    <id>http://huang3.github.io/2016/11/21/gitoolbox/</id>
+    <published>2016-11-21T20:24:44.000Z</published>
+    <updated>2016-11-21T20:34:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>With the expanding size of the Grammatical Inference Community, it’s getting more and more desirable that a robust and effective set of tools for GI should be ready for use. We establish such an open source project which provides many widely used GI algorithms and convenient implementations for diverse targets.</p>
+<h2 id="who-are-we">Who Are WE</h2>
+<ul>
+<li>Hasan Ibne Akram, Technische Universität München, Germany</li>
+<li>Huang Xiao, Technische Universität München, Germany</li>
+</ul>
+<p>This project is also supervised and supported by Colin De La Higuera, Université de Nantes, France and Prof. Dr. Claudia Eckert, Technische Universität München, Germany.</p>
+<h2 id="who-may-like-us">Who May Like US</h2>
+<p>Those who are currently looking for open source implementations of Grammatical Inference algorithms, HERE is your oasis. For now, the following algorithms have been covered by us.</p>
+<ul>
+<li>RPNI</li>
+<li>EDSM</li>
+<li>K-Testable</li>
+<li>Alergia</li>
+<li>MDI</li>
+<li>OSTIA</li>
+</ul>
+<h2 id="project-information">Project Information</h2>
+<ul>
+<li>License: MIT License</li>
+<li>6 stars</li>
+<li>svn-based source control</li>
+</ul>
+<p>The Wikipedia of this project and downloads can be found on our hosting web page on <a href="https://code.google.com/archive/p/gitoolbox/wikis" target="_blank" rel="external"><strong>Google Code</strong></a>.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      We open sourced a grammatical inference toolbox hosted on Google code. The toolbox is implemented in Matlab, and contains several GI algorithms.
+    
+    </summary>
+    
+      <category term="research" scheme="http://huang3.github.io/categories/research/"/>
+    
+    
+      <category term="grammatical inference" scheme="http://huang3.github.io/tags/grammatical-inference/"/>
+    
+  </entry>
   
   <entry>
     <title>DataViz - Easy Visualization for Machine Learning</title>
