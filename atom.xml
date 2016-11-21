@@ -129,14 +129,14 @@
     <link href="http://huang3.github.io/2016/10/23/botnet-detection/"/>
     <id>http://huang3.github.io/2016/10/23/botnet-detection/</id>
     <published>2016-10-23T08:01:41.000Z</published>
-    <updated>2016-10-25T06:05:41.000Z</updated>
+    <updated>2016-11-21T14:12:06.000Z</updated>
     
     <content type="html"><![CDATA[<p>This blog is a summary of study for the paper as follows, figures and facts are derived from this paper and should not be abused for other purpose.</p>
 <blockquote>
 <p>Guofei Gu, Roberto Perdisci, Junjie Zhang, and Wenke Lee. 2008. <strong>BotMiner: clustering analysis of network traffic for protocol- and structure-independent botnet detection.</strong> In Proceedings of the 17th conference on Security symposium (SS’08). USENIX Association, Berkeley, CA, USA, 139-154.</p>
 </blockquote>
 <p>While machine learning has been proved effective enough in many different fields, notably such as NLP, OCR, recommendation system and so on, but its applications on Security is relatively barely satisfactory. Given that the security related data volume is booming up at a scale of GB-level per day in many organization, this is absolutely urgent to get our hands on the so called Data-Driven-Security. Amongst all, during my study over this subfield of applied machine learning, Botnets detection is actually a pretty good example or subject of research.</p>
-<h3 id="a-few-words-about-botnets">A few words about Botnets</h3>
+<h2 id="a-few-words-about-botnets">A few words about Botnets</h2>
 <p>A Botnet can be understood as a group of machines, infected or intended, communicated and controlled by a botmaster to carry on malicious activities through over the network. Obviously a botnet can perform serious harm on a legitimate network or system, known such as DDoS attacks, spams, phishing, identity theft and information exfiltration. Typical structure of Botnet can be centralized or distributed (P2P), and typical protocol of C&amp;C can be IRC, HTTP. Since HTTP is normally allowed by most of networks, HTTP-based P2P Botnet is getting more and more popular.</p>
 <div class="figure">
 <img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img1.png" alt="Fig.1 Possible Botnet structures. a centralized b">
@@ -148,119 +148,117 @@
 <li>who is doing what? (A-plane)</li>
 </ul>
 <p>The assumptions behind it is that we believe that an identifiable botnet is always driven by a certain number of C&amp;C servers, and is intended to perform malicious activities to some assets. Therefore, the characteristics of an identifiable botnet can be summarized as being C&amp;C patterns and the malicious activities patterns, as shown in Fig.1. By doing so, the detection framework is more independent of structure, protocols, infection models and so on, since we are inspecting the botnets by looking at its behavior.</p>
-<h3 id="c-plane">C-plane</h3>
+<h2 id="c-plane">C-plane</h2>
 <p>The BotMiner framework is thus divided into two parts, that is, C-plane and A-plane. C stands for C&amp;C which examines network flow between botmaster and bots, because it is believed the network flow between them follows some certain patterns. It helps logging the network flow in a format suitable for efficient storage and further analysis.</p>
-<h3 id="a-plane">A-plane</h3>
+<h2 id="a-plane">A-plane</h2>
 <p>On the other handside, A-plane focus on outbound traffic of activities performed by the bots. Suspicious activities such as scanning, spamming, binary downloading and exploit attempts could very possibly follow some certain patterns. To detect those malicious activities, they deployed a variety of IDS engines to identify the traffic patterns.</p>
 <p>Importantly we note that either C-plane or A-plane is not enough to detect botnets, which can usually produce high false positive. BotMiner combines two planes and cross-correlate the outputs from both planes to produce the final results. The architecture of BotMiner is depicted in Fig.2.</p>
 <div class="figure">
-<img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img2.png" alt="yy">
-<p class="caption">yy</p>
+<img src="https://www.usenix.org/legacy/event/sec08/tech/full_papers/gu/gu_html/img2.png" alt="Fig.2. BotMiner architecture">
+<p class="caption"><strong>Fig.2. BotMiner architecture</strong></p>
 </div>
-<p><strong>Fig.2. BotMiner architecture</strong></p>
-<h3 id="learning-traffic">Learning traffic</h3>
+<h2 id="learning-traffic">Learning traffic</h2>
 <p>As seen in Fig.2, outbound traffic in A-plane and network flows data in C-plane will be filtered and preprocessed to prepare vector-like features, just as commonly required by machine learning algorithms. For C-plane, similar network flow patterns are aggregated according to source IP and destination IP, also port number and protocol types, which define the <code>who is talking to whom</code>. Features are then built for example, number of flows per hour, number of packets per flow, avg. number of bytes per packets and avg. number of bytes per second. This characterizes the communication pattern when clients are talking to servers. Then a 2-step clustering is applied on the dataset, where X-means is used. For A-plane, it also follows 2-layer clustering, that is, Snort output are clustered firstly according to different types of activities, and further clustered within a similar activity. For instances, scanning on same ports will be classified as the same cluster. Overlapping of SMTP destinations will also be classified as the same cluster. This defines <code>who is doing what</code>. clustering results will be cross correlated to compute the final cluster result, which identifies the detected botnets. To confirm the cross-plane correlation, a score has to be assigned on host, where we expect higher score when the host belongs to multiple malicious activities. In the meanwhile, if the host also belongs to at least one C-cluster sharing a common network flow patterns, then we believe this host belongs to certain botnet.</p>
-<h3 id="results">Results</h3>
-<p>The results look pretty good, BotMiner is able to detect almost all the botnets, detailed in Table.1.</p>
-<table style="width:67%;">
+<h2 id="results">Results</h2>
+<p>The results look pretty good, BotMiner is able to detect almost all the botnets, detailed in Table.1. You can refer more explanation of the observations in the paper.</p>
+<table>
+<caption><strong>Table.1 Botnet detection results using BotMiner</strong></caption>
 <colgroup>
-<col width="8%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
+<col width="21%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left">Botnet</th>
-<th align="center">Number of Bots</th>
-<th align="center">Detected?</th>
-<th align="center">Clustered Bots</th>
-<th align="center">Detection Rate</th>
-<th align="center">False Positive Clusters/Hosts</th>
-<th align="center">FP Rate</th>
+<th align="left">#Bots</th>
+<th align="left">Detected?</th>
+<th align="left">Clustered Bots</th>
+<th align="left">Detection Rate</th>
+<th align="left">False Positive Clusters/Hosts</th>
+<th align="left">FP Rate</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">IRC-rbot</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">4</td>
-<td align="center">100%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
+<td align="left">4</td>
+<td align="left">YES</td>
+<td align="left">4</td>
+<td align="left">100%</td>
+<td align="left">1/2</td>
+<td align="left">0.003</td>
 </tr>
 <tr class="even">
 <td align="left">IRC-sdbot</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">4</td>
-<td align="center">100%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
+<td align="left">4</td>
+<td align="left">YES</td>
+<td align="left">4</td>
+<td align="left">100%</td>
+<td align="left">1/2</td>
+<td align="left">0.003</td>
 </tr>
 <tr class="odd">
 <td align="left">IRC-spybot</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">3</td>
-<td align="center">75%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
+<td align="left">4</td>
+<td align="left">YES</td>
+<td align="left">3</td>
+<td align="left">75%</td>
+<td align="left">1/2</td>
+<td align="left">0.003</td>
 </tr>
 <tr class="even">
 <td align="left">IRC-N</td>
-<td align="center">259</td>
-<td align="center">YES</td>
-<td align="center">258</td>
-<td align="center">9.6%</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left">259</td>
+<td align="left">YES</td>
+<td align="left">258</td>
+<td align="left">9.6%</td>
+<td align="left">0</td>
+<td align="left">0</td>
 </tr>
 <tr class="odd">
 <td align="left">HTTP-1</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">4</td>
-<td align="center">100%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
+<td align="left">4</td>
+<td align="left">YES</td>
+<td align="left">4</td>
+<td align="left">100%</td>
+<td align="left">1/2</td>
+<td align="left">0.003</td>
 </tr>
 <tr class="even">
 <td align="left">HTTP-2</td>
-<td align="center">4</td>
-<td align="center">YES</td>
-<td align="center">4</td>
-<td align="center">100%</td>
-<td align="center">1/2</td>
-<td align="center">0.003</td>
+<td align="left">4</td>
+<td align="left">YES</td>
+<td align="left">4</td>
+<td align="left">100%</td>
+<td align="left">1/2</td>
+<td align="left">0.003</td>
 </tr>
 <tr class="odd">
 <td align="left">P2P-Storm</td>
-<td align="center">13</td>
-<td align="center">YES</td>
-<td align="center">13</td>
-<td align="center">100%</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left">13</td>
+<td align="left">YES</td>
+<td align="left">13</td>
+<td align="left">100%</td>
+<td align="left">0</td>
+<td align="left">0</td>
 </tr>
 <tr class="even">
 <td align="left">P2P-Nugache</td>
-<td align="center">82</td>
-<td align="center">YES</td>
-<td align="center">82</td>
-<td align="center">100%</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left">82</td>
+<td align="left">YES</td>
+<td align="left">82</td>
+<td align="left">100%</td>
+<td align="left">0</td>
+<td align="left">0</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Table.1 Botnet detection results using BotMiner</strong></p>
-<p>You can refer more explanation of the observations in the paper.</p>
-<h3 id="conclusion">Conclusion</h3>
+<h2 id="conclusion">Conclusion</h2>
 <p>Finally when we retrospect the work on detecting botnets using learning based techniques, it is believed and proved eventually that the assumptions made about the botnets are actually realistic and approchable. As we have seen, the whole frame work is grounded on two facts: <code>who is talking to whom</code> and <code>who is doing what</code>. Since we believe this characterizes the fundamental behavior of malware instances, which will be told apart from normal instances. Although a lot of effort on feature engineering is still indispensable for efficiency and precision, the intrinsic properties of botnets have shown those infected machines that have similar communication patterns, meanwhile perform the same set of multiple suspicious activities.</p>
 ]]></content>
     

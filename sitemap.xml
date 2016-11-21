@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://huang3.github.io/2016/10/23/botnet-detection/</loc>
+    
+    <lastmod>2016-11-21T14:12:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://huang3.github.io/2016/09/22/intro-svc/</loc>
     
     <lastmod>2016-11-20T19:39:38.000Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>http://huang3.github.io/projects/index.html</loc>
     
     <lastmod>2016-10-26T11:59:32.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://huang3.github.io/2016/10/23/botnet-detection/</loc>
-    
-    <lastmod>2016-10-25T06:05:41.000Z</lastmod>
     
   </url>
   
