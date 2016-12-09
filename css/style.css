@@ -453,7 +453,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif;
+  font-family: "Helvetica Neue", SimSun, Arial, sans-serif;
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -599,9 +599,9 @@ footer {
   padding-bottom: 2em; }
   .post .post-title {
     margin: 0px;
-    font-weight: 400;
-    font-size: 26px;
-    font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+    font-weight: 800;
+    font-size: 24px;
+    font-family: "Helvetica Neue", SimSun, Arial, sans-serif; }
     .post .post-title .post-link:hover {
       border-bottom: 2px solid #0047AB;
       transition: 0.1s; }
@@ -610,26 +610,27 @@ footer {
     display: inline-block;
     color: #8a8a8a; }
   .post .post-content {
-    line-height: 1.8;
-    text-align: justify; }
+    line-height: 1.5;
+    text-align: justify;
+    font-size: 90%; }
     .post .post-content h1 {
-      font-weight: 400;
-      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+      font-weight: 600;
+      font-family: "Helvetica Neue", SimSun, Arial, sans-serif; }
     .post .post-content h2 {
-      font-weight: 400;
-      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+      font-weight: 600;
+      font-family: "Helvetica Neue", SimSun, Arial, sans-serif; }
     .post .post-content h3 {
-      font-weight: 400;
-      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+      font-weight: 600;
+      font-family: "Helvetica Neue", SimSun, Arial, sans-serif; }
     .post .post-content h4 {
-      font-weight: 400;
-      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+      font-weight: 600;
+      font-family: "Helvetica Neue", SimSun, Arial, sans-serif; }
     .post .post-content h5 {
-      font-weight: 400;
-      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+      font-weight: 600;
+      font-family: "Helvetica Neue", SimSun, Arial, sans-serif; }
     .post .post-content h6 {
-      font-weight: 400;
-      font-family: Palatino, Times New Roman, SimSun, Microsoft Yahei, serif; }
+      font-weight: 600;
+      font-family: "Helvetica Neue", SimSun, Arial, sans-serif; }
     .post .post-content .headerlink:hover {
       border-bottom: 0; }
     .post .post-content .headerlink::before {
@@ -684,9 +685,14 @@ footer {
         text-align: center;
         padding-bottom: 20px; }
     .post .post-content kbd {
-      background-color: #FCF8E3;
-      color: #8D7140;
-      padding: 2px 3px; }
+      background-color: #f2d765;
+      color: rgba(41, 46, 5, 0.69);
+      padding: 1px 1px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      font-size: 85%;
+      font-weight: 600; }
 
 .post .post-sidebar {
   position: absolute;

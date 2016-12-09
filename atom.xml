@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huang3.github.io/"/>
-  <updated>2016-11-21T20:34:41.000Z</updated>
+  <updated>2016-12-09T14:32:45.000Z</updated>
   <id>http://huang3.github.io/</id>
   
   <author>
@@ -14,6 +14,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Installation Notes of Holmes-Processing</title>
+    <link href="http://huang3.github.io/2016/12/09/holmes-processing-notes/"/>
+    <id>http://huang3.github.io/2016/12/09/holmes-processing-notes/</id>
+    <published>2016-12-09T14:28:59.000Z</published>
+    <updated>2016-12-09T14:32:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="overview">Overview</h2>
+<blockquote>
+<p>Holmes Processing was born out of the need to rapidly process and analyze large volumes data in the computer security community. At its core, Holmes Processing is a catalyst for extracting useful information and generate meaningful intelligence. Furthermore, the robust distributed architecture allows the system to scale while also providing the flexibility needed to evolve.</p>
+</blockquote>
+<p>I quoted the description from its <a href="https://holmesprocessing.github.io/" target="_blank" rel="external">website</a>. The architecture looks like this:</p>
+<div class="figure">
+<img src="https://holmesprocessing.github.io/img/general/skald-architecture.svg" alt="Figure. 1 Architecture of Holmes-Processing" width="500">
+<p class="caption"><strong>Figure. 1</strong> Architecture of Holmes-Processing</p>
+</div>
+<p>Publication can be downloaded from <a href="https://www.sec.in.tum.de/assets/Uploads/skald.pdf" target="_blank" rel="external">here</a>.</p>
+<h2 id="install-docker">Install <strong>docker</strong></h2>
+<p>Binaries for OSX is provided on their <a href="https://www.docker.com/" target="_blank" rel="external">home page</a>, docker is a great idea of virtualizing applications instead of the whole OS. It simply runs on all the platforms.</p>
+<p>docker for OSX comes with <strong>docker engine</strong>, <strong>docker-compose</strong>, and also <strong>docker-machine</strong>.</p>
+<h2 id="install-rabbitmq">Install RabbitMQ</h2>
+<p>It is a message queue help you process messages asynchronously. The easiest way of installing it is via homebrew:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install rabbitmq</div></pre></td></tr></table></figure>
+<p>This will install rabbitmq in <kbd><em>/usr/local/Cellar/rabbitmq/VERSION/</em></kbd></p>
+<h2 id="install-cassandra">Install Cassandra</h2>
+<p>Binaries can be downloaded from their <a href="http://www.apache.org/dyn/closer.lua/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz" target="_blank" rel="external">home page</a>. Unzip the tar-ball, and optionally add the <kbd>$CASSANDRA_HOME/bin to your PATH.</kbd></p>
+<h2 id="install-riakcs">Install <a href="http://docs.basho.com/riak/cs/2.1.1/" target="_blank" rel="external">RiakCS</a></h2>
+<ul>
+<li>distributed on nodes</li>
+<li>scalable</li>
+<li>peer-2-peer network</li>
+<li>fault-tolorence by replicate</li>
+<li>high availability</li>
+<li>key-value data store</li>
+</ul>
+<p><strong>Passed for the moment, it worths awhile to take a look at</strong> <a href="https://github.com/jubos/fake-s3" target="_blank" rel="external">fake-s3</a>.</p>
+<h2 id="install-go">Install Go</h2>
+<p>Go-lange can be downloaded and installed without any problem. After installation, you need to do one thing: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> <span class="variable">$GOPATH</span>=<span class="variable">$HOME</span>/go/workspace</div></pre></td></tr></table></figure></p>
+<p>To define the environment variable <em>GOPATH</em>, run command above as you like. Any binaries by <kbd>go get xxx will be pulled &amp; compiled in the workspace.</kbd></p>
+<h2 id="install-holmes-storage">Install Holmes-Storage</h2>
+<p>It is basically a wrapper for coordinating different databases on clusters, and is responsible to interact with data. To install, run bash:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go get -v -x -u <span class="string">"github.com/HolmesProcessing/Holmes-Storage"</span></div></pre></td></tr></table></figure>
+<p>This will install binaries in your <kbd>GOPATH. One problem occurred is the “magic.h” is missing, it turns out you need to install dev version of magicmime: <kbd>libmagic, which can be easily installed by homebrew.</kbd></kbd></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install libmagic</div></pre></td></tr></table></figure>
+<p>that’s it.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Notes of experimenting Holmes-Processing system implemented by my colleague George Webster. It meant to be a large-scale distributed framework for security analysis.
+    
+    </summary>
+    
+    
+      <category term="distributed system" scheme="http://huang3.github.io/tags/distributed-system/"/>
+    
+      <category term="system design" scheme="http://huang3.github.io/tags/system-design/"/>
+    
+      <category term="technical" scheme="http://huang3.github.io/tags/technical/"/>
+    
+  </entry>
   
   <entry>
     <title>GIToolbox</title>
