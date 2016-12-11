@@ -26,10 +26,10 @@ ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end -
 <p>docker for OSX comes with <strong>docker engine</strong>, <strong>docker-compose</strong>, and also <strong>docker-machine</strong>.</p>
 <h2 id="install-rabbitmq">Install RabbitMQ</h2>
 <p>It is a message queue help you process messages asynchronously. The easiest way of installing it is via homebrew:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install rabbitmq</div></pre></td></tr></table></figure>
-<p>This will install rabbitmq in <kbd><em>/usr/local/Cellar/rabbitmq/VERSION/</em></kbd></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">brew update</div><div class="line">brew install rabbitmq</div></pre></td></tr></table></figure>
+<p>This will install rabbitmq in <kbd>/usr/local/Cellar/rabbitmq/VERSION/</kbd></p>
 <h2 id="install-cassandra">Install Cassandra</h2>
-<p>Binaries can be downloaded from their <a href="http://www.apache.org/dyn/closer.lua/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz" target="_blank" rel="external">home page</a>. Unzip the tar-ball, and optionally add the <kbd>$CASSANDRA_HOME/bin to your PATH.</kbd></p>
+<p>Binaries can be downloaded from their <a href="http://www.apache.org/dyn/closer.lua/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz" target="_blank" rel="external">home page</a>. Unzip the tar-ball, and optionally add the <kbd>$CASSANDRA_HOME/bin</kbd> to your PATH.</p>
 <h2 id="install-riakcs">Install <a href="http://docs.basho.com/riak/cs/2.1.1/" target="_blank" rel="external">RiakCS</a></h2>
 <ul>
 <li>distributed on nodes</li>
@@ -39,17 +39,36 @@ ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end -
 <li>high availability</li>
 <li>key-value data store</li>
 </ul>
-<p><strong>Passed for the moment, it worths awhile to take a look at</strong> <a href="https://github.com/jubos/fake-s3" target="_blank" rel="external">fake-s3</a>.</p>
+<p>Passed for the moment, it worths awhile to take a look at <a href="https://github.com/jubos/fake-s3" target="_blank" rel="external">fake-s3</a>.</p>
 <h2 id="install-go">Install Go</h2>
-<p>Go-lange can be downloaded and installed without any problem. After installation, you need to do one thing: <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> <span class="variable">$GOPATH</span>=<span class="variable">$HOME</span>/go/workspace</div></pre></td></tr></table></figure></p>
-<p>To define the environment variable <em>GOPATH</em>, run command above as you like. Any binaries by <kbd>go get xxx will be pulled &amp; compiled in the workspace.</kbd></p>
+<p>Go-lange can be downloaded and installed without any problem. After installation, you need to do one thing: <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="built_in">export</span> <span class="variable">$GOPATH</span>=<span class="variable">$HOME</span>/go/workspace</div></pre></td></tr></table></figure></p>
+<p>To define the environment variable <em>GOPATH</em>, run command above as you like. Any binaries by <kbd>go get xxx</kbd> will be pulled &amp; compiled in the workspace.</p>
 <h2 id="install-holmes-storage">Install Holmes-Storage</h2>
 <p>It is basically a wrapper for coordinating different databases on clusters, and is responsible to interact with data. To install, run bash:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go get -v -x -u <span class="string">"github.com/HolmesProcessing/Holmes-Storage"</span></div></pre></td></tr></table></figure>
-<p>This will install binaries in your <kbd>GOPATH. One problem occurred is the “magic.h” is missing, it turns out you need to install dev version of magicmime: <kbd>libmagic, which can be easily installed by homebrew.</kbd></kbd></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install libmagic</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">go get -v -x -u <span class="string">"github.com/HolmesProcessing/Holmes-Storage"</span></div></pre></td></tr></table></figure>
+<p>This will install binaries in your <kbd>GOPATH</kbd>. One problem occurred is the “magic.h” is missing, it turns out you need to install dev version of magicmime: <kbd>libmagic</kbd>, which can be easily installed by homebrew.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">brew install libmagic</div></pre></td></tr></table></figure>
 <p>that’s it.</p>
-</div></article></div><div class="col-3"><div class="post"><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#overview"><span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-docker"><span class="toc-text">Install docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-rabbitmq"><span class="toc-text">Install RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-cassandra"><span class="toc-text">Install Cassandra</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-riakcs"><span class="toc-text">Install RiakCS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-go"><span class="toc-text">Install Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-holmes-storage"><span class="toc-text">Install Holmes-Storage</span></a></li></ol></div></div></div></div><div class="row"><div class="col-12"><div class="tags"><span class="badge"><i class="fa fa-tag"></i><a href="/tags/distributed-system/">distributed system</a></span><span class="badge"><i class="fa fa-tag"></i><a href="/tags/system-design/">system design</a></span><span class="badge"><i class="fa fa-tag"></i><a href="/tags/technical/">technical</a></span></div></div></div><div class="row"><div class="col-12">    <div class="paginator"><a href="/2016/11/21/gitoolbox/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div></div></div><div class="row"><div class="col-12"><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
+<h2 id="install-holmes-totem">Install Holmes-Totem</h2>
+<p>Totem provides a set of static file analysis services. This can be downloade and built by:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/HolmesProcessing/Holmes-Totem.git</div><div class="line"><span class="built_in">cd</span> Holmes-Totem</div><div class="line">sbt assembly</div></pre></td></tr></table></figure>
+<p>Of course you need to install sbt first by <kbd>brew install sbt</kbd>.</p>
+<h2 id="run-totem-services">Run Totem services</h2>
+<p>To run totem services, checkout the individual services folder in <kbd>src</kbd> folder. In each service, you need to copy <em>service.conf.example</em> to <em>service.conf</em>.</p>
+<p>Compile and run service in docker:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="built_in">cd</span> Holmes-Totem/conf/</div><div class="line">cp docker-compose.yml.example docker-compose.yml</div><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
+<p>This will bring up services in docker.</p>
+<h2 id="todo">TODO</h2>
+<ul>
+<li>configure local storage</li>
+<li>configure service confs</li>
+<li>manual tasking totem</li>
+<li>install holmes-dynamic</li>
+<li>install holmes-gateway</li>
+<li>install holmes-toolbox</li>
+<li>…</li>
+</ul>
+</div></article></div><div class="col-3"><div class="post"><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#overview"><span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-docker"><span class="toc-text">Install docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-rabbitmq"><span class="toc-text">Install RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-cassandra"><span class="toc-text">Install Cassandra</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-riakcs"><span class="toc-text">Install RiakCS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-go"><span class="toc-text">Install Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-holmes-storage"><span class="toc-text">Install Holmes-Storage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-holmes-totem"><span class="toc-text">Install Holmes-Totem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#run-totem-services"><span class="toc-text">Run Totem services</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#todo"><span class="toc-text">TODO</span></a></li></ol></div></div></div></div><div class="row"><div class="col-12"><div class="tags"><span class="badge"><i class="fa fa-tag"></i><a href="/tags/distributed-system/">distributed system</a></span><span class="badge"><i class="fa fa-tag"></i><a href="/tags/system-design/">system design</a></span><span class="badge"><i class="fa fa-tag"></i><a href="/tags/technical/">technical</a></span></div></div></div><div class="row"><div class="col-12">    <div class="paginator"><a href="/2016/11/21/gitoolbox/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div></div></div><div class="row"><div class="col-12"><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
     this.page.url = 'http://huang3.github.io/2016/12/09/holmes-processing-notes/';
     this.page.identifier = '2016/12/09/holmes-processing-notes/';
     this.page.title = 'Installation Notes of Holmes-Processing';
