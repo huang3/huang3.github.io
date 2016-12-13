@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://huang3.github.io/2016/10/26/how-to-manual-pkg-miktex/</loc>
+    
+    <lastmod>2016-12-13T13:54:37.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://huang3.github.io/2016/12/09/holmes-processing-notes/</loc>
     
-    <lastmod>2016-12-11T11:48:43.000Z</lastmod>
+    <lastmod>2016-12-11T11:49:59.000Z</lastmod>
     
   </url>
   
@@ -47,13 +54,6 @@
     <loc>http://huang3.github.io/about/index.html</loc>
     
     <lastmod>2016-11-20T18:31:22.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://huang3.github.io/2016/10/26/how-to-manual-pkg-miktex/</loc>
-    
-    <lastmod>2016-10-27T10:40:46.000Z</lastmod>
     
   </url>
   
