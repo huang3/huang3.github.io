@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huang3.github.io/"/>
-  <updated>2016-12-11T11:49:59.000Z</updated>
+  <updated>2016-12-14T16:13:29.000Z</updated>
   <id>http://huang3.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://huang3.github.io/2016/12/09/holmes-processing-notes/"/>
     <id>http://huang3.github.io/2016/12/09/holmes-processing-notes/</id>
     <published>2016-12-09T14:28:59.000Z</published>
-    <updated>2016-12-11T11:49:59.000Z</updated>
+    <updated>2016-12-14T16:13:29.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="overview">Overview</h2>
 <blockquote>
@@ -51,6 +51,9 @@
 <li>key-value data store</li>
 </ul>
 <p>Passed for the moment, it worths awhile to take a look at <a href="https://github.com/jubos/fake-s3" target="_blank" rel="external">fake-s3</a>.</p>
+<p>Installed fake-s3, run the fake-s3 server by:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">fake3 -r YOUR_ROOT_FOLDER -p PORT</div></pre></td></tr></table></figure>
+<p>the fake-s3 server is up and running. You need then configure it in Holmes-Storage.</p>
 <h2 id="install-go">Install Go</h2>
 <p>Go-lange can be downloaded and installed without any problem. After installation, you need to do one thing: <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="built_in">export</span> <span class="variable">$GOPATH</span>=<span class="variable">$HOME</span>/go/workspace</div></pre></td></tr></table></figure></p>
 <p>To define the environment variable <em>GOPATH</em>, run command above as you like. Any binaries by <kbd>go get xxx</kbd> will be pulled &amp; compiled in the workspace.</p>
@@ -60,8 +63,10 @@
 <p>This will install binaries in your <kbd>GOPATH</kbd>. One problem occurred is the “magic.h” is missing, it turns out you need to install dev version of magicmime: <kbd>libmagic</kbd>, which can be easily installed by homebrew.</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">brew install libmagic</div></pre></td></tr></table></figure>
 <p>that’s it.</p>
+<h3 id="holmes-storage-config">Holmes-Storage Config</h3>
+<p>Default config file is shipped, you can copy it and change your data storage settings accordingly.</p>
 <h2 id="install-holmes-totem">Install Holmes-Totem</h2>
-<p>Totem provides a set of static file analysis services. This can be downloade and built by:</p>
+<p>Totem provides a set of static file analysis services. This can be downloaded and built by:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/HolmesProcessing/Holmes-Totem.git</div><div class="line"><span class="built_in">cd</span> Holmes-Totem</div><div class="line">sbt assembly</div></pre></td></tr></table></figure>
 <p>Of course you need to install sbt first by <kbd>brew install sbt</kbd>.</p>
 <h2 id="run-totem-services">Run Totem services</h2>
@@ -69,6 +74,10 @@
 <p>Compile and run service in docker:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="built_in">cd</span> Holmes-Totem/conf/</div><div class="line">cp docker-compose.yml.example docker-compose.yml</div><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
 <p>This will bring up services in docker.</p>
+<p>At this point, services are all running in docker. You can run Totem by:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">java -jar ./target/scala-2.11/totem-assembly-0.5.0.jar</div></pre></td></tr></table></figure>
+<p>You will see then:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">SLF4J: Failed to load class <span class="string">"org.slf4j.impl.StaticLoggerBinder"</span>.</div><div class="line">SLF4J: Defaulting to no-operation (NOP) logger implementation</div><div class="line">SLF4J: See http://www.slf4j.org/codes.html<span class="comment">#StaticLoggerBinder for further details.</span></div><div class="line">Using default config file: ./config/totem.conf</div><div class="line">Configuring details <span class="keyword">for</span> Totem Tasking</div><div class="line">Configuring details <span class="keyword">for</span> downloading objects</div><div class="line">Configuring details <span class="keyword">for</span> Rabbit queues</div><div class="line">Configuring setting <span class="keyword">for</span> Services</div><div class="line">Completing configuration</div><div class="line">Creating Totem Actors</div><div class="line">Totem version 0.5.0 is running and ready to receive tasks</div><div class="line">[INFO] [12/14/2016 17:10:56.873] [totem-akka.actor.default-dispatcher-4] [akka://totem/user/producer] RabbitProducer: exchange totem should be made</div></pre></td></tr></table></figure>
 <h2 id="todo">TODO</h2>
 <ul>
 <li>configure local storage</li>
