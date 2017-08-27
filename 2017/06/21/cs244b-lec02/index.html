@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta lang="zh-CN"><meta name="X-UA-Compatible" content="IE=9"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="Huang Xiao"><meta name="description" content="Notes while studying distributed system."><meta name="keywords" content="distributed system,system design"><title>Design Distributed System · My name is Xiao, Huang</title><link rel="icon" href="/favicon_h3.png"><link rel="canonical" href="http://huang3.github.io/2017/06/21/cs244b-lec02/"><link rel="alternate" href="/atom.xml" title="My name is Xiao, Huang"><link rel="stylesheet" href="/css/bootstrap-tag.min.css"><link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"><script type="text/javascript"><!-- hexo-inject:begin --><!-- hexo-inject:end -->var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?Your baidu Analytics ID";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Your Google Analytics ID', 'auto');
+ga('send', 'pageview');</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="main"><header><a href="/." class="logo">My name is Xiao, Huang</a><ul id="myTopnav" class="nav"><li class="navicon"><a href="javascript:void(0);" style="font-size:24px;" onclick="toggleNav()">&#9776;</a></li><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Blogs</a></li><li class="nav-link"><a href="/projects/" target="_self">Projects</a></li><li class="nav-link"><a href="/vita/" target="_self">Vita</a></li></ul></header><div class="row"><div class="col-9"><article class="post"><h1 class="post-title">Design Distributed System</h1><span class="post-time">Jun 21, 2017</span><div class="post-content"><h2 id="设计分布式系统所需要遵从的原则">设计分布式系统所需要遵从的原则</h2>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>复杂的系统设计需要遵从极其简单的基本原则。以下设计原则经常在设计复杂系统时需要考虑:</p>
+<ul>
+<li>Modularity</li>
+<li>Efficiency</li>
+<li>Scalability</li>
+<li>Extensibility</li>
+<li>Service/object oriented</li>
+<li>Prioritizing user interactive requests</li>
+<li>Partition and separation</li>
+<li>Design as simple as needed</li>
+</ul>
+<h2 id="设计分布式系统所需要考虑的方面">设计分布式系统所需要考虑的方面</h2>
+<ul>
+<li>当你需要同时应对X请求时，设想100X甚至100,000X请求时，系统所承受的场景</li>
+<li>并行化计算+数据读写等操作意味着尽可能地提升计算资源的利用率，即optimizing architecture according to some constraints</li>
+<li>一旦使用并行，需要面临的两大问题：一致性原则（consistency）、故障处理（failure handling）</li>
+<li>设计复杂系统时，请仔细思考系统各功能模块的需求以及相互的依赖关系</li>
+<li>load balancing (routing), replicate, caching, indexing, message queue, proxy等是一些常用系统设计技巧</li>
+<li>Back-of-the-envelope calculation 在设计初期会很有帮助</li>
+<li>Service的设计尽可能的独立，减少Service之间的依赖性，系统的设计遵循模块化</li>
+<li>重点设计protocol，而非communication</li>
+</ul>
+<h2 id="一些常用的设计模式">一些常用的设计模式</h2>
+<div class="figure">
+<img src="http://1.bp.blogspot.com/_j6mB7TMmJJY/TLnj_mWL50I/AAAAAAAAAgg/JFPsfGcAenI/s1600/p1.png" alt="Figure. 1 A typical load balancer try to pick a proper worker to process the requests. We normally expect the dispatcher to follow some geographical pattern so that users perceive little latency. For simple case, a very basic round-robin method can also be used." width="500">
+<p class="caption"><strong>Figure. 1</strong> A typical load balancer try to pick a proper worker to process the requests. We normally expect the dispatcher to follow some geographical pattern so that users perceive little latency. For simple case, a very basic round-robin method can also be used.</p>
+</div>
+<div class="figure">
+<img src="http://2.bp.blogspot.com/_j6mB7TMmJJY/TLlDyOK60HI/AAAAAAAAAfI/JreI7fqvohA/s1600/P2.png" alt="Figure. 2 Multicast to all workers and the dispatcher aggregates all responses, then sends it back to requester." width="500">
+<p class="caption"><strong>Figure. 2</strong> Multicast to all workers and the dispatcher aggregates all responses, then sends it back to requester.</p>
+</div>
+<div class="figure">
+<img src="http://4.bp.blogspot.com/_j6mB7TMmJJY/TLlEpBawVMI/AAAAAAAAAfQ/Jp8vbVYnF0s/s1600/P3.png" alt="Figure. 3 Adding cache can obviously speed up a lot in large-scale systems." width="500">
+<p class="caption"><strong>Figure. 3</strong> Adding cache can obviously speed up a lot in large-scale systems.</p>
+</div>
+<div class="figure">
+<img src="http://3.bp.blogspot.com/_j6mB7TMmJJY/TLlFf-b8lPI/AAAAAAAAAfY/Poy8V0eH1gA/s400/P4.png" alt="Figure. 4 The principle is very similar as parameter server, where parameters are intermediate results from learning." width="500">
+<p class="caption"><strong>Figure. 4</strong> The principle is very similar as parameter server, where parameters are intermediate results from learning.</p>
+</div>
+<div class="figure">
+<img src="http://4.bp.blogspot.com/_j6mB7TMmJJY/TLlGIM4IDiI/AAAAAAAAAfg/nQgVADmUl5w/s400/P5.png" alt="Figure. 5 This pattern follows design of a message queue, events are enqueue and responses are dequeue." width="500">
+<p class="caption"><strong>Figure. 5</strong> This pattern follows design of a message queue, events are enqueue and responses are dequeue.</p>
+</div>
+<div class="figure">
+<img src="http://3.bp.blogspot.com/_j6mB7TMmJJY/TLlHPyMkTII/AAAAAAAAAf4/McnK_GGkYpw/s400/P7.png" alt="Figure. 6 Very popular map-reduce pattern" width="500">
+<p class="caption"><strong>Figure. 6</strong> Very popular map-reduce pattern</p>
+</div>
+<div class="figure">
+<img src="http://4.bp.blogspot.com/_j6mB7TMmJJY/TLnhYZH7PTI/AAAAAAAAAgY/YHy5K8H6hZA/s400/P8.png" alt="Figure. 7 Bulk Synchronous Parellel" width="500">
+<p class="caption"><strong>Figure. 7</strong> Bulk Synchronous Parellel</p>
+</div>
+<div class="figure">
+<img src="http://3.bp.blogspot.com/_j6mB7TMmJJY/TLlH_a9WOMI/AAAAAAAAAgI/41l0bvV3fkE/s400/P8.png" alt="Figure. 8 Execution Orchestrator is based on an intelligent scheduler / orchestrator to schedule ready-to-run tasks (based on a dependency graph) across a clusters of dumb workers. This pattern is used in Microsoft’s Dryad project" width="500">
+<p class="caption"><strong>Figure. 8</strong> Execution Orchestrator is based on an intelligent scheduler / orchestrator to schedule ready-to-run tasks (based on a dependency graph) across a clusters of dumb workers. This pattern is used in Microsoft’s Dryad project</p>
+</div>
+</div></article></div><div class="col-3"><div class="post"><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计分布式系统所需要遵从的原则"><span class="toc-text">设计分布式系统所需要遵从的原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计分布式系统所需要考虑的方面"><span class="toc-text">设计分布式系统所需要考虑的方面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些常用的设计模式"><span class="toc-text">一些常用的设计模式</span></a></li></ol></div></div></div></div><div class="row"><div class="col-12"><div class="tags"><span class="badge"><i class="fa fa-tag"></i><a href="/tags/distributed-system/">distributed system</a></span><span class="badge"><i class="fa fa-tag"></i><a href="/tags/system-design/">system design</a></span></div></div></div><div class="row"><div class="col-12">    <div class="paginator"><a href="/2016/12/09/holmes-processing-notes/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div></div></div><div class="row"><div class="col-12"><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://huang3.github.io/2017/06/21/cs244b-lec02/';
+    this.page.identifier = '2017/06/21/cs244b-lec02/';
+    this.page.title = 'Design Distributed System';
+};
+(function() {
+var d = document, s = d.createElement('script');
+
+s.src = '//huang3.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();</script></div></div><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2017<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">Huang Xiao</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script><script src="/js/particles.js"></script><script src="/js/myscript.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
