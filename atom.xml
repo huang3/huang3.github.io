@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://huang3.github.io/"/>
-  <updated>2017-08-27T11:03:29.000Z</updated>
+  <updated>2018-01-06T05:30:32.000Z</updated>
   <id>http://huang3.github.io/</id>
   
   <author>
@@ -14,6 +14,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Face recognition in Mxnet</title>
+    <link href="http://huang3.github.io/2017/10/15/deep-face-recognition/"/>
+    <id>http://huang3.github.io/2017/10/15/deep-face-recognition/</id>
+    <published>2017-10-15T09:09:00.000Z</published>
+    <updated>2018-01-06T05:30:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="install-dependencies">Install Dependencies</h2>
+<p>Most computer vision tasks would require dependencies such as dlib and opencv. We will walk through how to install the dependencies, and the problems we encountered and how we resolved them. Installing these dependencies is non-trivial task, it might vary for different system setups. We only show you the story on OSX El Captain, therefore can not guarantee this will work on other setups.</p>
+<h3 id="opencv">OpenCV</h3>
+<h3 id="dlib">Dlib</h3>
+<p><a href="http://dlib.net/" target="_blank" rel="external">dlib</a> is a wellknown C++ library containing many useful machine learning routines. It is widely used in face related tasks. Mostly you would follow the instructions on their <a href="https://github.com/davisking/dlib" target="_blank" rel="external">git repo</a> to compile your own programs. In our case, we need compile the dlib python API by running,</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ python setup.py install --yes USE_AVX_INSTRUCTIONS</div></pre></td></tr></table></figure>
+<p>In order to check if your CPU support AVX, on Mac you can run, <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ sysctl <span class="_">-a</span> | grep machdep.cpu.leaf7_features</div></pre></td></tr></table></figure></p>
+<p>This will gives you output like, <figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">machdep<span class="selector-class">.cpu</span><span class="selector-class">.leaf7_features</span>: SMEP ERMS RDWRFSGS TSC_THREAD_OFFSET BMI1 AVX2 BMI2 INVPCID FPU_CSDS</div></pre></td></tr></table></figure></p>
+<p>See if you have AVX2 in your output, if yes, then you can compile your python API with the <code>USE_AVX_INSTRUCTIONS</code> option, otherwise just leave it none. Unfortunately during the compiling we got the compile error complaining that Boost.Python is not found, then we realized that dlib relies on Boost Libraries which is another C++ libraries, so what is it?</p>
+<h3 id="boost-c-library">Boost C++ Library</h3>
+<blockquote>
+<p>Boost is a set of libraries for the C++ programming language that provide support for tasks and structures such as linear algebra, pseudorandom number generation, multithreading, image processing, regular expressions, and unit testing. It contains over eighty individual libraries.</p>
+<p>– <a href="https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)" target="_blank" rel="external">from wikipedia</a></p>
+</blockquote>
+<p>Install the headers and binaries of Boost for Python is actually pretty handy. After download the tarball (we are using version 1.65.1), just uncompress it in your own <code>BOOST_ROOT_PATH</code>. All the headers are in the subfolder <code>boost</code>. If you don’t need other binaries, you can just include the headers in your own C++ programs. However, since we need Python bindings, therefore there’s additional steps to do.</p>
+<p>To compile the python extensions, you must follow the <a href="http://www.boost.org/doc/libs/1_65_1/more/getting_started/unix-variants.html#easy-build-and-install" target="_blank" rel="external">instruction</a> by specifying the python binding using the script provided,</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ ./bootstrap.sh --prefix=path/to/installation/prefix --with-libraries=python --with-python=path/to/python</div></pre></td></tr></table></figure>
+<p>Since we only need python extensions, so only python is specified in <code>--with-libraries</code>. The default installation path is <code>/usr/local/</code>. After successfully compiled the python bindings, you can now go back to compile dlib Python binaries.</p>
+<h3 id="face-detection-example-in-dlib">Face detection example in Dlib</h3>
+<p>After successfully compiled Dlib Python binaries, you can try out the Python examples in <code>DLIB_ROOT/python_examples/</code>, e.g., <code>cnn_face_detector.py</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># The contents of this file are in the public domain. See LICENSE_FOR_EXAMPLE_PROGRAMS.txt</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#   This example shows how to run a CNN based face detector using dlib.  The</span></div><div class="line"><span class="comment">#   example loads a pretrained model and uses it to find faces in images.  The</span></div><div class="line"><span class="comment">#   CNN model is much more accurate than the HOG based model shown in the</span></div><div class="line"><span class="comment">#   face_detector.py example, but takes much more computational power to</span></div><div class="line"><span class="comment">#   run, and is meant to be executed on a GPU to attain reasonable speed.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#   You can download the pre-trained model from:</span></div><div class="line"><span class="comment">#       http://dlib.net/files/mmod_human_face_detector.dat.bz2</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#   The examples/faces folder contains some jpg images of people.  You can run</span></div><div class="line"><span class="comment">#   this program on them and see the detections by executing the</span></div><div class="line"><span class="comment">#   following command:</span></div><div class="line"><span class="comment">#       ./cnn_face_detector.py mmod_human_face_detector.dat ../examples/faces/*.jpg</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># COMPILING/INSTALLING THE DLIB PYTHON INTERFACE</span></div><div class="line"><span class="comment">#   You can install dlib using the command:</span></div><div class="line"><span class="comment">#       pip install dlib</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#   Alternatively, if you want to compile dlib yourself then go into the dlib</span></div><div class="line"><span class="comment">#   root folder and run:</span></div><div class="line"><span class="comment">#       python setup.py install</span></div><div class="line"><span class="comment">#   or</span></div><div class="line"><span class="comment">#       python setup.py install --yes USE_AVX_INSTRUCTIONS --yes DLIB_USE_CUDA</span></div><div class="line"><span class="comment">#   if you have a CPU that supports AVX instructions, you have an Nvidia GPU</span></div><div class="line"><span class="comment">#   and you have CUDA installed since this makes things run *much* faster.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#   Compiling dlib should work on any operating system so long as you have</span></div><div class="line"><span class="comment">#   CMake and boost-python installed.  On Ubuntu, this can be done easily by</span></div><div class="line"><span class="comment">#   running the command:</span></div><div class="line"><span class="comment">#       sudo apt-get install libboost-python-dev cmake</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment">#   Also note that this example requires scikit-image which can be installed</span></div><div class="line"><span class="comment">#   via the command:</span></div><div class="line"><span class="comment">#       pip install scikit-image</span></div><div class="line"><span class="comment">#   Or downloaded from http://scikit-image.org/download.html.</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> dlib</div><div class="line"><span class="keyword">from</span> skimage <span class="keyword">import</span> io</div><div class="line"></div><div class="line"><span class="keyword">if</span> len(sys.argv) &lt; <span class="number">3</span>:</div><div class="line">    print(</div><div class="line">        <span class="string">"Call this program like this:\n"</span></div><div class="line">        <span class="string">"   ./cnn_face_detector.py mmod_human_face_detector.dat ../examples/faces/*.jpg\n"</span></div><div class="line">        <span class="string">"You can get the mmod_human_face_detector.dat file from:\n"</span></div><div class="line">        <span class="string">"    http://dlib.net/files/mmod_human_face_detector.dat.bz2"</span>)</div><div class="line">    exit()</div><div class="line"></div><div class="line">cnn_face_detector = dlib.cnn_face_detection_model_v1(sys.argv[<span class="number">1</span>])</div><div class="line">win = dlib.image_window()</div><div class="line"></div><div class="line"><span class="keyword">for</span> f <span class="keyword">in</span> sys.argv[<span class="number">2</span>:]:</div><div class="line">    print(<span class="string">"Processing file: &#123;&#125;"</span>.format(f))</div><div class="line">    img = io.imread(f)</div><div class="line">    <span class="comment"># The 1 in the second argument indicates that we should upsample the image</span></div><div class="line">    <span class="comment"># 1 time.  This will make everything bigger and allow us to detect more</span></div><div class="line">    <span class="comment"># faces.</span></div><div class="line">    dets = cnn_face_detector(img, <span class="number">1</span>)</div><div class="line">    <span class="string">'''</span></div><div class="line">    This detector returns a mmod_rectangles object. This object contains a list of mmod_rectangle objects.</div><div class="line">    These objects can be accessed by simply iterating over the mmod_rectangles object</div><div class="line">    The mmod_rectangle object has two member variables, a dlib.rectangle object, and a confidence score.</div><div class="line">    </div><div class="line">    It is also possible to pass a list of images to the detector.</div><div class="line">        - like this: dets = cnn_face_detector([image list], upsample_num, batch_size = 128)</div><div class="line"></div><div class="line">    In this case it will return a mmod_rectangless object.</div><div class="line">    This object behaves just like a list of lists and can be iterated over.</div><div class="line">    '''</div><div class="line">    print(<span class="string">"Number of faces detected: &#123;&#125;"</span>.format(len(dets)))</div><div class="line">    <span class="keyword">for</span> i, d <span class="keyword">in</span> enumerate(dets):</div><div class="line">        print(<span class="string">"Detection &#123;&#125;: Left: &#123;&#125; Top: &#123;&#125; Right: &#123;&#125; Bottom: &#123;&#125; Confidence: &#123;&#125;"</span>.format(</div><div class="line">            i, d.rect.left(), d.rect.top(), d.rect.right(), d.rect.bottom(), d.confidence))</div><div class="line"></div><div class="line">    rects = dlib.rectangles()</div><div class="line">    rects.extend([d.rect <span class="keyword">for</span> d <span class="keyword">in</span> dets])</div><div class="line"></div><div class="line">    win.clear_overlay()</div><div class="line">    win.set_image(img)</div><div class="line">    win.add_overlay(rects)</div><div class="line">    dlib.hit_enter_to_continue()</div></pre></td></tr></table></figure>
+<p>The result of face detections looks like following. The python code is self explanatory. Next, we will look into how to code your own recognition model using Mxnet.</p>
+<p><img src="/imgs/dlib_fr_example.jpg" width="300px" style="display: inline;"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;install-dependencies&quot;&gt;Install Dependencies&lt;/h2&gt;
+&lt;p&gt;Most computer vision tasks would require dependencies such as dlib and opencv. We
+    
+    </summary>
+    
+    
+      <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
+    
+      <category term="mxnet" scheme="http://huang3.github.io/tags/mxnet/"/>
+    
+  </entry>
   
   <entry>
     <title>Design Distributed System</title>
@@ -189,7 +235,7 @@
     <link href="http://huang3.github.io/2016/11/21/gitoolbox/"/>
     <id>http://huang3.github.io/2016/11/21/gitoolbox/</id>
     <published>2016-11-21T20:24:44.000Z</published>
-    <updated>2016-11-21T20:34:41.000Z</updated>
+    <updated>2018-01-06T05:30:38.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>With the expanding size of the Grammatical Inference Community, it’s getting more and more desirable that a robust and effective set of tools for GI should be ready for use. We establish such an open source project which provides many widely used GI algorithms and convenient implementations for diverse targets.</p>
@@ -232,11 +278,50 @@
   </entry>
   
   <entry>
+    <title>Next Generation Security Information Event Management</title>
+    <link href="http://huang3.github.io/2016/11/20/ngSIEM/"/>
+    <id>http://huang3.github.io/2016/11/20/ngSIEM/</id>
+    <published>2016-11-20T09:15:44.000Z</published>
+    <updated>2018-01-06T05:41:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Das Kernkonzept für ngSIEM (next generation SIEM) ist wie folgendes aufgeteilt.</p>
+<h2 id="automatisierung-der-pipeline">Automatisierung der Pipeline </h2>
+<p>In ngSIEM werden wir das Pipeline für Security Events mit Hilfe vom ML weiter optimieren und automatisieren. Hier reden wir von reine Daten aus heterogene Sensoren und Geräten bis hinzu Security Intelligenz, und auch bis Gegenmaßnahmen. Die Daten ist wesentlich als Datenstrom definiert statt Datenblock. Die Ströme fliessen kontinuierlich ins System und werden versammelt, transformiert, gespeichert, analysiert und dann verteilt. Die weitere Optimierung und Automatisierung der Sicherheitsaktivitäten werden den Personaleinsatz deutlich vermindert, aber auch die Sicherheitsniveau des Systems erhöhen.  </p>
+<h2 id="systemarchitektur-des-platforms">Systemarchitektur des Platforms</h2>
+<p>Um vorgenannte Ziel zu erreichen haben wir momenta z.B., in unser Malwarezoo Project ein geeignete Systemarchitektur entworfen, die sich ins SMACK (1) bewegen, welche ein hoch effiziente, verteilte, fault-tolorente, konsistente Systementwurf ist. Alle Komponente von SMACK sind opensource. Das Design bietet auch ein Lambda-Architektur (2), die in beider Batch und Stream Mode funktioniert. Batch Mode hat Consistency gewährleistet und Stream Mode bietet rechtzeitige Analysis. </p>
+<h2 id="maschinelles-lernen">Maschinelles Lernen</h2>
+<p>ML ist die Schlüsseltechnologie hier. Aber man muss auf jeden fall auf seine Anwendbarkeit und Sicherheit beachten, da ML in beider Theorie und Praxis anfällig ist. Hier spielt unsere AdvML Thema. Außerdem ist auch die Thema Model Transparenz für alle ML-Anwender wichtig und interessant ist. </p>
+<h2 id="teilbare-security-intelligenz">Teilbare Security Intelligenz </h2>
+<p>Alle Daten werden nach Bearbeitung und Analysis als Security Intelligenz transformiert, zB., Indicator of Compromise, White/Black IP-Liste, Botnets IPs uzw. Es ist entscheidend für die sichere digitale Zukunft dass die Intelligenzen teilbar ist, zB., durch Malwarezoo REST Services. Man sollt die Intelligenz so weit wie möglich durchaus des Clouds verteilen, sodass 0day Anfälligkeiten so schnell wie möglich erkannt werden.  Möglicherweise sollt ein solche Online Market oder Repository für Security Intelligenz.   </p>
+<h2 id="standardisierung-von-security-threats">Standardisierung von Security Threats</h2>
+<p>Um die Intelligenz effizient zur Austausch muss die Datenformat und ihr Kommunizieren als lightweight standardisiert, ggf. platform-agnostisch egal für Laptop, Server oder Automobile, industrielle Anlagen, zB., TAXII, STIX and CybOX.</p>
+<h2 id="automatische-gegenmaßnahmen">Automatische Gegenmaßnahmen</h2>
+<p>Weiterhin entscheidet man auf Basis von Security Intelligenz Gegenmaßnahmen, dabei muss man alle Aktivitäten mit Hilfe vom ML Regelsätze automatisch generieren, zB., Firewall Regelsätzen von einer Entscheidungsbaum generiert und integriert werden.  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      (In german) A summary write of ngSIEM (next generation security information event management) shows some fundamental concepts of using machine learning and big data to guide the upgrade of SIEM system.
+    
+    </summary>
+    
+      <category term="research" scheme="http://huang3.github.io/categories/research/"/>
+    
+    
+      <category term="machine learning" scheme="http://huang3.github.io/tags/machine-learning/"/>
+    
+      <category term="security events" scheme="http://huang3.github.io/tags/security-events/"/>
+    
+      <category term="artificial intelligence" scheme="http://huang3.github.io/tags/artificial-intelligence/"/>
+    
+  </entry>
+  
+  <entry>
     <title>DataViz - Easy Visualization for Machine Learning</title>
     <link href="http://huang3.github.io/2016/11/20/visualize-data/"/>
     <id>http://huang3.github.io/2016/11/20/visualize-data/</id>
     <published>2016-11-20T09:15:44.000Z</published>
-    <updated>2016-11-21T20:46:16.000Z</updated>
+    <updated>2018-01-06T05:31:02.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="dataviz-for-easy-plotting">DataViz for Easy Plotting</h2>
 <p>Ever since machine learning and big data are getting extremely popular, it makes total sense that we need a better way to look into what’s going on behind the data and model. There exists a number of frameworks you can leverage to produce figures on your demand, most popular ones like <a href="http://matplotlib.org/" target="_blank" rel="external">matplotlib</a>, <a href="http://seaborn.pydata.org/" target="_blank" rel="external">seaborn</a>, <a href="https://plot.ly/python/getting-started/" target="_blank" rel="external">plot.ly</a>, and also <a href="http://bokeh.pydata.org" target="_blank" rel="external">bokeh</a> which we use in this project. Of course, there’re many other choices.</p>
@@ -568,7 +653,7 @@
     <link href="http://huang3.github.io/2016/09/22/intro-svc/"/>
     <id>http://huang3.github.io/2016/09/22/intro-svc/</id>
     <published>2016-09-22T14:15:44.000Z</published>
-    <updated>2016-11-20T19:39:38.000Z</updated>
+    <updated>2018-01-06T05:30:47.000Z</updated>
     
     <content type="html"><![CDATA[<p>支撑向量机（Support vector machine）对熟悉机器学习的人来讲太不陌生了，90年代在神经网络逐渐衰败之际，出现一批以Vapinik为代表的统计学习理论研究者，其中代表作之一SVM大有一统江湖之意，如果不是深度学习网络的逆袭，我们恐怕以为机器学习就要这么走向终点。在深度网络以前，机器学习学界一直是以probabilistic graphical model和SVM为代表的贝叶斯派和统计学习论两大流派占据了各大主流国际会议和论坛，尽管神经网络再一次以深度的姿态逆袭，我们仍然发现诸如SVM一类的经典算法仍然能够解决大部分我们遇到的分析问题，虽然由于其算法本质具有极高的局部特性。</p>
 <p>本文要详细介绍的就是SVM的一种变种算法：支撑向量聚类（support vector clustering，SVC)，名字上显示是聚类，其实和Bernhardt的One-class SVM并没有两样，只不过是从另一个角度描述同一个问题而已，本质上是在学习数据在空间的密度（density）分布，然后再通过几何学的方法找出聚类边界，和SVM binary或者mulit-class分类不同，SVC是完全非监督的。</p>
